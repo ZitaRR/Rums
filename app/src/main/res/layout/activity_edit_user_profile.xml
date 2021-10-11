@@ -6,4 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".EditUserProfile">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/main_actionbar"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageButton
+        android:id="@+id/changeProfilePicture"
+        android:contentDescription="@string/user_profile_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/profile_picture"
+        app:layout_constraintBottom_toTopOf="@+id/input_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <EditText
+        android:id="@+id/input_username"
+        android:inputType="text"
+        android:hint="@string/hint_profile_username"
+        android:autofillHints="name"
+        android:maxLength="15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_user_age" />
+
+    <EditText
+        android:id="@+id/input_user_age"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        android:hint="@string/hint_profile_age"
+        android:maxLength="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_user_occupation"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/input_user_occupation"
+        android:maxLength="30"
+        android:inputType="text"
+        android:hint="@string/hint_profile_occupation"
+        android:importantForAutofill="no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_short_description"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/input_short_description"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:maxLength="100"
+        android:importantForAutofill="no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/hint_profile_description"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/user_device_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="230dp" />
+
+    <Switch
+        android:id="@+id/switch_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/user_notifications"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_apply_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
