@@ -5,12 +5,22 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 public class UserSettings extends AppCompatActivity {
 
     private Toolbar actionBar;
-    private ImageView profilePicture;
+    private EditText edit_username;
+    private EditText edit_age;
+    private EditText edit_description;
+    private Switch switch_notifications;
+    private Button button_apply;
+    private Button button_continue;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +29,5 @@ public class UserSettings extends AppCompatActivity {
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
-
-        profilePicture = findViewById(R.id.imageView);
-
-        profilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 }

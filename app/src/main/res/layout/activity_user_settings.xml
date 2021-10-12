@@ -40,28 +40,12 @@
         android:inputType="number"
         android:maxLength="3"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_user_occupation"
+        app:layout_constraintBottom_toTopOf="@+id/input_description"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <EditText
-        android:id="@+id/input_user_occupation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:ellipsize="start"
-        android:gravity="center_horizontal"
-        android:hint="@string/settings_hint_occupation"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:maxLength="30"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_short_description"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
-
-    <EditText
-        android:id="@+id/input_short_description"
+        android:id="@+id/input_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -78,25 +62,15 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
 
-    <Switch
-        android:id="@+id/switch_notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:minHeight="48dp"
-        android:text="@string/settings_notifications"
-        app:layout_constraintBottom_toTopOf="@+id/button_continue"
+    <View
+        android:id="@+id/divider"
+        android:layout_width="200dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button_apply"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_button_apply"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_center_vertically"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_description" />
 
     <TextView
         android:id="@+id/textView4"
@@ -113,6 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:autofillHints="password"
         android:ellipsize="start"
         android:ems="10"
         android:gravity="center_horizontal"
@@ -132,34 +107,49 @@
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="@string/settings_hint_newpass"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/switch_notifications"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
+    <Switch
+        android:id="@+id/switch_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:minHeight="34dp"
+        android:text="@string/settings_notifications"
+        app:layout_constraintBottom_toTopOf="@+id/button_continue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/button_apply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/settings_button_apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center_vertically"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+
     <Button
         android:id="@+id/button_continue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="@string/settings_button_continue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_center_vertically" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="200dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_short_description" />
 
 
     <ImageView
         android:id="@+id/icon_username"
+        android:contentDescription="@string/settings_hint_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/input_username"
@@ -170,6 +160,7 @@
 
     <ImageView
         android:id="@+id/icon_age"
+        android:contentDescription="@string/settings_hint_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/input_user_age"
@@ -179,23 +170,14 @@
         app:srcCompat="@drawable/ic_age" />
 
     <ImageView
-        android:id="@+id/icon_occupation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/input_user_occupation"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/input_user_occupation"
-        app:srcCompat="@drawable/ic_occupation" />
-
-    <ImageView
         android:id="@+id/icon_description"
+        android:contentDescription="@string/settings_hint_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/input_short_description"
+        app:layout_constraintBottom_toBottomOf="@+id/input_description"
         app:layout_constraintEnd_toStartOf="@+id/guideline_left"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/input_short_description"
+        app:layout_constraintTop_toTopOf="@+id/input_description"
         app:srcCompat="@drawable/ic_information" />
 
     <ImageView
