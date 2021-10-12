@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">Rums</string>
     <string name="welcome_message">Welcome to Rums!</string>
-    <string name="hint_profile_username">Username</string>
-    <string name="hint_profile_age">Age</string>
-    <string name="hint_profile_occupation">Occupation</string>
-    <string name="hint_profile_description">Tell people about yourself!</string>
-    <string name="user_device_settings">User Settings</string>
-    <string name="user_profile_settings">Profile Settings</string>
-    <string name="user_profile_picture">Profile Picture</string>
-    <string name="user_notifications">Notifications</string>
-    <string name="button_apply_settings">Apply Settings</string>
+
+    <string name="settings_hint_username">Username</string>
+    <string name="settings_hint_age">Age</string>
+    <string name="settings_hint_occupation">Occupation</string>
+    <string name="settings_hint_description">Tell people about yourself!</string>
+    <string name="settings_hint_oldpass">Old Password</string>
+    <string name="settings_hint_newpass">New Password</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_button_apply">Apply Settings</string>
+    <string name="settings_button_continue">Continue</string>
+    <string name="settings_change_password">Change Password</string>
 </resources>

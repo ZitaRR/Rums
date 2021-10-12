@@ -6,9 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-public class EditUserProfile extends AppCompatActivity {
+public class UserSettings extends AppCompatActivity {
 
     private Toolbar actionBar;
     private ImageView profilePicture;
@@ -16,7 +15,7 @@ public class EditUserProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_user_profile);
+        setContentView(R.layout.activity_user_settings);
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);

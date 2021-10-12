@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditUserProfile">
+    tools:context=".UserSettings">
 
     <include
         android:id="@+id/include"
@@ -20,13 +20,13 @@
         android:autofillHints="name"
         android:ellipsize="start"
         android:gravity="center_horizontal"
-        android:hint="@string/hint_profile_username"
+        android:hint="@string/settings_hint_username"
         android:inputType="text"
         android:maxLength="15"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/input_user_age"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <EditText
         android:id="@+id/input_user_age"
@@ -35,14 +35,14 @@
         android:layout_marginBottom="8dp"
         android:ellipsize="start"
         android:gravity="center_horizontal"
-        android:hint="@string/hint_profile_age"
+        android:hint="@string/settings_hint_age"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="3"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/input_user_occupation"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <EditText
         android:id="@+id/input_user_occupation"
@@ -51,14 +51,14 @@
         android:layout_marginBottom="8dp"
         android:ellipsize="start"
         android:gravity="center_horizontal"
-        android:hint="@string/hint_profile_occupation"
+        android:hint="@string/settings_hint_occupation"
         android:importantForAutofill="no"
         android:inputType="text"
         android:maxLength="30"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/input_short_description"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <EditText
         android:id="@+id/input_short_description"
@@ -67,23 +67,16 @@
         android:layout_marginBottom="8dp"
         android:ellipsize="start"
         android:gravity="center_horizontal"
-        android:hint="@string/hint_profile_description"
+        android:hint="@string/settings_hint_description"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:maxLength="75"
         android:maxLines="2"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline_midpoint"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="300dp" />
 
     <Switch
         android:id="@+id/switch_notifications"
@@ -91,18 +84,18 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:minHeight="48dp"
-        android:text="@string/user_notifications"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:text="@string/settings_notifications"
+        app:layout_constraintBottom_toTopOf="@+id/button_continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_apply"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/button_apply_settings"
+        android:text="@string/settings_button_apply"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_center_vertically"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -110,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Change Password"
+        android:text="@string/settings_change_password"
         app:layout_constraintBottom_toTopOf="@+id/old_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -123,12 +116,12 @@
         android:ellipsize="start"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:hint="Old Password"
+        android:hint="@string/settings_hint_oldpass"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/new_password"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <EditText
         android:id="@+id/new_password"
@@ -138,28 +131,21 @@
         android:ellipsize="start"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:hint="New Password"
+        android:hint="@string/settings_hint_newpass"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/switch_notifications"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_continue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/settings_button_continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintStart_toStartOf="@+id/guideline_center_vertically" />
 
     <View
         android:id="@+id/divider"
@@ -172,69 +158,97 @@
         app:layout_constraintTop_toBottomOf="@+id/input_short_description" />
 
 
+    <ImageView
+        android:id="@+id/icon_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/input_username"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_username"
+        app:srcCompat="@drawable/ic_username" />
+
+    <ImageView
+        android:id="@+id/icon_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/input_user_age"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_user_age"
+        app:srcCompat="@drawable/ic_age" />
+
+    <ImageView
+        android:id="@+id/icon_occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/input_user_occupation"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_user_occupation"
+        app:srcCompat="@drawable/ic_occupation" />
+
+    <ImageView
+        android:id="@+id/icon_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/input_short_description"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_short_description"
+        app:srcCompat="@drawable/ic_information" />
+
+    <ImageView
+        android:id="@+id/icon_profile_picture"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_username"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:srcCompat="@drawable/ic_profile" />
+
+    <ImageView
+        android:id="@+id/icon_profile_picture_add"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_profile_picture"
+        app:layout_constraintEnd_toEndOf="@+id/icon_profile_picture"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/icon_profile_picture"
+        app:layout_constraintTop_toBottomOf="@+id/icon_profile_picture"
+        app:srcCompat="@drawable/ic_add_profile_picture" />
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+        android:id="@+id/guideline_midpoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="300dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="40dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="40dp" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center_vertically"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/input_username"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/input_username"
-        app:srcCompat="@drawable/ic_username" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/input_user_age"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/input_user_age"
-        app:srcCompat="@drawable/ic_age" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/input_user_occupation"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/input_user_occupation"
-        app:srcCompat="@drawable/ic_occupation" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/input_short_description"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/input_short_description"
-        app:srcCompat="@drawable/ic_information" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="125dp"
-        android:layout_height="93dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_username"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:srcCompat="@drawable/ic_profile" />
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="205dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
