@@ -14,9 +14,10 @@
 
     <ImageButton
         android:id="@+id/changeProfilePicture"
-        android:contentDescription="@string/user_profile_picture"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/user_profile_picture"
         android:src="@drawable/profile_picture"
         app:layout_constraintBottom_toTopOf="@+id/input_username"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,64 +26,63 @@
 
     <EditText
         android:id="@+id/input_username"
-        android:inputType="text"
-        android:hint="@string/hint_profile_username"
-        android:autofillHints="name"
-        android:maxLength="15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints="name"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_profile_username"
+        android:inputType="text"
+        android:maxLength="15"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/input_user_age" />
 
     <EditText
         android:id="@+id/input_user_age"
-        android:inputType="number"
-        android:importantForAutofill="no"
-        android:hint="@string/hint_profile_age"
-        android:maxLength="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_profile_age"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="3"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/input_user_occupation"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/input_user_occupation"
-        android:maxLength="30"
-        android:inputType="text"
-        android:hint="@string/hint_profile_occupation"
-        android:importantForAutofill="no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_profile_occupation"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLength="30"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/input_short_description"
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/input_short_description"
-        android:inputType="textMultiLine"
-        android:maxLines="3"
-        android:maxLength="100"
-        android:importantForAutofill="no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
         android:hint="@string/hint_profile_description"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:maxLength="75"
+        android:maxLines="2"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/user_device_settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -90,26 +90,93 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="230dp" />
+        app:layout_constraintGuide_end="300dp" />
 
     <Switch
         android:id="@+id/switch_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:minHeight="48dp"
         android:text="@string/user_notifications"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/button_apply_settings"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Change Password"
+        app:layout_constraintBottom_toTopOf="@+id/old_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/old_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="start"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="Old Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/new_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/new_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ellipsize="start"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="New Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/switch_notifications"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="200dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_short_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

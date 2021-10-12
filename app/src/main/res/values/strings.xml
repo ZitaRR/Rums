@@ -6,7 +6,7 @@
     <string name="hint_profile_occupation">Occupation</string>
     <string name="hint_profile_description">Tell people about yourself!</string>
     <string name="user_device_settings">User Settings</string>
-    <string name="user_profile_settings">User Settings</string>
+    <string name="user_profile_settings">Profile Settings</string>
     <string name="user_profile_picture">Profile Picture</string>
     <string name="user_notifications">Notifications</string>
     <string name="button_apply_settings">Apply Settings</string>
