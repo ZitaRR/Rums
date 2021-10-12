@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterUser extends AppCompatActivity {
 
+    private EditText username;
     private EditText email;
     private EditText password;
     private EditText confirmPassword;
@@ -30,6 +31,7 @@ public class RegisterUser extends AppCompatActivity {
         setContentView(R.layout.activity_register_user);
 
         auth = FirebaseAuth.getInstance();
+        username = findViewById(R.id.edit_username);
         email = findViewById(R.id.edit_register_email);
         password = findViewById(R.id.edit_password);
         confirmPassword = findViewById(R.id.edit_confirm_password);
@@ -38,6 +40,7 @@ public class RegisterUser extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String txtUsername = username.getText().toString();
                 String txtEmail = email.getText().toString();
                 String txtPassword = password.getText().toString();
                 String txtConfirmPassword = confirmPassword.getText().toString();
