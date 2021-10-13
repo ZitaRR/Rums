@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserSettings extends AppCompatActivity {
 
@@ -19,6 +22,8 @@ public class UserSettings extends AppCompatActivity {
     private Switch switch_notifications;
     private Button button_apply;
     private Button button_continue;
+    private CircleImageView profile_picture;
+    private ImageView profile_picture_add;
 
 
 
@@ -29,5 +34,13 @@ public class UserSettings extends AppCompatActivity {
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
+        profile_picture = (CircleImageView) findViewById(R.id.circleImageView);
+
+        profile_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(UserSettings.this, "Test", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
