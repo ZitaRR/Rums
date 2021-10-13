@@ -16,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class RegisterUser extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText email;
@@ -28,7 +28,7 @@ public class RegisterUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_user);
+        setContentView(R.layout.activity_register);
 
         auth = FirebaseAuth.getInstance();
         username = findViewById(R.id.edit_username);
@@ -46,11 +46,11 @@ public class RegisterUser extends AppCompatActivity {
                 String txtConfirmPassword = confirmPassword.getText().toString();
 
                 if (TextUtils.isEmpty(txtEmail) || TextUtils.isEmpty(txtPassword) || TextUtils.isEmpty(txtConfirmPassword)) {
-                    Toast.makeText(RegisterUser.this, "not everything is filled in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "not everything is filled in", Toast.LENGTH_SHORT).show();
                 } else if (!txtPassword.equals(txtConfirmPassword)){
-                    Toast.makeText(RegisterUser.this, "Passwords doesn't match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Passwords doesn't match", Toast.LENGTH_SHORT).show();
                 } else if (txtConfirmPassword.length() < 5){
-                    Toast.makeText(RegisterUser.this, "Password is too short!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Password is too short!", Toast.LENGTH_SHORT).show();
                 } else{
                     registerUser(txtEmail, txtConfirmPassword);
                 }
@@ -58,14 +58,14 @@ public class RegisterUser extends AppCompatActivity {
         });
     }
     private void registerUser(String email, String confirmPassword) {
-        auth.createUserWithEmailAndPassword(email, confirmPassword).addOnCompleteListener(RegisterUser.this, new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(email, confirmPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(RegisterUser.this, "Registration complete, signing in", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterUser.this, MainActivity.class));
+                    Toast.makeText(RegisterActivity.this, "Registration complete, signing in", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }else{
-                    Toast.makeText(RegisterUser.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
                 }
 
             }
