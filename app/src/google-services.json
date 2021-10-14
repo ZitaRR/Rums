@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "585024002028",
-    "project_id": "iths-48021",
-    "storage_bucket": "iths-48021.appspot.com"
+    "project_number": "612823553270",
+    "firebase_url": "https://iths-167a4-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "iths-167a4",
+    "storage_bucket": "iths-167a4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:585024002028:android:aa94c113b349daf24c12c9",
+        "mobilesdk_app_id": "1:612823553270:android:f785109a4606c5f5fbc8d7",
         "android_client_info": {
           "package_name": "com.rums"
         }
       },
       "oauth_client": [
         {
-          "client_id": "585024002028-k7spfeibl23fc60inhn2t7j9u264bd60.apps.googleusercontent.com",
+          "client_id": "612823553270-shobt4t13dctgskcrrvc5jsdircn3pi1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDnV4SPRWk1Cxq5kso_sAJdad-AadhP-l0"
+          "current_key": "AIzaSyD3tyJfM4DEhP0Arn3KETy3Lx43lOUTHGw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "585024002028-k7spfeibl23fc60inhn2t7j9u264bd60.apps.googleusercontent.com",
+              "client_id": "612823553270-shobt4t13dctgskcrrvc5jsdircn3pi1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
