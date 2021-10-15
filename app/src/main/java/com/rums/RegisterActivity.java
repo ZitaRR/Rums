@@ -40,11 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Används inte än men tanken är att den skall skickas med till profilen.
                 String txtUsername = username.getText().toString();
                 String txtEmail = email.getText().toString();
                 String txtPassword = password.getText().toString();
                 String txtConfirmPassword = confirmPassword.getText().toString();
 
+                //Lösenords kontroll till en början sen om allt stämmer så körs metoden för att användaren registreras.
                 if (TextUtils.isEmpty(txtEmail) || TextUtils.isEmpty(txtPassword) || TextUtils.isEmpty(txtConfirmPassword)) {
                     Toast.makeText(RegisterActivity.this, "not everything is filled in", Toast.LENGTH_SHORT).show();
                 } else if (!txtPassword.equals(txtConfirmPassword)){
@@ -57,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    //Behöver mer av appen så man kan ta med & hantera datan, men detta är ju metoden som registrerar användaren i Firebase.
     private void registerUser(String email, String confirmPassword) {
         auth.createUserWithEmailAndPassword(email, confirmPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -67,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

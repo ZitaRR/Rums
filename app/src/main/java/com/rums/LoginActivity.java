@@ -1,5 +1,6 @@
 package com.rums;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,12 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.button_login);
         auth = FirebaseAuth.getInstance();
 
+        //Här ska det ju hända lite mer än vad som händer i nuläget, man bara loggas in som det är nu.
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String textEmail = email.getText().toString();
-                String textPassword = password.getText().toString();
-                loginUser(textEmail, textPassword);
+                String txtEmail = email.getText().toString();
+                String txtPassword = password.getText().toString();
+                loginUser(txtEmail, txtPassword);
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
@@ -49,14 +53,32 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //
     private void loginUser(String email, String password) {
 
         auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(LoginActivity.this, "Login succesful!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(LoginActivity.this, xxx.class));
             }
+
         });
     }
  }
+/*
+EJ TESTAD KOD:
+ISTÄLLET FÖR OnSuccesListener
+Behövs fortfarande mer av appen för att kunna hantera datan
+
+    public void onComplete(@NonNull Task<AuthResult> task) {
+        if (task.isSuccessful()){
+            FirebaseUser user = auth.getCurrentUser();
+            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Login failed, make sure mail & pw is correct", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+});*/
