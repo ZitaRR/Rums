@@ -8,32 +8,34 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.google.android.material.chip.ChipGroup;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserSettings extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar actionBar;
-    private EditText edit_username;
-    private EditText edit_age;
-    private EditText edit_description;
-    private EditText old_password;
-    private EditText new_password;
+
+    private EditText edit_username, edit_age, edit_description;
+    private EditText old_password, new_password;
     private Switch switch_notifications;
-    private Button button_apply;
-    private Button button_continue;
+    private Button button_save;
     private CircleImageView profile_picture;
     private ImageView profile_picture_add;
 
     private String username;
-    private int user_age;
     private String user_description;
-    private String old_pass;
-    private String new_pass;
+    private String old_pass, new_pass;
+
+    private int user_age;
+
     private boolean notifications;
 
 
@@ -46,90 +48,45 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(actionBar);
 
         edit_username = (EditText) findViewById(R.id.input_username);
-        edit_username.setOnClickListener(this);
         edit_age = (EditText) findViewById(R.id.input_user_age);
-        edit_age.setOnClickListener(this);
         edit_description = (EditText) findViewById(R.id.input_description);
-        edit_description.setOnClickListener(this);
         old_password = (EditText) findViewById(R.id.old_password);
-        old_password.setOnClickListener(this);
         new_password = (EditText) findViewById(R.id.new_password);
-        new_password.setOnClickListener(this);
-
-        switch_notifications = (Switch) findViewById(R.id.switch_notifications);
-        switch_notifications.setOnClickListener(this);
-
-        button_apply = (Button) findViewById(R.id.button_apply);
-        button_apply.setOnClickListener(this);
-        button_continue = (Button) findViewById(R.id.button_continue);
-        button_continue.setOnClickListener(this);
+        button_save = (Button) findViewById(R.id.button_save);
         profile_picture = (CircleImageView) findViewById(R.id.profile_picture);
-        profile_picture.setOnClickListener(this);
         profile_picture_add = (ImageView) findViewById(R.id.profile_picture_add);
+        switch_notifications = (Switch) findViewById(R.id.switch_notifications);
+
+        button_save.setOnClickListener(this);
+        profile_picture.setOnClickListener(this);
         profile_picture_add.setOnClickListener(this);
+        switch_notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switch_notifications.isChecked()) {
+                    setNotifications(true);
+                } else {
+                    setNotifications(false);
+                }
+            }
+        });
 
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.input_username:
-                changeUsername();
-                break;
-            case R.id.input_user_age:
-                changeUserAge();
-                break;
-            case R.id.input_description:
-                changeUserDescription();
-                break;
-            case R.id.button_apply:
-                saveChanges();
-                break;
-            case R.id.button_continue:
-                // Intent + startnextactivity?
-                Toast.makeText(UserSettings.this, "Change Activity", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.profile_picture:
             case R.id.profile_picture_add:
                 changeProfilePicture();
                 break;
-            case R.id.old_password:
-                confirmOldPassword();
+            case R.id.button_save:
+                saveChanges();
                 break;
-            case R.id.new_password:
-                setNewPassword();
-                break;
-            case R.id.switch_notifications:
-                changeNotifications();
+            case R.id.button_save_password:
+                // Intent + startnextactivity?
                 break;
         }
-
-    }
-
-    private void changeNotifications() {
-
-        Toast.makeText(UserSettings.this, "Test: switch", Toast.LENGTH_SHORT).show();
-    }
-
-    private void changeUsername() {
-
-        username = edit_username.getText().toString();
-        Toast.makeText(UserSettings.this, "Test: " + username, Toast.LENGTH_SHORT).show();
-    }
-
-    private void changeUserAge() {
-
-        user_age = Integer.parseInt(edit_age.getText().toString());
-        String showAgeInToast = user_age + "";
-
-        Toast.makeText(UserSettings.this, "Test: " + showAgeInToast, Toast.LENGTH_SHORT).show();
-    }
-
-    private void changeUserDescription() {
-
-        user_description = edit_description.getText().toString();
-
-        Toast.makeText(UserSettings.this, "Test: " + user_description, Toast.LENGTH_SHORT).show();
     }
 
     private void changeProfilePicture() {
@@ -142,20 +99,61 @@ public class UserSettings extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(UserSettings.this, "Change Profile Pic", Toast.LENGTH_SHORT).show();
     }
 
-    private void confirmOldPassword() {
+    private void changePassword() {
 
-        Toast.makeText(UserSettings.this, "Old Password", Toast.LENGTH_SHORT).show();
-    }
 
-    private void setNewPassword() {
 
-        Toast.makeText(UserSettings.this, "New password", Toast.LENGTH_SHORT).show();
     }
 
     private void saveChanges() {
 
-        // Ändra i databaser
+        boolean successfulSave = true;
 
-        Toast.makeText(UserSettings.this, "Changes Saved", Toast.LENGTH_SHORT).show();
+        // Om användarnamn är mindre än 5 eller mer än 13 karaktärer, så får man felmeddelande.
+        if(edit_username.getText().toString().length() < 5 || edit_username.getText().toString().length() > 13) {
+           Toast.makeText(UserSettings.this, "Username must be between 5 and 13 characters.", Toast.LENGTH_SHORT).show();
+           successfulSave = false;
+        } else {
+            setUsername(edit_username.getText().toString());
+        }
+
+        // Denna spelar ingen roll om den sätts till tom eller inte.
+        setUser_description(edit_description.getText().toString());
+
+        // Programmet kraschar om den försöker parsa ett tomt värde, så behöver se så det inte är tomt.
+        // Behövs inget max-värde, satt max 3 siffror i EditText elementet, så 999 är max
+        if (edit_age.getText().toString().length() > 1) {
+           setUser_age(Integer.parseInt(edit_age.getText().toString()));
+        }
+
+        if (successfulSave) {
+            Toast.makeText(UserSettings.this, "Save Successful", Toast.LENGTH_SHORT).show();
+            // StartnextActivity
+            changeDatabase();
+        }
+
     }
+
+    private void changeDatabase() {
+        // När värden ändrats, skicka upp i sfären på nått sätt
+    }
+
+    // Getters & Setters
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setUser_description(String user_description) {
+        this.user_description = user_description;
+    }
+
+    public void setUser_age(int user_age) {
+        this.user_age = user_age;
+    }
+
+    public void setNotifications(boolean notifications) {
+        this.notifications = notifications;
+    }
+
 }
