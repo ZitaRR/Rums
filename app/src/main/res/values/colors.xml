@@ -7,4 +7,22 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    Kristian: A lot of confusing color names... -->
+    <color name="medium_gray">#AAAAAA</color>
+    <color name="light_light_gray">#CCCCCC</color>
+    <color name="medium_light_gray">#9A9A9A</color>
+    <color name="darker_gray">#5C5C5C</color>
+    <color name="medium_dark_gray">#323232</color>
+    <color name="dark_dark_gray">#2E2E2E</color>
+    <color name="lighter_gray">#A8A8A8</color>
+
+    <color name="light_purple">#C6ADFF</color>
+    <color name="darker_purple">#9D7DE6</color>
+    <color name="dark_purple">#A37C53DA</color>
+
+    <color name="transparent">#00C6ADFF</color>
+    <!--    ................... -->
+
+    
 </resources>
