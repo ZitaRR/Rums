@@ -30,7 +30,7 @@ public class ChatRoom extends AppCompatActivity {
         names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
                 "som fortsätter vidare och vidare och vidare.");
 
-        adapter = new ArrayAdapter<>(this, R.layout.my_list_textview, names);
+        adapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
         listView = findViewById(R.id.list_view);
         listView.setAdapter(adapter);
 
