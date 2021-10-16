@@ -19,7 +19,7 @@
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".ChatRoom"
+            android:name=".ChatRoomActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

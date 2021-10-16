@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ChatRoom extends AppCompatActivity {
+public class ChatRoomActivity extends AppCompatActivity {
 
     ArrayList<String> names;
     ArrayAdapter<String> adapter;
