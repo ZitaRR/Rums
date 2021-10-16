@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".UserSettings"
+            android:name=".UserProfile"
             android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity
