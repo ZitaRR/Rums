@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar actionBar;
-    private Button nextActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +18,5 @@ public class MainActivity extends AppCompatActivity {
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
-
-        nextActivity = findViewById(R.id.button);
-
-        nextActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, UserProfile.class);
-                startActivity(intent);
-            }
-        });
     }
 }
