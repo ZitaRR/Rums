@@ -18,5 +18,16 @@ public class MainActivity extends AppCompatActivity {
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
+
+        //Kristian: Här kan vi starta "vår egen" Activity,
+        // så vi kan testa den.
+        // Byt bara ChatRoomActivity till namnet på din Activity.
+        startSomeActivity(ChatRoomActivity.class);
     }
+
+    private void startSomeActivity(Class<?> cls) {
+        Intent intent = new Intent(this, cls);
+        startActivity(intent);
+    }
+
 }

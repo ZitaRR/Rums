@@ -10,8 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".UserProfile"
-            android:parentActivityName=".MainActivity"
+            android:name=".StartActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChatRoomActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

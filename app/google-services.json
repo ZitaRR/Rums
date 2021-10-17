@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "585024002028",
+    "project_id": "iths-48021",
+    "storage_bucket": "iths-48021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585024002028:android:aa94c113b349daf24c12c9",
+        "android_client_info": {
+          "package_name": "com.rums"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585024002028-k7spfeibl23fc60inhn2t7j9u264bd60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnV4SPRWk1Cxq5kso_sAJdad-AadhP-l0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585024002028-k7spfeibl23fc60inhn2t7j9u264bd60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
