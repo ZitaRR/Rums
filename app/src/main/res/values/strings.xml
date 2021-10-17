@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Rums</string>
     <string name="welcome_message">Welcome to Rums!</string>
+
+    <string name="settings_hint_username">Username</string>
+    <string name="settings_hint_age">Age</string>
+    <string name="settings_hint_phone">Phone Number</string>
+    <string name="settings_hint_description">Tell people about yourself!</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_button_apply">Save</string>
 </resources>

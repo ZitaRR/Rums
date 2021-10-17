@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserProfile">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/main_actionbar"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/rums_ikon"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_midpoint"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <EditText
+        android:id="@+id/input_username"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="name"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/settings_hint_username"
+        android:inputType="text"
+        android:maxLength="13"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_midpoint" />
+
+    <EditText
+        android:id="@+id/input_user_age"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/settings_hint_age"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="3"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/input_username" />
+
+    <EditText
+        android:id="@+id/input_user_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/settings_hint_phone"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="12"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/input_user_age" />
+
+    <EditText
+        android:id="@+id/input_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/settings_hint_description"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:maxLength="50"
+        android:maxLines="2"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/input_user_phone" />
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="200dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/input_description" />
+
+    <ImageView
+        android:id="@+id/icon_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/settings_hint_username"
+        app:layout_constraintBottom_toBottomOf="@+id/input_username"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_username"
+        app:srcCompat="@drawable/ic_username" />
+
+    <ImageView
+        android:id="@+id/icon_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/settings_hint_age"
+        app:layout_constraintBottom_toBottomOf="@+id/input_user_age"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_user_age"
+        app:srcCompat="@drawable/ic_age" />
+
+    <ImageView
+        android:id="@+id/icon_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/settings_hint_age"
+        app:layout_constraintBottom_toBottomOf="@+id/input_user_phone"
+        app:layout_constraintEnd_toStartOf="@+id/input_user_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_user_phone"
+        app:srcCompat="@drawable/ic_phone" />
+
+    <ImageView
+        android:id="@+id/icon_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/settings_hint_description"
+        app:layout_constraintBottom_toBottomOf="@+id/input_description"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/input_description"
+        app:srcCompat="@drawable/ic_information" />
+
+    <Switch
+        android:id="@+id/switch_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
+        android:text="@string/settings_notifications"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/settings_button_apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_midpoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="380dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center_vertically"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="205dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
