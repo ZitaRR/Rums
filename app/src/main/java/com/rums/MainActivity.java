@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 return false;
             }
 
@@ -69,6 +70,26 @@ public class MainActivity extends AppCompatActivity {
 
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //för att kunna välja items i listan
+
+        //checkBox.setChecked(true);
+        int id = item.getItemId();
+        if (id == R.id.add_done) {
+
+            String itemSelected = "Invites send!";
+
+            showSettingsActivity(); //anropar metod för att skickas till ny activity
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showSettingsActivity() { // metod för att skickas till Secondactivity
+        Intent intent = new Intent(this, Rooms.class);
+        startActivity(intent);
     }
 
 }
