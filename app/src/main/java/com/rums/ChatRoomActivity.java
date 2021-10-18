@@ -55,10 +55,6 @@ public class ChatRoomActivity extends AppCompatActivity {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         //Deprecated:
         startActivityForResult(gallery, GALLERY_REQUEST);
-        //Är ovanstående nyare än: ?
-//        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-//        photoPickerIntent.setType("image/*");
-//        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
     }
 
     @Override
