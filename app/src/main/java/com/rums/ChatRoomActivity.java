@@ -2,6 +2,7 @@ package com.rums;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -44,9 +45,12 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
     private void picAPicFromGallery() {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, GALLERY_REQUEST);
+        //Är ovanstående nyare är: ?
+//        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+//        photoPickerIntent.setType("image/*");
+//        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
     }
 
 
