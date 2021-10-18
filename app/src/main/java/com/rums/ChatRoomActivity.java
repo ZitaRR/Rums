@@ -1,6 +1,8 @@
 package com.rums;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
+    private static final int GALLERY_REQUEST = 100;
     ArrayList<String> names;
     ArrayAdapter<String> adapter;
     ListView listView;
@@ -26,7 +29,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private void setupListViewAdapter() {
         names = new ArrayList<>();
         int duplicates = 1;
-        for(int i = 0; i<duplicates; i++) {
+        for (int i = 0; i < duplicates; i++) {
             names.add("Kalle");
             names.add("Bille");
             names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
@@ -38,5 +41,16 @@ public class ChatRoomActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         //Scroll to bottom:
         listView.post(() -> listView.setSelection(listView.getCount() - 1));
+    }
+
+    private void picAPicFromGallery() {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
+    }
+
+
+    public void imageFromGalleryButtonMethod(View view) {
+        picAPicFromGallery();
     }
 }
