@@ -6,6 +6,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,6 +52,22 @@ public class ChatRoomActivity extends AppCompatActivity {
 //        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 //        photoPickerIntent.setType("image/*");
 //        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+//        Uri imageUri;
+//        ImageView imageView = findViewById(R.id.image_main_galary);
+
+        if (resultCode == RESULT_OK && reqCode == 100){
+//            imageUri = data.getData();
+//            imageView.setImageURI(imageUri);
+            Toast.makeText(this,"Pic from gallery OK", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,"Pic from galler NOT ok", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
