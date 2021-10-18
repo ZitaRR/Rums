@@ -47,10 +47,14 @@ public class ChatRoomActivity extends AppCompatActivity {
         listView.post(() -> listView.setSelection(listView.getCount() - 1));
     }
 
+    public void imageFromGalleryButtonMethod(View view) {
+        picAPicFromGallery();
+    }
+
     private void picAPicFromGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, GALLERY_REQUEST);
-        //Är ovanstående nyare är: ?
+        //Är ovanstående nyare än: ?
 //        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 //        photoPickerIntent.setType("image/*");
 //        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
@@ -61,8 +65,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onActivityResult(reqCode, resultCode, data);
 
         Uri imageUri;
-//        ImageView imageView = findViewById(R.id.image_main_galary);
-
+//        ImageView imageView = findViewById(R.id.profile_image_view);
         if (resultCode == RESULT_OK && reqCode == 100){
             imageUri = data.getData();
 //            imageView.setImageURI(imageUri);
@@ -74,7 +77,5 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
 
-    public void imageFromGalleryButtonMethod(View view) {
-        picAPicFromGallery();
-    }
+
 }
