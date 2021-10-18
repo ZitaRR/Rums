@@ -1,8 +1,10 @@
 package com.rums;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -58,13 +60,14 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
 
-//        Uri imageUri;
+        Uri imageUri;
 //        ImageView imageView = findViewById(R.id.image_main_galary);
 
         if (resultCode == RESULT_OK && reqCode == 100){
-//            imageUri = data.getData();
+            imageUri = data.getData();
 //            imageView.setImageURI(imageUri);
-            Toast.makeText(this,"Pic from gallery OK", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Pic Uri: " + imageUri, Toast.LENGTH_SHORT).show();
+            Log.d("TAG", "Pic Uri: " + imageUri);
         } else {
             Toast.makeText(this,"Pic from galler NOT ok", Toast.LENGTH_SHORT).show();
         }
