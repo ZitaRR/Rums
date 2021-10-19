@@ -16,13 +16,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        actionBar = findViewById(R.id.main_actionbar);
-        setSupportActionBar(actionBar);
+       actionBar = findViewById(R.id.main_actionbar);
+       setSupportActionBar(actionBar);
 
         //Kristian: Här kan vi starta "vår egen" Activity,
         // så vi kan testa den.
         // Byt bara ChatRoomActivity till namnet på din Activity.
-        startSomeActivity(ChatRoomActivity.class);
+
+       startSomeActivity(NewRoomActivity.class);
     }
 
     private void startSomeActivity(Class<?> cls) {
