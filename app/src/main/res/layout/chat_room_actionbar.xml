@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/teal_700"
     android:id="@+id/main_actionbar"
-    app:title="Kalle"
+    app:title="[ [ Rums ]  A Cosy Rum ]"
+    app:titleTextColor="@color/light_light_gray"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 </androidx.appcompat.widget.Toolbar>
