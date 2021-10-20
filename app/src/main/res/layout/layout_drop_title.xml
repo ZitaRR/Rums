@@ -7,6 +7,7 @@
         android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="?attr/actionBarSize"
-        android:textColor="@android:color/white"
+        android:textColor="@color/slightly_darker_gray"
+    android:background="@color/black"
         android:ellipsize="marquee"/>
 

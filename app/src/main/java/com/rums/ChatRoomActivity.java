@@ -59,7 +59,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             if (view1 instanceof Spinner)
             {
                 final Spinner spinner = (Spinner) view1;
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, testParticipants);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.layout_drop_title, testParticipants);
 
                 spinner.setAdapter(arrayAdapter);
 
