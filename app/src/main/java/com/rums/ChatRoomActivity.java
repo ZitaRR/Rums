@@ -52,8 +52,8 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         //Spinner:
 
-            MenuInflater mi=getMenuInflater();
-            mi.inflate(R.menu.chat_room_menu, menu);
+//            MenuInflater mi=getMenuInflater();
+//            mi.inflate(R.menu.chat_room_menu, menu);
             mSpinnerItem1 = menu.findItem( R.id.spinner);
             View view1 = mSpinnerItem1.getActionView();
             if (view1 instanceof Spinner)
