@@ -5,20 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ChatRoomActivity">
 
-    <item
-        android:id="@+id/search_view"
-        android:title="Yyyyyy"
-        app:showAsAction="always"
-        app:actionViewClass="android.widget.TextView"
-        android:text="Blu"
 
-        android:textColor="@color/light_light_gray"
+    <item
+        android:id="@+id/participants_view"
+        android:title="Yyyyyy"
+        android:color="@color/black"
+
+        app:showAsAction="always"
+        android:orderInCategory="50"
 
         />
 
     <item
         android:id="@+id/add_done"
         app:showAsAction="ifRoom"
+        android:orderInCategory="100"
         android:icon="@drawable/ic_baseline_person_add_24"
         tools:ignore="MenuTitle" />
 
