@@ -6,13 +6,13 @@
     tools:context=".ChatRoomActivity">
 
 
-    <item
-        android:id="@+id/participants_view"
-        android:title="A nick, Another nick"
-        app:showAsAction="always"
-        android:orderInCategory="50"
+<!--    <item-->
+<!--        android:id="@+id/participants_view"-->
+<!--        android:title="A nick, Another nick"-->
+<!--        app:showAsAction="always"-->
+<!--        android:orderInCategory="50"-->
 
-        />
+<!--        />-->
 
     <item
         android:id="@+id/add_done"

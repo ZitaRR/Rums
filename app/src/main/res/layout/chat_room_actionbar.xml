@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/very_dark_gray"
     android:id="@+id/main_actionbar"
-    app:title="[ A Cosy Rum ]"
+    app:title="[ [ A Cosy Rum ]  wilma +3 ]"
     app:titleTextColor="@color/slightly_darker_gray"
     android:theme="@style/Theme.Rums">
 
