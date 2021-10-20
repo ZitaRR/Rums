@@ -10,7 +10,8 @@
         android:title="Yyyyyy"
         app:showAsAction="always"
         app:actionViewClass="android.widget.TextView"
-        te
+        android:text="Blu"
+
         android:textColor="@color/light_light_gray"
 
         />
