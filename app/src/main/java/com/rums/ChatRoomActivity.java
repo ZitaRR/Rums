@@ -45,7 +45,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_search, menu);
+        menuInflater.inflate(R.menu.menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }

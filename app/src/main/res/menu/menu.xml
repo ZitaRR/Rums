@@ -14,7 +14,7 @@
     <item
         android:id="@+id/add_done"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_group_add_24"
+        android:icon="@drawable/ic_baseline_person_add_24"
         tools:ignore="MenuTitle" />
 
 </menu>
