@@ -17,6 +17,7 @@
 
     <item
         android:id="@+id/spinner"
+        android:title="Kattis"
         android:orderInCategory="10"
         app:actionViewClass="androidx.appcompat.widget.AppCompatSpinner"
         app:showAsAction="always" />
