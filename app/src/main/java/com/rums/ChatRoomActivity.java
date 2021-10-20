@@ -28,6 +28,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     private Toolbar actionBar;
     private MenuItem mSpinnerItem1 = null;
 
+    private ArrayList<String> testParticipants = new ArrayList() {{add("Pylle"); add("Lylle");}};
+
 
 
     @Override
@@ -57,7 +59,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             if (view1 instanceof Spinner)
             {
                 final Spinner spinner = (Spinner) view1;
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, testParticipants);
 
                 spinner.setAdapter(arrayAdapter);
 
