@@ -21,4 +21,11 @@
         android:icon="@drawable/ic_baseline_person_add_24"
         tools:ignore="MenuTitle" />
 
+    <item
+        android:id="@+id/goto_profile_menu_item"
+        app:showAsAction="always"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_baseline_person_add_24"
+        tools:ignore="MenuTitle" />
+
 </menu>
