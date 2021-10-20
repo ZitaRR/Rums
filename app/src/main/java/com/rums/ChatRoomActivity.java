@@ -48,10 +48,10 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
     public void imageFromGalleryButtonMethod(View view) {
-        picAPicFromGallery();
+        pickAPicFromGallery();
     }
 
-    private void picAPicFromGallery() {
+    private void pickAPicFromGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         //Deprecated:
         startActivityForResult(gallery, GALLERY_REQUEST);
