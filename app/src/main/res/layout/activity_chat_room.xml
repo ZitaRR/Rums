@@ -23,20 +23,6 @@
         <include layout="@layout/chat_room_actionbar"/>
 
 
-        <TextView
-            android:id="@+id/rum_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:text="[COSY RUM]"
-            android:textColor="@color/lighter_gray"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </TextView>
 
         <ListView
             android:id="@+id/list_view"
