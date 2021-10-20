@@ -34,6 +34,9 @@
         app:showAsAction="always"
         android:orderInCategory="30"
         android:icon="@drawable/dog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         tools:ignore="MenuTitle" />
 
 </menu>
