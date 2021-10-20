@@ -28,7 +28,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private Toolbar actionBar;
     private MenuItem mSpinnerItem1 = null;
 
-    private ArrayList<String> testParticipants = new ArrayList() {{add("Pylle"); add("Lylle");}};
+    private ArrayList<String> testParticipants = new ArrayList() {{add("Pylle + 1"); add("Lylle");}};
 
 
 
