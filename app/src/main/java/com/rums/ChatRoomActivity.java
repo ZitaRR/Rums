@@ -46,19 +46,14 @@ public class ChatRoomActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.chat_room_menu, menu);
 
         //Spinner:
-        getMenuInflater().inflate(R.id.);
         MenuItem menuItem = findViewById(R.id.spinner);
-        menu
+        androidx.appcompat.widget.AppCompatSpinner spinner = menuItem.getActionView();
 
-        menuInflater.inflate(R.menu.main_menu, menu)
+        //Ska vara Annan array
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
 
-        val item = menu?.findItem(R.id.spinner)
-        val spinner = item?.actionView as AppCompatSpinner
-
-        var arrayAdapter =
-                ArrayAdapter(this@MainActivity, R.layout.layout_drop_title, getCountries())
-        arrayAdapter.setDropDownViewResource(R.layout.layout_drop_list)
-        spinner.adapter = arrayAdapter
+        arrayAdapter.setDropDownViewResource(R.layout.layout_drop_list);
+        spinner.setAdapter(arrayAdapter);
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
