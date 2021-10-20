@@ -7,6 +7,6 @@
     android:id="@+id/main_actionbar"
     app:title="[ A Cosy Rum ]"
     app:titleTextColor="@color/slightly_darker_gray"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/Theme.Rums">
 
 </androidx.appcompat.widget.Toolbar>

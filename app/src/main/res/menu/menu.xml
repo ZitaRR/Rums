@@ -9,8 +9,6 @@
     <item
         android:id="@+id/participants_view"
         android:title="Yyyyyy"
-        android:color="@color/black"
-
         app:showAsAction="always"
         android:orderInCategory="50"
 
