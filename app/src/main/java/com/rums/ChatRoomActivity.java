@@ -90,7 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     private void setupListViewAdapter() {
         names = new ArrayList<>();
-        int duplicates = 1;
+        int duplicates = 10;
         for(int i = 0; i<duplicates; i++) {
             names.add("Kalle");
             names.add("Bille");
