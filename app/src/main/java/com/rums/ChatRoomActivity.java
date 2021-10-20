@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -45,6 +46,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.chat_room_menu, menu);
 
         //Spinner:
+        MenuItem menuItem = findViewById(R.id.spinner); 
         menu
 
         menuInflater.inflate(R.menu.main_menu, menu)
