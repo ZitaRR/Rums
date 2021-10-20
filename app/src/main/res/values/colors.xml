@@ -20,12 +20,17 @@
 
     <color name="lighter_gray">#A8A8A8</color>
 
+    <color name="gray_icon_color">#ACACAC</color>
+
+
     <color name="light_purple">#C6ADFF</color>
     <color name="darker_purple">#9D7DE6</color>
     <color name="dark_purple">#A37C53DA</color>
 
     <color name="transparent">#00C6ADFF</color>
     <!--    ................... -->
+
+
 
 
 </resources>

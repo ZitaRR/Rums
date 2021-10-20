@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/participants_view"
-        android:title="Yyyyyy"
+        android:title="A nick, Another nick"
         app:showAsAction="always"
         android:orderInCategory="50"
 
@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/add_done"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:orderInCategory="100"
         android:icon="@drawable/ic_baseline_person_add_24"
         tools:ignore="MenuTitle" />

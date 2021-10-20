@@ -13,8 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        <item name="actionMenuTextColor">@color/slightly_darker_gray</item>
-        <item name="android:actionMenuTextColor">@color/slightly_darker_gray</item>
+        <item name="actionMenuTextColor">@color/gray_icon_color</item>
+        <item name="android:actionMenuTextColor">@color/gray_icon_color</item>
     </style>
 
 </resources>
