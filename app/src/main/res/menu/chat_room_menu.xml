@@ -18,22 +18,42 @@
     <item
         android:id="@+id/goto_profile_menu_item"
         app:showAsAction="always"
-        android:orderInCategory="100"
+        android:orderInCategory="10"
         android:icon="@drawable/ic_baseline_person_add_24"
         tools:ignore="MenuTitle" />
 
     <item
         android:id="@+id/divider_menu_item"
         app:showAsAction="always"
-        android:orderInCategory="100"
+        android:orderInCategory="20"
         android:icon="@drawable/ic_baseline_person_add_24"
         tools:ignore="MenuTitle" />
 
     <item
         android:id="@+id/add_done"
         app:showAsAction="always"
-        android:orderInCategory="100"
+        android:orderInCategory="30"
         android:icon="@drawable/dog"
         tools:ignore="MenuTitle" />
 
 </menu>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
