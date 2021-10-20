@@ -44,6 +44,30 @@ public class ChatRoomActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.chat_room_menu, menu);
 
+        //Spinner:
+        menu
+
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        val item = menu?.findItem(R.id.spinner)
+        val spinner = item?.actionView as AppCompatSpinner
+
+        var arrayAdapter =
+                ArrayAdapter(this@MainActivity, R.layout.layout_drop_title, getCountries())
+        arrayAdapter.setDropDownViewResource(R.layout.layout_drop_list)
+        spinner.adapter = arrayAdapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                showToast(getCountries()[position] + " selected")
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+        return true
+    }
+
         return super.onCreateOptionsMenu(menu);
     }
 
