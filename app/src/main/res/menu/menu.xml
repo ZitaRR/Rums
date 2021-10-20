@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ChatRoomActivity">
 
-    <item
-        android:id="@+id/search_view"
-        android:title="Yyyyyy"
-        app:showAsAction="always"
-        app:actionViewClass="android.widget.SearchView"/>
+<!--    <item-->
+<!--        android:id="@+id/search_view"-->
+<!--        android:title="Yyyyyy"-->
+<!--        app:showAsAction="always"-->
+<!--        app:actionViewClass="android.widget.SearchView"-->
+<!--        />-->
 
     <item
         android:id="@+id/add_done"
