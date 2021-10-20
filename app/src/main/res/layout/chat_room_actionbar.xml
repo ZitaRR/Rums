@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
+    android:background="@color/very_dark_gray"
     android:id="@+id/main_actionbar"
     app:title="[ A Cosy Rum ]"
-    app:titleTextColor="@color/medium_light_gray"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    app:titleTextColor="@color/darker_gray"
+    android:theme="@XML/styles/AppTheme">
 
 </androidx.appcompat.widget.Toolbar>
