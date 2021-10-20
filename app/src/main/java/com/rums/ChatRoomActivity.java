@@ -47,7 +47,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         //Spinner:
         MenuItem menuItem = findViewById(R.id.spinner);
-        androidx.appcompat.widget.AppCompatSpinner spinner = menuItem.getActionView();
+        androidx.appcompat.widget.AppCompatSpinner spinner = (androidx.appcompat.widget.AppCompatSpinner)findViewById(R.id.drop_down_list);
 
         //Ska vara Annan array
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
@@ -55,16 +55,16 @@ public class ChatRoomActivity extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(R.layout.layout_drop_list);
         spinner.setAdapter(arrayAdapter);
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//
+//            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                showToast(getCountries()[position] + " selected")
+//            }
+//
+//            override fun onNothingSelected(p0: AdapterView<*>?) {}
+//        }
+//        return true
 
-            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                showToast(getCountries()[position] + " selected")
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-        }
-        return true
-    }
 
         return super.onCreateOptionsMenu(menu);
     }
