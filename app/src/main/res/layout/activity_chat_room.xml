@@ -20,7 +20,7 @@
         android:background="@color/medium_dark_gray"
 
         >
-        <include layout="@layout/main_actionbar"/>
+        <include layout="@layout/chat_room_actionbar"/>
 
 
         <TextView
