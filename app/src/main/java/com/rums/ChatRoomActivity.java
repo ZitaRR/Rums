@@ -38,7 +38,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
         setupListViewAdapter();
 
-        actionBar = findViewById(R.id.main_actionbar);
+        actionBar = findViewById(R.id.chat_room_actionbar);
         setSupportActionBar(actionBar);
 
     }

@@ -4,7 +4,7 @@
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/very_dark_gray"
-    android:id="@+id/main_actionbar"
+    android:id="@+id/chat_room_actionbar"
     app:title="[ A Cosy Rum ]"
     app:titleTextColor="@color/slightly_darker_gray"
     android:theme="@style/Theme.Rums">
