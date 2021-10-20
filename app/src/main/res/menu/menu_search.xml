@@ -18,3 +18,7 @@
         tools:ignore="MenuTitle" />
 
 </menu>
+
+
+<!--
+Layout för sökfunktion i toolbar + "NyGrupp-ikon" som tar användaren till HomeActivity med olika chattrum-->

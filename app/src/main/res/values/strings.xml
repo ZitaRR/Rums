@@ -9,7 +9,8 @@
     <string name="settings_notifications">Notifications</string>
     <string name="settings_button_apply">Save</string>
 
-    <string name="person_name">Person</string>
+    <string name="u_name">Username:</string>
+    <string name="u_phone">Phone:</string>
     <string name="search_menu">Search</string>
 
 </resources>
