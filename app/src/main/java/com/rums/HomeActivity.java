@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private Toolbar actionBar;
 
     @Override
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         //Kristian: Här kan vi starta "vår egen" Activity,
         // så vi kan testa den.
         // Byt bara ChatRoomActivity till namnet på din Activity.
-        startSomeActivity(ChatRoomActivity.class);
+        //startSomeActivity(ChatRoomActivity.class);
     }
 
     private void startSomeActivity(Class<?> cls) {
