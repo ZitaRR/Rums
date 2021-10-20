@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView listView;
     private Toolbar actionBar;
+    private MenuItem mSpinnerItem1 = null;
+
 
 
     @Override
@@ -46,24 +49,37 @@ public class ChatRoomActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.chat_room_menu, menu);
 
         //Spinner:
-        MenuItem menuItem = findViewById(R.id.spinner);
-        androidx.appcompat.widget.AppCompatSpinner spinner = (androidx.appcompat.widget.AppCompatSpinner)findViewById(R.id.drop_down_list);
 
-        //Ska vara Annan array
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
+            MenuInflater mi=getMenuInflater();
+            mi.inflate(R.menu.chat_room_menu, menu);
+            mSpinnerItem1 = menu.findItem( R.id.spinner);
+            View view1 = mSpinnerItem1.getActionView();
+            if (view1 instanceof Spinner)
+            {
+                final Spinner spinner = (Spinner) view1;
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
 
-        arrayAdapter.setDropDownViewResource(R.layout.layout_drop_list);
-        spinner.setAdapter(arrayAdapter);
+                spinner.setAdapter(arrayAdapter);
 
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+//                spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 //
-//            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                showToast(getCountries()[position] + " selected")
-//            }
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> arg0, View arg1,
+//                                               int arg2, long arg3) {
+//                        // TODO Auto-generated method stub
 //
-//            override fun onNothingSelected(p0: AdapterView<*>?) {}
-//        }
-//        return true
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> arg0) {
+//                        // TODO Auto-generated method stub
+//
+//                    }
+//                });
+
+            }
+
 
 
         return super.onCreateOptionsMenu(menu);
