@@ -114,7 +114,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         if (successfulSave) {
             Toast.makeText(UserProfile.this, "Save Successful", Toast.LENGTH_SHORT).show();
             changeDatabase();
-            // StartnextActivity
+            Intent i = new Intent(UserProfile.this, HomeActivity.class);
+            startActivity(i);
         }
 
     }
