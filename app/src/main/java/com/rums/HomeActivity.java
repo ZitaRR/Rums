@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     // Meny i toolbar funktionalitet (Sign-out & Edit-profile)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
 
