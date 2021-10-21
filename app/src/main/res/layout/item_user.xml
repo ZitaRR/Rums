@@ -34,10 +34,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/user_phone"
                 app:layout_constraintEnd_toStartOf="@+id/check_Box"
-                app:layout_constraintHorizontal_bias="0.041"
+                app:layout_constraintHorizontal_bias="0.032"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.571" />
+                app:layout_constraintVertical_bias="0.937" />
 
             <TextView
                 android:id="@+id/user_phone"
@@ -50,10 +50,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/check_Box"
-                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintHorizontal_bias="0.109"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.737" />
+                app:layout_constraintVertical_bias="0.54" />
 
             <TextView
                 android:id="@+id/users_name"
@@ -64,10 +64,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/user_phone"
                 app:layout_constraintEnd_toStartOf="@+id/check_Box"
-                app:layout_constraintHorizontal_bias="0.972"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.535" />
+                app:layout_constraintVertical_bias="0.937" />
 
             <TextView
                 android:id="@+id/users_phone"
@@ -79,10 +79,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/check_Box"
-                app:layout_constraintHorizontal_bias="0.419"
+                app:layout_constraintHorizontal_bias="0.425"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.754" />
+                app:layout_constraintVertical_bias="0.54" />
 
             <ImageView
                 android:id="@+id/user_pic"

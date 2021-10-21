@@ -54,7 +54,7 @@ public class NewRoomActivity extends AppCompatActivity {
        // LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         userRow.setLayoutManager(new LinearLayoutManager(this));
 
-        userList = User.createUsersList(20);
+        userList = User.createUsersList(10);
         //userList = new ArrayList<>();
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
