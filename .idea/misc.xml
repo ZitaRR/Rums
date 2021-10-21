@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.10208333333333333" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/chat_bubble_list_item.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/main_actionbar.xml" value="0.1" />
       </map>
     </option>

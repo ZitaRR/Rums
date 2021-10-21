@@ -1,16 +1,21 @@
 package com.rums;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,10 +28,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private Button buttonSave;
     private CircleImageView profilePicture;
 
-    private String username;
-    private String userDescription;
-    private int userAge;
-    private int userPhone;
+    private String username, userDescription;
+    private int userAge, userPhone;
     private boolean userNotification;
 
 
@@ -35,8 +38,13 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        actionBar = findViewById(R.id.main_actionbar);
+        actionBar = (Toolbar) findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
 
         editUsername = (EditText) findViewById(R.id.input_username);
         editAge = (EditText) findViewById(R.id.input_user_age);
@@ -166,6 +174,20 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     public boolean isUserNotification() {
         return userNotification;
+    }
+
+
+    // För att kunna använda bakåtknappen. Inte det mest effektiva sättet att göra det förmodligen men enda som jag fick att fungera.
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Intent i = new Intent(UserProfile.this, HomeActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
