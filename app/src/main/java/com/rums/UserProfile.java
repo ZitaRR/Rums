@@ -27,7 +27,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private String userDescription;
     private int userAge;
     private int userPhone;
-    private boolean userNotific;
+    private boolean userNotification;
 
 
     @Override
@@ -73,7 +73,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-
     // Inte klar, tror behöver Firebase Storage
     private void changeProfilePicture() {
 
@@ -87,28 +86,31 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     private void saveChanges() {
 
+        String inputUsername = editUsername.getText().toString();
+        String inputDescription = editDescription.getText().toString();
+        String inputAge = editAge.getText().toString();
+        String inputPhone = editPhone.getText().toString();
+
         boolean successfulSave = true;
 
-        // Om användarnamn är mindre än 5 eller mer än 13 karaktärer, så får man felmeddelande.
-        if(editUsername.getText().toString().length() < 5 || editUsername.getText().toString().length() > 13) {
+        // Användarnamn. Vilkor: Mellan 5 och 13 karaktärer.
+        if(inputUsername.length() < 5 || inputUsername.length() > 13) {
            Toast.makeText(UserProfile.this, "Username must be between 5 and 13 characters.", Toast.LENGTH_SHORT).show();
            successfulSave = false;
         } else {
-            setUsername(editUsername.getText().toString());
+            setUsername(inputUsername);
         }
 
-        if (!editDescription.getText().toString().isEmpty()) {
-            setUserDescription(editDescription.getText().toString());
+        if (!inputDescription.isEmpty()) {
+            setUserDescription(inputDescription);
         }
 
-        // Programmet kraschar om den försöker parsa ett tomt värde, så behöver se så det inte är tomt.
-        // Behövs inget max-värde, satt max 3 siffror i EditText elementet, så 999 är max
-        if (editAge.getText().toString().length() > 1) {
-           setUserAge(Integer.parseInt(editAge.getText().toString()));
+        if (!inputAge.isEmpty()) {
+           setUserAge((Integer.parseInt(inputAge)));
         }
 
-        if (editPhone.getText().toString().length() > 1) {
-            setUserPhone(Integer.parseInt(editPhone.getText().toString()));
+        if (!inputPhone.isEmpty()) {
+            setUserPhone(Integer.parseInt(inputPhone));
         }
 
         if (successfulSave) {
@@ -121,12 +123,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     private void changeDatabase() {
-        // När värden ändrats, skicka upp i sfären på nått sätt
+        // När värden ändrats, skicka till User.Class eller databas eller nått? Dunno?
     }
-
-
-
-
 
     // Getters & Setters
 
@@ -134,20 +132,40 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         this.username = username;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setUserAge(int user_age) {
         this.userAge = user_age;
+    }
+
+    public int getUserAge() {
+        return userAge;
     }
 
     public void setUserPhone(int user_phone) {
         this.userPhone = user_phone;
     }
 
+    public int getUserPhone() {
+        return userPhone;
+    }
+
     public void setUserDescription(String user_description) {
         this.userDescription = user_description;
     }
 
+    public String getUserDescription() {
+        return userDescription;
+    }
+
     public void setNotifications(boolean notifications) {
-        this.userNotific = notifications;
+        this.userNotification = notifications;
+    }
+
+    public boolean isUserNotification() {
+        return userNotification;
     }
 
 }

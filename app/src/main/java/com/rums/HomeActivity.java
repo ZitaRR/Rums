@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
     private Toolbar actionBar;
+    private Button testActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +25,20 @@ public class HomeActivity extends AppCompatActivity {
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
 
-        //Kristian: Här kan vi starta "vår egen" Activity,
-        // så vi kan testa den.
-        // Byt bara ChatRoomActivity till namnet på din Activity.
-        //startSomeActivity(ChatRoomActivity.class);
+        testActivity = findViewById(R.id.button_test_activity);
+
+        testActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this, ChatRoomActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
-    private void startSomeActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-    }
 
-    // Adding Logout Functionality
+    // Meny i toolbar funktionalitet (Sign-out & Edit-profile)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -44,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+       // Kanske ändra till IF?
         switch (item.getItemId()){
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
