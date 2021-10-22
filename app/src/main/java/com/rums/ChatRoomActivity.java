@@ -43,6 +43,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         setSupportActionBar(actionBar);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
+//            ab.setIcon(R.drawable.ic_baseline_arrow_back_ios_new_24);
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
