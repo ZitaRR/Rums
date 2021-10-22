@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UserProfile">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/main_actionbar"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+    <include layout="@layout/main_actionbar"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
