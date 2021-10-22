@@ -46,7 +46,6 @@ public class ChatRoomActivity extends AppCompatActivity {
 //            ab.setIcon(R.drawable.ic_baseline_arrow_back_ios_new_24);
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override
