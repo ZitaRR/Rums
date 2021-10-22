@@ -38,7 +38,10 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
         setupListViewAdapter();
+        setActionBar();
+    }
 
+    private void setActionBar() {
         actionBar = findViewById(R.id.chat_room_actionbar);
         setSupportActionBar(actionBar);
         ActionBar ab = getSupportActionBar();
@@ -59,14 +62,14 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 //            MenuInflater mi=getMenuInflater();
 //            mi.inflate(R.menu.chat_room_menu, menu);
-            mSpinnerItem1 = menu.findItem( R.id.spinner);
-            View view1 = mSpinnerItem1.getActionView();
-            if (view1 instanceof Spinner)
-            {
-                final Spinner spinner = (Spinner) view1;
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.layout_drop_title, testParticipants);
+        mSpinnerItem1 = menu.findItem( R.id.spinner);
+        View view1 = mSpinnerItem1.getActionView();
+        if (view1 instanceof Spinner)
+        {
+            final Spinner spinner = (Spinner) view1;
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.layout_drop_title, testParticipants);
 
-                spinner.setAdapter(arrayAdapter);
+            spinner.setAdapter(arrayAdapter);
 
 
 //                spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -85,7 +88,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 //                    }
 //                });
 
-            }
+        }
 
 
 
