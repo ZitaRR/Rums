@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText confirmPassword;
     private Button register;
     private FirebaseAuth auth;
+    private PersistantStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         auth = FirebaseAuth.getInstance();
+        storage = PersistantStorage.getInstance();
         username = findViewById(R.id.edit_username);
         email = findViewById(R.id.edit_register_email);
         password = findViewById(R.id.edit_password);
@@ -61,10 +64,20 @@ public class RegisterActivity extends AppCompatActivity {
     }
     //Behöver mer av appen så man kan ta med & hantera datan, men detta är ju metoden som registrerar användaren i Firebase.
     private void registerUser(String email, String confirmPassword) {
+        String username = this.username.getText().toString();
+
         auth.createUserWithEmailAndPassword(email, confirmPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    FirebaseUser authUser = auth.getCurrentUser();
+                    RumUser user = new RumUser(authUser.getUid());
+                    user.setUsername(username);
+                    user.setPassword(confirmPassword);
+                    user.setEmail(email);
+                    storage.getUsers().insert(user);
+                    storage.getUsers().commit();
+
                     Toast.makeText(RegisterActivity.this, "Registration complete, signing in", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                 }else{
