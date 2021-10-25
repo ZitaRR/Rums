@@ -123,7 +123,7 @@ public class NewRoomActivity extends AppCompatActivity {
     }
 
      private void showSettingsActivity () {
-        Intent intent = new Intent(this, TestHomeActivity.class);
+        Intent intent = new Intent(this, ChatRoomActivity.class);
         startActivity(intent);
     }
 
