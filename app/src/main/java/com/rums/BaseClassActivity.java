@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 public class BaseClassActivity extends AppCompatActivity {
@@ -21,7 +20,8 @@ public class BaseClassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        setContentView(R.layout.activity_home);
+//        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
     }
 
     protected void init() {
