@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 public class BaseClassActivity extends AppCompatActivity {
@@ -69,6 +70,16 @@ public class BaseClassActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    private void moveUserToChatRoom(String roomID) {
+//        RumUser currentUser = getCurrentRumUser;
+//        ChatRoom room = getChatRoomByID(String roomID);
+//        if(room != null) {
+//            currentUser.setCurrentChatRoomID = room.ID;
+//            currentUser.setCurrentChatRoom = room;
+//            startSomeActivity(ChatRoomActivity.class);
+//        }
     }
 
     protected void startSomeActivity(Class<?> cls) {
