@@ -21,12 +21,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
 
     private ArrayList<User> mUserList;
     private Context context;
-    private ArrayList<User> mUsersFull;
+    private ArrayList<User> mFiltered;
 
     public MyAdapter(Context context, ArrayList<User> userList) {
         this.context = context;
         this.mUserList = userList;
-        this.mUsersFull = new ArrayList<>(userList);
+        this.mFiltered = new ArrayList<>(userList);
     }
 
     @NonNull
@@ -46,24 +46,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
 
         User currentUser = mUserList.get(position);
 
+        currentUser.getChecked();
+
         holder.userName.setText(currentUser.getName());
         holder.userPhone.setText(currentUser.getPhone());
 
         TextView tv = holder.userName;
         tv.setText(currentUser.getName());
        // Checkbox invite = holder.inviteBox;
-        holder.inviteBox.setChecked(mUserList.get(position).getChecked());
-        /*holder.inviteBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mUserList.get(position).getChecked()) {
-                    mUserList.get(position).setChecked(false);
-                } else {
-                    mUserList.get(position).setChecked(true);
-                }
-            }
-        });*/
 
+            holder.inviteBox.setChecked(currentUser.getChecked());
+            holder.inviteBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   currentUser.setChecked(holder.inviteBox.isChecked());
+
+                }
+            });
     }
 
     @Override
@@ -71,7 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         return mUserList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView userName, userPhone;
         public CheckBox inviteBox;
@@ -97,11 +96,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         protected FilterResults performFiltering(CharSequence constraint) {
             List<User> filteredList = new ArrayList<>();
             if (constraint == null || constraint.length()==0) {
-                filteredList.addAll(mUsersFull);
+                filteredList.addAll(mFiltered);
             } else {
                 String filteredPattern = constraint.toString().toLowerCase().trim();
 
-                for (User item : mUsersFull) {
+                for (User item : mFiltered) {
                     if (item.getName().toLowerCase().contains(filteredPattern)) {
                         filteredList.add(item);
                     }

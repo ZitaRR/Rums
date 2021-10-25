@@ -48,14 +48,9 @@ public class NewRoomActivity extends AppCompatActivity {
         setSupportActionBar(actionBar);
 
         userRow = (RecyclerView) findViewById(R.id.user_Row);
-        //database = FirebaseDatabase.getInstance().getReference("Users");
-       // userRow.setHasFixedSize(true);
-
-       // LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         userRow.setLayoutManager(new LinearLayoutManager(this));
 
         userList = User.createUsersList(10);
-        //userList = new ArrayList<>();
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
 
@@ -108,7 +103,7 @@ public class NewRoomActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.add_done) {
 
-            String itemChecked = "Invites send";
+            String itemChecked = "Users added to groupchat!";
 /*            for(int i = 0; i <userRow.getChildCount(); i++) {
                 if (checkBox.isChecked()) {
 
@@ -116,6 +111,7 @@ public class NewRoomActivity extends AppCompatActivity {
                     setNewChat(userList);
                 }
             }*/
+
             showSettingsActivity();
            Toast.makeText(this,itemChecked, Toast.LENGTH_SHORT).show();
 

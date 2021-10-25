@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class User {
 
-    private ClipData.Item item;
-
     private String mName, mPhone;
     private boolean mChecked;
 
@@ -45,5 +43,4 @@ public class User {
     public void setChecked(boolean checked) {
         mChecked = checked;
     }
-
 }
