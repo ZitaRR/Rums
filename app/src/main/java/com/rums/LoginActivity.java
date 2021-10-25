@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        PersistantStorage.getInstance();
         register = findViewById(R.id.text_register);
         email = findViewById(R.id.edit_login_mail);
         password = findViewById(R.id.edit_login_password);

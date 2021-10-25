@@ -6,6 +6,8 @@ public class RumUser implements Identity {
     private String password;
     private String email;
 
+    public RumUser(){}
+
     public RumUser(String id){
         this.id = id;
     }
