@@ -72,7 +72,7 @@ public class BaseClassActivity extends AppCompatActivity {
         return true;
     }
 
-    private void moveUserToChatRoom(String roomID) {
+    private void moveUserToChatRoom(ChatRoom chatRoom) {
 //        RumUser currentUser = getCurrentRumUser;
 //        ChatRoom room = getChatRoomByID(String roomID);
 //        if(room != null) {
