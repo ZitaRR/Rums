@@ -1,5 +1,6 @@
 package com.rums;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +16,7 @@ public class BaseClassActivity extends AppCompatActivity {
     private Toolbar actionBar;
     protected Boolean shouldHaveBackArrowInActionBar = true;
     protected Class<?> previousActivityClass;
+    protected BaseClassActivity specificActivityForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
 
 
@@ -54,25 +56,23 @@ public class BaseClassActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getClass() == androidx.appcompat.view.menu.ActionMenuItem.class) {
-
+    @Override      //Back arrow in ActionBar, etc.
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getClass() == androidx.appcompat.view.menu.ActionMenuItem.class) {
             switch (item.getItemId()) {
                 case android.R.id.home:
-                    if (previousActivityClass != null) {
+                    if (specificActivityForBackArrow == null) {
+                        startSomeActivity(HomeActivity.class);
+                    } else if (previousActivityClass != null) {
                         startSomeActivity(previousActivityClass);
                     }
-//                NavUtils.navigateUpFromSameTask(this);
                     return true;
-                default:
-//                return super.onOptionsItemSelected(item);
             }
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
-    private void moveUserToChatRoom(ChatRoom chatRoom) {
+//    private void moveUserToChatRoom(ChatRoom chatRoom) {
 //        RumUser currentUser = getCurrentRumUser;
 //        ChatRoom room = getChatRoomByID(String roomID);
 //        if(room != null) {
@@ -80,7 +80,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //            currentUser.setCurrentChatRoom = room;
 //            startSomeActivity(ChatRoomActivity.class);
 //        }
-    }
+//    }
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
