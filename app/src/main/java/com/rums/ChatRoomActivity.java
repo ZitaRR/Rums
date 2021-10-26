@@ -58,7 +58,9 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.chat_room_menu, menu);
+//        menu.setGroupDividerEnabled(true);
         MenuCompat.setGroupDividerEnabled(menu, true);
+
 
 
         //Spinner:
