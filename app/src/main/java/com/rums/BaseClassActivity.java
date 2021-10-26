@@ -16,7 +16,7 @@ public class BaseClassActivity extends AppCompatActivity {
     private Toolbar actionBar;
     protected Boolean shouldHaveBackArrowInActionBar = true;
     protected Class<?> previousActivityClass;
-    protected BaseClassActivity specificActivityForBackArrow;
+    protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
 
 
@@ -61,13 +61,15 @@ public class BaseClassActivity extends AppCompatActivity {
         if (item.getClass() == androidx.appcompat.view.menu.ActionMenuItem.class) {
             switch (item.getItemId()) {
                 case android.R.id.home:
-                    if (specificActivityForBackArrow == null) {
-                        startSomeActivity(HomeActivity.class);
-                    } else if (previousActivityClass != null) {
-                        startSomeActivity(previousActivityClass);
+                    if (specificActivityClassForBackArrow == null) {
+                        if (previousActivityClass != null) {
+                            startSomeActivity(previousActivityClass);
+                        }
+                    } else {
+                        startSomeActivity(specificActivityClassForBackArrow);
                     }
-                    return true;
             }
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
