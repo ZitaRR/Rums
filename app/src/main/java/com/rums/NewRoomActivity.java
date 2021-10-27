@@ -35,7 +35,7 @@ import java.util.Arrays;
 
 public class NewRoomActivity extends BaseClassActivity {
 
-    private ArrayList<User> userList;
+    private ArrayList<ChatRoom> userList;
     private RecyclerView userRow;
     private MyAdapter myAdapter;
     //private DatabaseReference database;
@@ -43,10 +43,14 @@ public class NewRoomActivity extends BaseClassActivity {
     private Toolbar actionBar;
     private CheckBox checkBox;
 
+    private PersistantStorage storage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
+
+        storage = PersistantStorage.getInstance();
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
@@ -54,7 +58,10 @@ public class NewRoomActivity extends BaseClassActivity {
         userRow = (RecyclerView) findViewById(R.id.user_Row);
         userRow.setLayoutManager(new LinearLayoutManager(this));
 
-        userList = User.createUsersList(10);
+        userList = (ArrayList<ChatRoom>) storage.getAll
+        /*userList = (ArrayList<ChatRoom>) storage.getRums().getRange(user -> {
+            return user.getId().contains("gmail");*/
+        });
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
 
@@ -138,7 +145,7 @@ public class NewRoomActivity extends BaseClassActivity {
                     .setNegativeButton(more, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getApplicationContext(),"Nothing Happened",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"",Toast.LENGTH_LONG).show();
                         }
                     });
 

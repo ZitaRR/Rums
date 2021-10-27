@@ -19,11 +19,11 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>implements Filterable {
 
-    private ArrayList<User> mUserList;
+    private ArrayList<RumUser> mUserList;
     private Context context;
-    private ArrayList<User> mFiltered;
+    private ArrayList<RumUser> mFiltered;
 
-    public MyAdapter(Context context, ArrayList<User> userList) {
+    public MyAdapter(Context context, ArrayList<RumUser> userList) {
         this.context = context;
         this.mUserList = userList;
         this.mFiltered = new ArrayList<>(userList);
@@ -44,23 +44,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        User currentUser = mUserList.get(position);
+        RumUser currentUser = mUserList.get(position);
 
-        currentUser.getChecked();
+        //currentUser.getChecked();
 
-        holder.userName.setText(currentUser.getName());
-        holder.userPhone.setText(currentUser.getPhone());
+        holder.userName.setText(currentUser.getUsername());
+        holder.userPhone.setText(currentUser.getEmail());
 
         TextView tv = holder.userName;
-        tv.setText(currentUser.getName());
+        tv.setText(currentUser.getUsername());
        // Checkbox invite = holder.inviteBox;
 
-            holder.inviteBox.setChecked(currentUser.getChecked());
+            holder.inviteBox.setChecked(false);
             holder.inviteBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   currentUser.setChecked(holder.inviteBox.isChecked());
-
+                   //currentUser.setChecked(false);
                 }
             });
     }
@@ -94,14 +93,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<User> filteredList = new ArrayList<>();
+            List<RumUser> filteredList = new ArrayList<>();
             if (constraint == null || constraint.length()==0) {
                 filteredList.addAll(mFiltered);
             } else {
                 String filteredPattern = constraint.toString().toLowerCase().trim();
 
-                for (User item : mFiltered) {
-                    if (item.getName().toLowerCase().contains(filteredPattern)) {
+                for (RumUser item : mFiltered) {
+                    if (item.getUsername().toLowerCase().contains(filteredPattern)) {
                         filteredList.add(item);
                     }
                 }

@@ -7,6 +7,12 @@ public class PersistantStorage {
     private FirebaseDatabase context;
     private Repository<RumUser> users;
 
+    public Repository<ChatRoom> getRums() {
+        return rums;
+    }
+
+    private Repository<ChatRoom> rums;
+
     private PersistantStorage() {
         if (instance != null) {
             throw new ExceptionInInitializerError(String.format("There's already an instance of %s", getClass().getName()));
@@ -16,6 +22,7 @@ public class PersistantStorage {
         context = FirebaseDatabase.getInstance();
 
         users = new Repository<>(RumUser.class);
+        rums = new Repository<>(ChatRoom.class);
     }
 
     public Repository<RumUser> getUsers(){
