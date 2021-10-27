@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-  <include layout="@layout/main_actionbar"/>
+  <include
+      android:id="@+id/actionbar_home"
+      layout="@layout/main_actionbar" />
 
     <TextView
         android:id="@+id/textView"
@@ -29,5 +31,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="1.0" />
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recycler_home"
+      android:layout_width="match_parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/actionbar_home"
+       android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
