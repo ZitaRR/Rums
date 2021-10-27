@@ -35,13 +35,14 @@ import java.util.Arrays;
 
 public class NewRoomActivity extends BaseClassActivity {
 
-    private ArrayList<User> userList;
+    private ArrayList<RumUser> userList;
     private RecyclerView userRow;
     private MyAdapter myAdapter;
     //private DatabaseReference database;
-
     private Toolbar actionBar;
     private CheckBox checkBox;
+
+    private PersistantStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class NewRoomActivity extends BaseClassActivity {
         userRow = (RecyclerView) findViewById(R.id.user_Row);
         userRow.setLayoutManager(new LinearLayoutManager(this));
 
-        userList = User.createUsersList(10);
+        userList = (ArrayList<RumUser>) storage.getUsers().getAll();
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
 
