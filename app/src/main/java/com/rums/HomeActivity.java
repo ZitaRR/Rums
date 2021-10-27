@@ -33,11 +33,10 @@ public class HomeActivity extends AppCompatActivity {
         testActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this, ChatRoomActivity.class);
+                Intent i = new Intent(HomeActivity.this, NewRoomActivity.class);
                 startActivity(i);
             }
         });
-
     }
 
 
