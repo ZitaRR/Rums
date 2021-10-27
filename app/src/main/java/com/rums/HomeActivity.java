@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseClassActivity {
     private Toolbar actionBar;
     private Button testActivity;
 

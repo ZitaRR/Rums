@@ -7,8 +7,11 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -29,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class NewRoomActivity extends AppCompatActivity {
+public class NewRoomActivity extends BaseClassActivity {
 
     private ArrayList<User> userList;
     private RecyclerView userRow;
@@ -99,20 +103,50 @@ public class NewRoomActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        String hello = getResources().getString(R.string.say_hello);
+        String more = getResources().getString(R.string.add_more);
+
         //checkBox.setChecked(false);
         int id = item.getItemId();
         if (id == R.id.add_done) {
 
             String itemChecked = "Users added to groupchat!";
-/*            for(int i = 0; i <userRow.getChildCount(); i++) {
-                if (checkBox.isChecked()) {
 
-                    itemChecked += checkBox;
-                    setNewChat(userList);
-                }
-            }*/
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            showSettingsActivity();
+            final FrameLayout frameView = new FrameLayout(this);
+            builder.setView(frameView)
+
+
+                   .setPositiveButton("Say Hello!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+/*                            *
+                            for(int i = 0; i <userRow.getChildCount(); i++) {
+                            if (checkBox.isChecked()) {
+
+                             itemChecked += checkBox;
+                            setNewChat(userList);
+                            }
+                            }*/
+
+                            showSettingsActivity();
+                            finish();
+                        }
+                    })
+
+                    .setNegativeButton(more, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getApplicationContext(),"Nothing Happened",Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+            final AlertDialog alertDialog = builder.create();
+            LayoutInflater inflater = alertDialog.getLayoutInflater();
+            View dialoglayout = inflater.inflate(R.layout.dialog_nameroom, frameView);
+            alertDialog.show();
+
            Toast.makeText(this,itemChecked, Toast.LENGTH_SHORT).show();
 
         }

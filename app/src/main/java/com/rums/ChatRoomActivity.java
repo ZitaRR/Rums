@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ChatRoomActivity extends AppCompatActivity {
+public class ChatRoomActivity extends BaseClassActivity {
 
     private static final int GALLERY_REQUEST = 100;
     ArrayList<String> names;

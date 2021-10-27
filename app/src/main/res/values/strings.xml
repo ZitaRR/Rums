@@ -13,4 +13,7 @@
     <string name="u_phone">Phone:</string>
     <string name="search_menu">Search</string>
 
+    <string name="say_hello">Say Hello!</string>
+    <string name="add_more">Add More!</string>
+
 </resources>
