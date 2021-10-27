@@ -55,7 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         tv.setText(currentUser.getUsername());
        // Checkbox invite = holder.inviteBox;
 
-           // holder.inviteBox.setChecked(currentUser.getChecked());
+            holder.inviteBox.setChecked(false);
             holder.inviteBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
