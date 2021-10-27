@@ -31,7 +31,7 @@ public class Message implements Identity {
 
     @Override
     public String getId() {
-        return null;
+        return id;
     }
 
     public void setId(String id) {
