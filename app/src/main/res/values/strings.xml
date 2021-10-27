@@ -10,7 +10,7 @@
     <string name="settings_button_apply">Save</string>
 
     <string name="u_name">Username:</string>
-    <string name="u_phone">Phone:</string>
+    <string name="u_email">Email:</string>
     <string name="search_menu">Search</string>
 
     <string name="say_hello">Say Hello!</string>

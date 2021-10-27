@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class User {
 
-    private String mName, mPhone;
+    private String mName, mEmail;
     private boolean mChecked;
 
-    public User(String name, String phone, boolean checked) {
+    public User(String name, String email, boolean checked) {
         this.mName = name;
-        this.mPhone = phone;
+        this.mEmail = email;
         this.mChecked = checked;
     }
 
@@ -20,7 +20,7 @@ public class User {
         ArrayList<User> userList = new ArrayList<User>();
 
         for (int i =1; i<=numUsers; i++) {
-           userList.add(new User("First Last "+ ++lastContactId, "070 xxx xx xx", i <= 0));
+           userList.add(new User("First Last "+ ++lastContactId, "@", i <= 0));
         }
         return userList;
     }
@@ -30,7 +30,7 @@ public class User {
     }
 
     public String getPhone() {
-        return mPhone;
+        return mEmail;
     }
 
     public boolean isChecked() {

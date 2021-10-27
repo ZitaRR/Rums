@@ -7,6 +7,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -48,6 +50,8 @@ public class NewRoomActivity extends BaseClassActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
+
+        storage = PersistantStorage.getInstance();
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
@@ -102,10 +106,12 @@ public class NewRoomActivity extends BaseClassActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("ResourceType")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        String hello = getResources().getString(R.string.say_hello);
-        String more = getResources().getString(R.string.add_more);
+       // String hello = getResources().getString(R.string.say_hello);
+
+        Button ok, no;
 
         //checkBox.setChecked(false);
         int id = item.getItemId();
@@ -118,8 +124,7 @@ public class NewRoomActivity extends BaseClassActivity {
             final FrameLayout frameView = new FrameLayout(this);
             builder.setView(frameView)
 
-
-                   .setPositiveButton("Say Hello!", new DialogInterface.OnClickListener() {
+                   .setPositiveButton(R.string.say_hello, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 /*                            *
@@ -136,7 +141,7 @@ public class NewRoomActivity extends BaseClassActivity {
                         }
                     })
 
-                    .setNegativeButton(more, new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Toast.makeText(getApplicationContext(),"Nothing Happened",Toast.LENGTH_LONG).show();
@@ -147,6 +152,7 @@ public class NewRoomActivity extends BaseClassActivity {
             LayoutInflater inflater = alertDialog.getLayoutInflater();
             View dialoglayout = inflater.inflate(R.layout.dialog_nameroom, frameView);
             alertDialog.show();
+            alertDialog.getWindow().setLayout(900, 500);
 
            Toast.makeText(this,itemChecked, Toast.LENGTH_SHORT).show();
 

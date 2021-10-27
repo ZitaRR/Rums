@@ -79,7 +79,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         public ViewHolder(View itemView) {
             super(itemView);
             userName = (TextView)  itemView.findViewById(R.id.users_name);
-            userPhone = (TextView) itemView.findViewById(R.id.users_phone);
+            userPhone = (TextView) itemView.findViewById(R.id.users_email);
             inviteBox = (CheckBox) itemView.findViewById(R.id.check_Box);
             userPic = (ImageView) itemView.findViewById(R.id.user_pic);
         }
