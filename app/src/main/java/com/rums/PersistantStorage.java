@@ -4,7 +4,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class PersistantStorage {
     private static PersistantStorage instance;
-    private FirebaseDatabase context;
     private Repository<RumUser> users;
 
     private PersistantStorage() {
