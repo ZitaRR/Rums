@@ -12,7 +12,6 @@ public class PersistantStorage {
         }
 
         instance = this;
-        context = FirebaseDatabase.getInstance();
 
         users = new Repository<>(RumUser.class);
     }
