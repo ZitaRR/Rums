@@ -7,36 +7,25 @@
     tools:context=".HomeActivity">
 
   <include
-      android:id="@+id/actionbar_home"
-      layout="@layout/main_actionbar" />
+    layout="@layout/main_actionbar"
+  />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_message"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_test_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="240dp"
-        android:text="Go to Test Activity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
+  <Button
+      android:id="@+id/button_test_activity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="240dp"
+      android:text="Go to Test Activity"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycler_home"
       android:layout_width="match_parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/actionbar_home"
-       android:layout_height="0dp"/>
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toTopOf="@+id/button_test_activity"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginTop="55dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
