@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolder> {
     ArrayList<String> chatRoomNames;
@@ -41,7 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
     holder.myText1.setText(chatRoomNames.get(position));
     holder.myText2.setText(chatUserNames.get(position));
-    holder.myImg.setImageResource(R.drawable.ic_age);
+    holder.myCircleView.setImageResource(R.drawable.rums_ikon);
 
     // När man klickar på en rad..
     holder.homeChatRows.setOnClickListener(new View.OnClickListener() {
@@ -61,15 +64,15 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
     public class HomeViewHolder extends RecyclerView.ViewHolder {
 
         TextView myText1, myText2;
-        ImageView myImg;
+        CircleImageView myCircleView;
         ConstraintLayout homeChatRows;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             myText1 = itemView.findViewById(R.id.textview_chatlist_room);
             myText2 = itemView.findViewById(R.id.textview_chatlist_username);
-            myImg = itemView.findViewById(R.id.imageview_chatlist_profilepic);
             homeChatRows = itemView.findViewById(R.id.home_chat_rows);
+            myCircleView = itemView.findViewById(R.id.circle_imageview_chatlist_profilepic);
         }
     }
 
