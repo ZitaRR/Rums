@@ -5,6 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class PersistantStorage {
     private static PersistantStorage instance;
     private Repository<RumUser> users;
+    private Repository<ChatRoom> rooms;
 
     private PersistantStorage() {
         if (instance != null) {
@@ -14,10 +15,15 @@ public class PersistantStorage {
         instance = this;
 
         users = new Repository<>(RumUser.class);
+        rooms = new Repository<>(ChatRoom.class);
     }
 
     public Repository<RumUser> getUsers(){
         return users;
+    }
+
+    public Repository<ChatRoom> getRooms() {
+        return rooms;
     }
 
     public static PersistantStorage getInstance(){
