@@ -18,6 +18,8 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Class<?> previousActivityClass;
     protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
+    private PersistantStorage storage;
+
 
 
     @Override
@@ -30,6 +32,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void init() {
         setActionBar();
         getPreviousActivity();
+        storage = PersistantStorage.getInstance();
     }
 
     protected void setActionBar() {
