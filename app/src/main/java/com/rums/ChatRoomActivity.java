@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ChatRoomActivity extends AppCompatActivity {
+public class ChatRoomActivity extends BaseClassActivity {
 
     private static final int GALLERY_REQUEST = 100;
     ArrayList<String> names;
@@ -25,8 +25,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+        super.init();
         setupListViewAdapter();
-
     }
 
 
