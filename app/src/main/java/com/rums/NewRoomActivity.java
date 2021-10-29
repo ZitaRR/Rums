@@ -40,7 +40,6 @@ public class NewRoomActivity extends BaseClassActivity {
     private ArrayList<RumUser> userList;
     private RecyclerView userRow;
     private MyAdapter myAdapter;
-    //private DatabaseReference database;
     private Toolbar actionBar;
     private CheckBox checkBox;
 
@@ -63,21 +62,6 @@ public class NewRoomActivity extends BaseClassActivity {
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
 
-        /*database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    User user = dataSnapshot.getValue(User.class);
-                    userList.add(user);
-                }
-                myAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
     }
 
     @Override
@@ -110,8 +94,6 @@ public class NewRoomActivity extends BaseClassActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
        // String hello = getResources().getString(R.string.say_hello);
-
-        Button ok, no;
 
         //checkBox.setChecked(false);
         int id = item.getItemId();
