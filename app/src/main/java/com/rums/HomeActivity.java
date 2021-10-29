@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -22,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar actionBar;
     private Button testActivity;
     private RecyclerView homeRecycler;
+    private ImageButton buttonNewRoom;
 
     // Test för att få till recycler bara
     ArrayList<String> chatRoomNames = new ArrayList<>();
@@ -39,6 +41,17 @@ public class HomeActivity extends AppCompatActivity {
         homeRecycler = findViewById(R.id.recycler_home);
 
         testActivity = findViewById(R.id.button_test_activity);
+
+        buttonNewRoom = findViewById(R.id.imgbtn_newroom);
+
+        buttonNewRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this, NewRoomActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         testActivity.setOnClickListener(new View.OnClickListener() {
             @Override
