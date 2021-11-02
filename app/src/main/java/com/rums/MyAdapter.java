@@ -2,6 +2,7 @@ package com.rums;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,21 +47,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         RumUser currentUser = mUserList.get(position);
-
-       // currentUser.getChecked();
+        currentUser.getChecked();
 
         holder.userName.setText(currentUser.getUsername());
-        holder.userPhone.setText(currentUser.getEmail());
+        holder.userEmail.setText(currentUser.getEmail());
 
         TextView tv = holder.userName;
         tv.setText(currentUser.getUsername());
-       // Checkbox invite = holder.inviteBox;
 
-            holder.inviteBox.setChecked(false);
+            holder.inviteBox.setChecked(currentUser.getChecked());
+
             holder.inviteBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                 //  currentUser.setChecked(holder.inviteBox.isChecked());
+                currentUser.setChecked(holder.inviteBox.isChecked());
+                    Toast.makeText(view.getContext(), "Position: " + (currentUser.getUsername()), Toast.LENGTH_LONG).show();
 
                 }
             });
@@ -70,18 +72,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         return mUserList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView userName, userPhone;
+        public TextView userName, userEmail;
         public CheckBox inviteBox;
         public ImageView userPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            userName = (TextView)  itemView.findViewById(R.id.users_name);
-            userPhone = (TextView) itemView.findViewById(R.id.users_email);
-            inviteBox = (CheckBox) itemView.findViewById(R.id.check_Box);
-            userPic = (ImageView) itemView.findViewById(R.id.user_pic);
+            userName = itemView.findViewById(R.id.users_name);
+            userEmail = itemView.findViewById(R.id.users_email);
+            inviteBox = itemView.findViewById(R.id.check_Box);
+            userPic = itemView.findViewById(R.id.user_pic);
+
         }
     }
 

@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class NewRoomActivity extends BaseClassActivity {
 
@@ -41,9 +42,9 @@ public class NewRoomActivity extends BaseClassActivity {
     private RecyclerView userRow;
     private MyAdapter myAdapter;
     private Toolbar actionBar;
-    private CheckBox checkBox;
 
     private PersistantStorage storage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class NewRoomActivity extends BaseClassActivity {
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
 
-        userRow = (RecyclerView) findViewById(R.id.user_Row);
+        userRow = findViewById(R.id.user_Row);
         userRow.setLayoutManager(new LinearLayoutManager(this));
 
         userList = (ArrayList<RumUser>) storage.getUsers().getAll();
@@ -72,7 +73,7 @@ public class NewRoomActivity extends BaseClassActivity {
 
         MenuItem menuItem = menu.findItem(R.id.search_view);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setQueryHint("Search user"); // text-hint
+        searchView.setQueryHint("Search user");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -90,10 +91,9 @@ public class NewRoomActivity extends BaseClassActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @SuppressLint("ResourceType")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-       // String hello = getResources().getString(R.string.say_hello);
 
         //checkBox.setChecked(false);
         int id = item.getItemId();
@@ -126,13 +126,14 @@ public class NewRoomActivity extends BaseClassActivity {
                     .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getApplicationContext(),"Nothing Happened",Toast.LENGTH_LONG).show();
                         }
                     });
 
             final AlertDialog alertDialog = builder.create();
             LayoutInflater inflater = alertDialog.getLayoutInflater();
+
             View dialoglayout = inflater.inflate(R.layout.dialog_nameroom, frameView);
+
             alertDialog.show();
             alertDialog.getWindow().setLayout(900, 500);
 
@@ -142,8 +143,6 @@ public class NewRoomActivity extends BaseClassActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setNewChat(ArrayList<User> userList) {
-    }
 
      private void showSettingsActivity () {
         Intent intent = new Intent(this, ChatRoomActivity.class);

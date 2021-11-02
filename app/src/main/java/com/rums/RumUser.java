@@ -6,6 +6,24 @@ public class RumUser implements Identity {
     private String password;
     private String email;
 
+    private boolean isChecked;
+
+    public boolean getChecked() {
+        return isChecked;
+    }
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+    private int position;
+
+    public int getPosition(int position) {
+        return this.position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public RumUser(){}
 
     public RumUser(String id){
