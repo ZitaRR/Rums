@@ -14,21 +14,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolder> {
-    ArrayList<String> chatRoomNames;
-    ArrayList<String> chatUserNames;
+    ArrayList<ChatRoom> chatRooms;
     Context context;
 
 
-    public HomeAdapter (Context ct, ArrayList<String> roomNames, ArrayList<String> userNames) {
+    public HomeAdapter (Context ct, ArrayList<ChatRoom> cr) {
 
         context = ct;
-        chatRoomNames = roomNames;
-        chatUserNames = userNames;
-
+        chatRooms = cr;
 
     }
 
@@ -42,8 +40,11 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-    holder.myText1.setText(chatRoomNames.get(position));
-    holder.myText2.setText(chatUserNames.get(position));
+
+    ChatRoom currentRoom = chatRooms.get(position);
+
+    holder.myText1.setText(currentRoom.getName());
+    holder.myText2.setText(currentRoom.getId());
     holder.myCircleView.setImageResource(R.drawable.rums_ikon);
 
     // När man klickar på en rad..
@@ -58,7 +59,7 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
 
     @Override
     public int getItemCount() {
-        return chatRoomNames.size();
+        return chatRooms.size();
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
