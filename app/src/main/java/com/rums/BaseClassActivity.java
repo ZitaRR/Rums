@@ -72,7 +72,7 @@ public class BaseClassActivity extends AppCompatActivity {
         return true;
     }
 
-    private void moveUserToChatRoom(ChatRoom chatRoom) {
+//    private void moveUserToChatRoom(ChatRoom chatRoom) {
 //        RumUser currentUser = getCurrentRumUser;
 //        ChatRoom room = getChatRoomByID(String roomID);
 //        if(room != null) {
@@ -80,7 +80,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //            currentUser.setCurrentChatRoom = room;
 //            startSomeActivity(ChatRoomActivity.class);
 //        }
-    }
+//    }
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
