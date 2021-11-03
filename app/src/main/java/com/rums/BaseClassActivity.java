@@ -22,20 +22,21 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
     private PersistantStorage storage;
-    protected RumUser currentRumUser;
-
+    protected static RumUser currentRumUser;
+    private static BaseClassActivity activityForRepositoryCallback;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
+        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
     }
 
     protected void init() {
         setActionBar();
         getPreviousActivity();
+        activityForRepositoryCallback = this;
         storage = PersistantStorage.getInstance();
     }
 
@@ -84,10 +85,10 @@ public class BaseClassActivity extends AppCompatActivity {
     protected boolean isLoggedIn() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
-            Log.d("Tag__1", "User IS logged in!");
+            Log.d("Tag__1", "User IS logged in");
             return true;
         } else {
-            Log.d("Tag__1", "User is not logged in...");
+            Log.d("Tag__1", "User is not logged in");
             return false;
         }
     }
@@ -100,6 +101,12 @@ public class BaseClassActivity extends AppCompatActivity {
         return getFirebaseUser().getUid();
     }
 
+    public void repositoryIsInitialized(Class<?> type) {
+        Log.d("Tag__1", "repositoryIsInitialized - type: " + type.toString());
+        readRumUserFromDatabase(getFirebaseUserUID());
+    }
+
+
     protected void testReadFromDatabase() {
         if(isLoggedIn()) {
             PersistantStorage storage = PersistantStorage.getInstance();
@@ -107,7 +114,6 @@ public class BaseClassActivity extends AppCompatActivity {
             String firebaseUserUID = getFirebaseUserUID();
             try {
                 rumUser = storage.getUsers().getById(firebaseUserUID);
-                Log.d("Tag__1", "rumUser: " + rumUser);
             } catch (Exception e) {
                 Log.d("Tag__1", "Exception: " + e + " - firebaseUserUID is " + firebaseUserUID);
             }
@@ -134,14 +140,13 @@ public class BaseClassActivity extends AppCompatActivity {
     protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
-            rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
+            rumUser = getStorage().getUsers().getById(UID); //getById() should return null if not successful
 //            rumUser = getRumUserByID(UID);
             setCurrentRumUser(rumUser);
+//            Log.d("Tag__1", "readRumUserFromDatabase getCurrentRumUser(): " + getCurrentRumUser());
         } catch (Exception e) {
             Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
             rumUser = setupNewRumUser();
-            Log.d("Tag__1", "rumUser rumUser: " + rumUser.getId());
-            writeRumUserToDatabase(rumUser);
         }
         return rumUser;
     }
@@ -164,11 +169,22 @@ public class BaseClassActivity extends AppCompatActivity {
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
     }
 
+    protected PersistantStorage getStorage() {
+        if(storage == null) {
+            storage = PersistantStorage.getInstance();
+        }
+        return storage;
+    }
+
     public RumUser getCurrentRumUser() {
         return currentRumUser;
     }
     public void setCurrentRumUser(RumUser currentRumUser) {
         this.currentRumUser = currentRumUser;
+    }
+
+    public static BaseClassActivity getActivityForRepositoryCallback() {
+        return activityForRepositoryCallback;
     }
 
 

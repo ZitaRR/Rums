@@ -45,9 +45,6 @@ public class LoginActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Test if RumUsers can be read from database (if already logged in)
-        testReadFromDatabase();
-
         PersistantStorage.getInstance();
         //Instantiate Widgets
         register = findViewById(R.id.text_register);
