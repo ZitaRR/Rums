@@ -16,7 +16,7 @@ public class StartActivity extends BaseClassActivity {
     protected void init() {
         super.init();
         if(isLoggedIn()) {
-            getU
+            readRumUserFromDatabase(getFirebaseUserUID());
             startSomeActivity(HomeActivity.class);
         } else {
             startSomeActivity(LoginActivity.class);
