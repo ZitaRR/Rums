@@ -93,19 +93,32 @@ public class BaseClassActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected RumUser setupNewRumUser(String UID) {
+    protected RumUser setupNewRumUser() {
         return new RumUser(getFirebaseUserUID(), getFirebaseUser().getDisplayName(), getFirebaseUser().getEmail());
     }
 
+    protected Boolean writeRumUserToDatabase(RumUser rumUser) {
+        Boolean success = false;
+        storage.getUsers().insert(rumUser);
+        try {
+            storage.getUsers().commit();
+            success = true;
+        } catch (Exception e) {
+            Log.d("Tag__1", "writeRumUserToDatabase Exception: " + e.getMessage());
+        }
+        return success;
+    }
 
-        protected RumUser readRumUserFromDatabase(String UID) {
+
+    protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
             rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
             setCurrentRumUser(rumUser);
         } catch (Exception e) {
-            Log.d("Tag__1", "Exception: " + e.getMessage());
-            rumUser = null;
+            Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
+            rumUser = setupNewRumUser();
+            writeRumUserToDatabase(rumUser);
         }
         return rumUser;
     }
