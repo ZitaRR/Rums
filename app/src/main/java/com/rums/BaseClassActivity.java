@@ -117,7 +117,17 @@ public class BaseClassActivity extends AppCompatActivity {
         }
     }
 
-    protected boolean isLoggedIn() {
+    protected void logUserEtcToConsole(String tag) {
+        RumUser currentUser = getCurrentRumUser();
+        if(currentUser != null) {
+            Log.d(tag, "currentUser " + currentUser);
+        } else {
+            Log.d(tag, "currentUser is null");
+        }
+    }
+
+
+        protected boolean isLoggedIn() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
             Log.d("Tag_1", "User IS logged in!");
