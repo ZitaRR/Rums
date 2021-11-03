@@ -30,7 +30,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
+        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
     }
 
     protected void init() {
@@ -101,8 +101,10 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     public void repositoryIsInitted(Class<?> type) {
-        Log.d("Tag__1", "repositoryIsInitted type: " + type.toString());
-        testReadFromDatabase();
+        Log.d("Tag__1", "repositoryIsInitted type: " + type.toString() + " this: " + this);
+//        testReadFromDatabase();
+        readRumUserFromDatabase(getFirebaseUserUID());
+        Log.d("Tag__1", "getCurrentRumUser: " + getCurrentRumUser().getId());
     }
 
 
@@ -140,14 +142,17 @@ public class BaseClassActivity extends AppCompatActivity {
     protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
-            rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
+            Log.d("Tag__1", "storage: " + storage);
+//            Log.d("Tag__1", "storage: " + storage + " storage.getUsers()" + storage.getUsers());
+
+            rumUser = getStorage().getUsers().getById(UID); //getById() should return null if not successful
 //            rumUser = getRumUserByID(UID);
             setCurrentRumUser(rumUser);
         } catch (Exception e) {
             Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
             rumUser = setupNewRumUser();
             Log.d("Tag__1", "rumUser rumUser: " + rumUser.getId());
-            writeRumUserToDatabase(rumUser);
+//            writeRumUserToDatabase(rumUser);
         }
         return rumUser;
     }
@@ -168,6 +173,13 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    protected PersistantStorage getStorage() {
+        if(storage == null) {
+            storage = PersistantStorage.getInstance();
+        }
+        return storage;
     }
 
     public RumUser getCurrentRumUser() {
