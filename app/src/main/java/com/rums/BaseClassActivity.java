@@ -94,7 +94,7 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     protected RumUser setupNewRumUser(String UID) {
-        RumUser rumUser = new RumUser()
+        return new RumUser(getFirebaseUserUID(), getFirebaseUser().getDisplayName(), getFirebaseUser().getEmail());
     }
 
 
