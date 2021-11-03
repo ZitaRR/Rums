@@ -35,6 +35,7 @@
                 android:textSize="11sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/user_email"
+                app:layout_constraintEnd_toEndOf="@+id/users_name"
                 app:layout_constraintHorizontal_bias="0.032"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
@@ -44,17 +45,18 @@
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:padding="1dp"
                 android:text="@string/u_email"
                 android:textSize="11sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
 
-                app:layout_constraintHorizontal_bias="0.124"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/users_email"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.54" />
+                app:layout_constraintVertical_bias="0.508" />
 
             <TextView
                 android:id="@+id/users_name"
@@ -65,10 +67,9 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/users_email"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.937" />
+                app:layout_constraintVertical_bias="0.928" />
 
             <TextView
                 android:id="@+id/users_email"
@@ -81,10 +82,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.085"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.508" />
+                app:layout_constraintVertical_bias="0.491" />
 
             <ImageView
                 android:id="@+id/user_pic"

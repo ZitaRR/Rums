@@ -106,6 +106,8 @@ public class NewRoomActivity extends BaseClassActivity {
                    .setPositiveButton(R.string.say_hello, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+
+                            // moveToChatRoom ();
 /*
                             for(int i = 0; i <userRow.getChildCount(); i++) {
                             if (checkBox.isChecked()) {
