@@ -20,7 +20,7 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
     private List<Consumer<T>> listeners = new ArrayList<>();
     private boolean initialized = false;
 
-    public Repository(Class<T> type, BaseClassActivity caller){
+    public Repository(Class<T> type){
         context = FirebaseDatabase.getInstance();
         reference = context.getReference(type.getSimpleName());
 
@@ -42,7 +42,7 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
 
                 if(!initialized){
                     initialized = true;
-                    caller.repositoryIsInitialized(type);
+                    BaseClassActivity.getActivityForRepositoryCallback().repositoryIsInitialized(type);
                     return;
                 }
 

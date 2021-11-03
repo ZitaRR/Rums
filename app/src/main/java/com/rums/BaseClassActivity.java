@@ -23,7 +23,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
     private PersistantStorage storage;
     protected RumUser currentRumUser;
-
+    private static BaseClassActivity activityForRepositoryCallback;
 
 
     @Override
@@ -36,6 +36,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void init() {
         setActionBar();
         getPreviousActivity();
+        activityForRepositoryCallback = this;
         storage = PersistantStorage.getInstance();
     }
 
@@ -103,6 +104,7 @@ public class BaseClassActivity extends AppCompatActivity {
     public void repositoryIsInitialized(Class<?> type) {
         Log.d("Tag__1", "repositoryIsInitialized - type: " + type.toString());
         readRumUserFromDatabase(getFirebaseUserUID());
+//        startSomeActivity(ChatRoomActivity.class);
     }
 
 
@@ -142,6 +144,8 @@ public class BaseClassActivity extends AppCompatActivity {
             rumUser = getStorage().getUsers().getById(UID); //getById() should return null if not successful
 //            rumUser = getRumUserByID(UID);
             setCurrentRumUser(rumUser);
+            Log.d("Tag__1", "readRumUserFromDatabase getCurrentRumUser(): " + getCurrentRumUser());
+
         } catch (Exception e) {
             Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
             rumUser = setupNewRumUser();
@@ -179,6 +183,10 @@ public class BaseClassActivity extends AppCompatActivity {
     }
     public void setCurrentRumUser(RumUser currentRumUser) {
         this.currentRumUser = currentRumUser;
+    }
+
+    public static BaseClassActivity getActivityForRepositoryCallback() {
+        return activityForRepositoryCallback;
     }
 
 
