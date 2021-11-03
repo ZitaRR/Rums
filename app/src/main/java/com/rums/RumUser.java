@@ -19,6 +19,12 @@ public class RumUser implements Identity {
         this.id = id;
     }
 
+    public RumUser(String id, String username, String email){
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
+
     public String getId(){
         return id;
     }
