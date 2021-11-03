@@ -90,15 +90,14 @@ public class BaseClassActivity extends AppCompatActivity {
         return rumUser;
     }
 
-//    private void moveUserToChatRoom(ChatRoom chatRoom) {
-//        RumUser currentUser = getCurrentRumUser;
-//        ChatRoom room = getChatRoomByID(String roomID);
-//        if(room != null) {
-//            currentUser.setCurrentChatRoomID = room.ID;
-//            currentUser.setCurrentChatRoom = room;
-//            startSomeActivity(ChatRoomActivity.class);
-//        }
-//    }
+    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+        RumUser currentUser = getCurrentRumUser();
+        if(chatRoom != null) {
+            currentUser.setCurrentChatRoomID(chatRoom.getId());
+            currentUser.setCurrentChatRoom(chatRoom);
+            startSomeActivity(ChatRoomActivity.class);
+        }
+    }
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
