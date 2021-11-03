@@ -73,7 +73,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onStart() {
         super.onStart();
-        Picasso.get().load(fUser.getPhotoUrl()).into(profilePicture);
+        if (fUser.getPhotoUrl() == null) {
+            profilePicture.setImageDrawable(getDrawable(R.drawable.ic_rums_ikon));
+        } else {
+            Picasso.get().load(fUser.getPhotoUrl()).into(profilePicture);
+        }
     }
 
     @Override
