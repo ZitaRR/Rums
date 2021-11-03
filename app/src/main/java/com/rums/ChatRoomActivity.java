@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,6 +31,13 @@ public class ChatRoomActivity extends BaseClassActivity {
         super.init();
         setupListViewAdapter();
         fillMessagesList();
+
+        MenuItem nameMenuItem = findViewById(R.id.chat_room_name_menu_item);
+        Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
+
+        if(nameMenuItem != null) {
+            nameMenuItem.setTitle("Kalle");
+        }
     }
 
 
@@ -57,14 +66,24 @@ public class ChatRoomActivity extends BaseClassActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        if(!omitOptionsMenu) {
+            getMenuInflater().inflate(R.menu.menu_chat_room, menu);
+        }
+        return true;
+    }
 
-        @Override
+
+    @Override
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
-            RumUser user = getCurrentRumUser();
-            Log.d("Tag__1", "repositoryIsInitialized in ChatRoomActivity user: " + user);
-            fillMessagesList();
+        RumUser user = getCurrentRumUser();
+        Log.d("Tag__1", "repositoryIsInitialized in ChatRoomActivity user: " + user);
+        fillMessagesList();
     }
+
 
     public void imageFromGalleryButtonMethod(View view) {
         pickAPicFromGallery();
