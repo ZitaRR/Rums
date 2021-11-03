@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class BaseClassActivity extends AppCompatActivity {
 
     private Toolbar actionBar;
@@ -103,11 +105,12 @@ public class BaseClassActivity extends AppCompatActivity {
         return rumUser;
     }
 
-    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+    protected void moveUserToChatRoom(ArrayList<String> usersByID, ChatRoom chatRoom) {
         RumUser currentUser = getCurrentRumUser();
-        if((currentUser != null) || (chatRoom != null)) {
+        if((currentUser != null) && (chatRoom != null)) {
             currentUser.setCurrentChatRoomID(chatRoom.getId());
             currentUser.setCurrentChatRoom(chatRoom);
+            chatRoom.setUsersByID(usersByID);
             startSomeActivity(ChatRoomActivity.class);
         } else {
             Log.d("Tag_1", "currentUser or chatRoom is null");
