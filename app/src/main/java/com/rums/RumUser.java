@@ -6,10 +6,23 @@ public class RumUser implements Identity {
     private String password;
     private String email;
 
+
+
+
+
+    private String currentChatRoomID;
+    private ChatRoom currentChatRoom; //Probably save to db, since it's a NoSQL db.
+
     public RumUser(){}
 
     public RumUser(String id){
         this.id = id;
+    }
+
+    public RumUser(String id, String username, String email){
+        this.id = id;
+        this.username = username;
+        this.email = email;
     }
 
     public String getId(){
@@ -39,4 +52,21 @@ public class RumUser implements Identity {
     public String getEmail(){
         return email;
     }
+
+    public String getCurrentChatRoomID() {
+        return currentChatRoomID;
+    }
+
+    public void setCurrentChatRoomID(String currentChatRoomID) {
+        this.currentChatRoomID = currentChatRoomID;
+    }
+
+    public ChatRoom getCurrentChatRoom() {
+        return currentChatRoom;
+    }
+
+    public void setCurrentChatRoom(ChatRoom currentChatRoom) {
+        this.currentChatRoom = currentChatRoom;
+    }
+
 }

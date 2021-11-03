@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class BaseClassActivity extends AppCompatActivity {
 
     private Toolbar actionBar;
@@ -18,6 +21,9 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Class<?> previousActivityClass;
     protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
+    private PersistantStorage storage;
+    protected RumUser currentRumUser;
+
 
 
     @Override
@@ -30,6 +36,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void init() {
         setActionBar();
         getPreviousActivity();
+        storage = PersistantStorage.getInstance();
     }
 
     protected void setActionBar() {
@@ -74,19 +81,94 @@ public class BaseClassActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void moveUserToChatRoom(ChatRoom chatRoom) {
-//        RumUser currentUser = getCurrentRumUser;
-//        ChatRoom room = getChatRoomByID(String roomID);
-//        if(room != null) {
-//            currentUser.setCurrentChatRoomID = room.ID;
-//            currentUser.setCurrentChatRoom = room;
-//            startSomeActivity(ChatRoomActivity.class);
-//        }
-//    }
+    protected boolean isLoggedIn() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            Log.d("Tag__1", "User IS logged in!");
+            return true;
+        } else {
+            Log.d("Tag__1", "User is not logged in...");
+            return false;
+        }
+    }
+
+    protected FirebaseUser getFirebaseUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    protected String getFirebaseUserUID() {
+        return getFirebaseUser().getUid();
+    }
+
+    protected void testReadFromDatabase() {
+        if(isLoggedIn()) {
+            PersistantStorage storage = PersistantStorage.getInstance();
+            RumUser rumUser;
+            String firebaseUserUID = getFirebaseUserUID();
+            try {
+                rumUser = storage.getUsers().getById(firebaseUserUID);
+                Log.d("Tag__1", "rumUser: " + rumUser);
+            } catch (Exception e) {
+                Log.d("Tag__1", "Exception: " + e + " - firebaseUserUID is " + firebaseUserUID);
+            }
+        }
+    }
+
+    protected RumUser setupNewRumUser() {
+        return new RumUser(getFirebaseUserUID(), getFirebaseUser().getDisplayName(), getFirebaseUser().getEmail());
+    }
+
+    protected Boolean writeRumUserToDatabase(RumUser rumUser) {
+        Boolean success = false;
+        storage.getUsers().insert(rumUser);
+        try {
+            storage.getUsers().commit();
+            success = true;
+        } catch (Exception e) {
+            Log.d("Tag__1", "writeRumUserToDatabase Exception: " + e.getMessage());
+        }
+        return success;
+    }
+
+
+    protected RumUser readRumUserFromDatabase(String UID) {
+        RumUser rumUser;
+        try {
+            rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
+//            rumUser = getRumUserByID(UID);
+            setCurrentRumUser(rumUser);
+        } catch (Exception e) {
+            Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
+            rumUser = setupNewRumUser();
+            Log.d("Tag__1", "rumUser rumUser: " + rumUser.getId());
+            writeRumUserToDatabase(rumUser);
+        }
+        return rumUser;
+    }
+
+
+    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+        RumUser currentUser = getCurrentRumUser();
+        if((currentUser != null) || (chatRoom != null)) {
+            currentUser.setCurrentChatRoomID(chatRoom.getId());
+            currentUser.setCurrentChatRoom(chatRoom);
+            startSomeActivity(ChatRoomActivity.class);
+        } else {
+            Log.d("Tag_1", "currentUser or chatRoom is null");
+        }
+    }
+
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    public RumUser getCurrentRumUser() {
+        return currentRumUser;
+    }
+    public void setCurrentRumUser(RumUser currentRumUser) {
+        this.currentRumUser = currentRumUser;
     }
 
 
