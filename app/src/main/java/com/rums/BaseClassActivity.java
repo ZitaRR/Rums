@@ -93,7 +93,12 @@ public class BaseClassActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected RumUser readRumUserFromDatabase(String UID) {
+    protected RumUser setupNewRumUser(String UID) {
+        RumUser rumUser = new RumUser()
+    }
+
+
+        protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
             rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
