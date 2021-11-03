@@ -90,6 +90,7 @@ public class BaseClassActivity extends AppCompatActivity {
         return rumUser;
     }
 
+
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
         RumUser currentUser = getCurrentRumUser();
         if((currentUser != null) || (chatRoom != null)) {
@@ -100,6 +101,7 @@ public class BaseClassActivity extends AppCompatActivity {
             Log.d("Tag_1", "currentUser or chatRoom is null");
         }
     }
+
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
