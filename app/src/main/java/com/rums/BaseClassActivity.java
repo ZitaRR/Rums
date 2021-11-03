@@ -9,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,6 +63,14 @@ public class BaseClassActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(!omitOptionsMenu) {
+            getMenuInflater().inflate(R.menu.menu_home, menu);
+        }
+        return true;
     }
 
     @Override      //Back arrow in ActionBar, etc.
