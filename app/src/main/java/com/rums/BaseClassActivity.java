@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class BaseClassActivity extends AppCompatActivity {
 
     private Toolbar actionBar;
@@ -99,6 +102,17 @@ public class BaseClassActivity extends AppCompatActivity {
             startSomeActivity(ChatRoomActivity.class);
         } else {
             Log.d("Tag_1", "currentUser or chatRoom is null");
+        }
+    }
+
+    protected boolean isLoggedIn() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            Log.d("Tag_1", "User IS logged in!");
+            return true;
+        } else {
+            Log.d("Tag_1", "User is not logged in...");
+            return false;
         }
     }
 

@@ -9,20 +9,18 @@ public class StartActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         omitOptionsMenu = true;
+        init();
     }
 
-//    @Override
-//    protected void init() {
-//        super.init();
-//        if(getFirebaseSingleton().isLoggedIn()) {
-////            RumUser.getInstance(this); //Fetches from db or creates new
-////            intent = new Intent(this, LoggedInActivity.class);
-////            setupRumUser(getFirebaseSingleton().getUserUID());
-//            startSomeActivity(LoggedInActivity.class);
-//        } else {
-//            startSomeActivity(LogInOrSignUpActivity.class);
-//        }
-//    }
+    @Override
+    protected void init() {
+        super.init();
+        if(isLoggedIn()) {
+            startSomeActivity(HomeActivity.class);
+        } else {
+            startSomeActivity(LoginActivity.class);
+        }
+    }
 
 
 }
