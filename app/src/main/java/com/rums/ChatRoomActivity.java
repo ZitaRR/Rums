@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -64,6 +65,15 @@ public class ChatRoomActivity extends BaseClassActivity {
             RumUser user = getCurrentRumUser();
             Log.d("Tag__1", "repositoryIsInitialized in ChatRoomActivity user: " + user);
             fillMessagesList();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        if(!omitOptionsMenu) {
+            getMenuInflater().inflate(R.menu.menu_chat_room, menu);
+        }
+        return true;
     }
 
     public void imageFromGalleryButtonMethod(View view) {
