@@ -19,6 +19,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
     private PersistantStorage storage;
+    protected RumUser currentRumUser;
 
 
 
@@ -77,6 +78,18 @@ public class BaseClassActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    protected RumUser getRumUserFromDatabase(String UID) {
+        RumUser rumUser;
+        try {
+            rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
+            setCurrentRumUser(rumUser);
+        } catch (Exception e) {
+            Log.d("Tag_1", "Exception: " + e.getMessage());
+            rumUser = null;
+        }
+        return rumUser;
+    }
+
 //    private void moveUserToChatRoom(ChatRoom chatRoom) {
 //        RumUser currentUser = getCurrentRumUser;
 //        ChatRoom room = getChatRoomByID(String roomID);
@@ -90,6 +103,13 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    public RumUser getCurrentRumUser() {
+        return currentRumUser;
+    }
+    public void setCurrentRumUser(RumUser currentRumUser) {
+        this.currentRumUser = currentRumUser;
     }
 
 
