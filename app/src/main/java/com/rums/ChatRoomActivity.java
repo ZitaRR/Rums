@@ -20,6 +20,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     ArrayList<String> names;
     ArrayAdapter<String> adapter;
     ListView listView;
+    ArrayList<Message> messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         setContentView(R.layout.activity_chat_room);
         super.init();
         setupListViewAdapter();
+        fillMessagesList();
     }
 
 
@@ -45,6 +47,23 @@ public class ChatRoomActivity extends BaseClassActivity {
         listView.setAdapter(adapter);
         //Scroll to bottom:
         listView.post(() -> listView.setSelection(listView.getCount() - 1));
+    }
+
+    private void fillMessagesList() {
+        if(getRepositoryReady()) {
+//            Log.d("Tag__1", "it's ready: ");
+        } else {
+//            Log.d("Tag__1", "it's NOT ready: ");
+        }
+    }
+
+
+        @Override
+    public void repositoryIsInitialized(Class<?> type) {
+        super.repositoryIsInitialized(type);
+            RumUser user = getCurrentRumUser();
+            Log.d("Tag__1", "repositoryIsInitialized in ChatRoomActivity user: " + user);
+            fillMessagesList();
     }
 
     public void imageFromGalleryButtonMethod(View view) {
