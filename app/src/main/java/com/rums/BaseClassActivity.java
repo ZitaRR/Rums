@@ -99,7 +99,7 @@ public class BaseClassActivity extends AppCompatActivity {
             rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
             setCurrentRumUser(rumUser);
         } catch (Exception e) {
-            Log.d("Tag_1", "Exception: " + e.getMessage());
+            Log.d("Tag__1", "Exception: " + e.getMessage());
             rumUser = null;
         }
         return rumUser;
@@ -127,7 +127,7 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
 
-        protected boolean isLoggedIn() {
+    protected boolean isLoggedIn() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
             Log.d("Tag_1", "User IS logged in!");
@@ -136,6 +136,14 @@ public class BaseClassActivity extends AppCompatActivity {
             Log.d("Tag_1", "User is not logged in...");
             return false;
         }
+    }
+
+    protected FirebaseUser getFirebaseUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    protected String getFirebaseUserUID() {
+        return getFirebaseUser().getUid();
     }
 
     protected void startSomeActivity(Class<?> cls) {

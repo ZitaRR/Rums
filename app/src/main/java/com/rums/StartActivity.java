@@ -16,6 +16,7 @@ public class StartActivity extends BaseClassActivity {
     protected void init() {
         super.init();
         if(isLoggedIn()) {
+            getU
             startSomeActivity(HomeActivity.class);
         } else {
             startSomeActivity(LoginActivity.class);
