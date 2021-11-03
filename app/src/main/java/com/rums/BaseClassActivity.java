@@ -92,10 +92,12 @@ public class BaseClassActivity extends AppCompatActivity {
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
         RumUser currentUser = getCurrentRumUser();
-        if(chatRoom != null) {
+        if((currentUser != null) || (chatRoom != null)) {
             currentUser.setCurrentChatRoomID(chatRoom.getId());
             currentUser.setCurrentChatRoom(chatRoom);
             startSomeActivity(ChatRoomActivity.class);
+        } else {
+            Log.d("Tag_1", "currentUser or chatRoom is null");
         }
     }
 
