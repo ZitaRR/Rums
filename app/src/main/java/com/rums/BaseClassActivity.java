@@ -84,10 +84,10 @@ public class BaseClassActivity extends AppCompatActivity {
     protected boolean isLoggedIn() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
-            Log.d("Tag__1", "User IS logged in!");
+            Log.d("Tag__1", "User IS logged in");
             return true;
         } else {
-            Log.d("Tag__1", "User is not logged in...");
+            Log.d("Tag__1", "User is not logged in");
             return false;
         }
     }
@@ -100,11 +100,9 @@ public class BaseClassActivity extends AppCompatActivity {
         return getFirebaseUser().getUid();
     }
 
-    public void repositoryIsInitted(Class<?> type) {
-        Log.d("Tag__1", "repositoryIsInitted type: " + type.toString() + " this: " + this);
-//        testReadFromDatabase();
+    public void repositoryIsInitialized(Class<?> type) {
+        Log.d("Tag__1", "repositoryIsInitialized - type: " + type.toString());
         readRumUserFromDatabase(getFirebaseUserUID());
-        Log.d("Tag__1", "getCurrentRumUser: " + getCurrentRumUser().getId());
     }
 
 
@@ -115,7 +113,6 @@ public class BaseClassActivity extends AppCompatActivity {
             String firebaseUserUID = getFirebaseUserUID();
             try {
                 rumUser = storage.getUsers().getById(firebaseUserUID);
-                Log.d("Tag__1", "rumUser: " + rumUser);
             } catch (Exception e) {
                 Log.d("Tag__1", "Exception: " + e + " - firebaseUserUID is " + firebaseUserUID);
             }
@@ -142,17 +139,12 @@ public class BaseClassActivity extends AppCompatActivity {
     protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
-            Log.d("Tag__1", "storage: " + storage);
-//            Log.d("Tag__1", "storage: " + storage + " storage.getUsers()" + storage.getUsers());
-
             rumUser = getStorage().getUsers().getById(UID); //getById() should return null if not successful
 //            rumUser = getRumUserByID(UID);
             setCurrentRumUser(rumUser);
         } catch (Exception e) {
             Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
             rumUser = setupNewRumUser();
-            Log.d("Tag__1", "rumUser rumUser: " + rumUser.getId());
-//            writeRumUserToDatabase(rumUser);
         }
         return rumUser;
     }
