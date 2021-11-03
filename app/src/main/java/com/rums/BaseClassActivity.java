@@ -9,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,10 +21,12 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Boolean shouldHaveBackArrowInActionBar = true;
     protected Class<?> previousActivityClass;
     protected Class<?> specificActivityClassForBackArrow;
+    protected Boolean omitOptionsMenu = false;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
     private PersistantStorage storage;
     protected static RumUser currentRumUser;
     private static BaseClassActivity activityForRepositoryCallback;
+    private static Boolean repositoryReady = false;
 
 
     @Override
@@ -64,6 +67,14 @@ public class BaseClassActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(!omitOptionsMenu) {
+            getMenuInflater().inflate(R.menu.menu_home, menu);
+        }
+        return true;
+    }
+
     @Override      //Back arrow in ActionBar, etc.
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getClass() == androidx.appcompat.view.menu.ActionMenuItem.class) {
@@ -98,11 +109,18 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     protected String getFirebaseUserUID() {
-        return getFirebaseUser().getUid();
+        FirebaseUser firebaseUser = getFirebaseUser();
+        if(firebaseUser != null) {
+            return firebaseUser.getUid();
+        }
+        else {
+            return null;
+        }
     }
 
     public void repositoryIsInitialized(Class<?> type) {
-        Log.d("Tag__1", "repositoryIsInitialized - type: " + type.toString());
+        Log.d("Tag__1", "repositoryIsInitialized in baseclass - type: " + type.toString());
+        setRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
     }
 
@@ -186,6 +204,16 @@ public class BaseClassActivity extends AppCompatActivity {
     public static BaseClassActivity getActivityForRepositoryCallback() {
         return activityForRepositoryCallback;
     }
+
+    public static void setRepositoryReady(Boolean repositoryReady) {
+        BaseClassActivity.repositoryReady = repositoryReady;
+    }
+
+    public static Boolean getRepositoryReady() {
+        return repositoryReady;
+    }
+
+
 
 
 
