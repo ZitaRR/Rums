@@ -127,26 +127,26 @@ public class BaseClassActivity extends AppCompatActivity {
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
 //        if(getCurrentRumUser() != null) {
-//            makeChatRoom("A roooom name", null, false, getCurrentRumUser().getId(), null);
+//            if(type == ChatRoom.class) {
+//                makeChatRoom("A roooom name", null, false, getCurrentRumUser().getId(), null);
+//            }
 //        }
     }
 
     private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
-        String ID = storage.getRooms().getUniqueKey();
-        return new ChatRoom("Kkkkkk", roomName, usersByID, isPrivate, adminByUserID, messages);
+        String ID = getStorage().getRooms().getUniqueKey();
+        ChatRoom room = new ChatRoom(ID, roomName, usersByID, isPrivate, adminByUserID, messages);
+        writeChatRoomToDatabase(room);
+        return room;
     }
 
-
-    protected void testReadFromDatabase() {
-        if(isLoggedIn()) {
-            PersistantStorage storage = PersistantStorage.getInstance();
-            RumUser rumUser;
-            String firebaseUserUID = getFirebaseUserUID();
-            try {
-                rumUser = storage.getUsers().getById(firebaseUserUID);
-            } catch (Exception e) {
-                Log.d("Tag__1", "Exception: " + e + " - firebaseUserUID is " + firebaseUserUID);
-            }
+    protected void writeChatRoomToDatabase(ChatRoom chatRoom) {
+        Repository<ChatRoom> rooms = getStorage().getRooms();
+        rooms.insert(chatRoom);
+        try {
+            rooms.commit();
+        } catch (Exception e) {
+            Log.d("Tag__1", "Exception: " + e);
         }
     }
 
@@ -161,9 +161,9 @@ public class BaseClassActivity extends AppCompatActivity {
 
     protected Boolean writeRumUserToDatabase(RumUser rumUser) {
         Boolean success = false;
-        storage.getUsers().insert(rumUser);
+        getStorage().getUsers().insert(rumUser);
         try {
-            storage.getUsers().commit();
+            getStorage().getUsers().commit();
             success = true;
         } catch (Exception e) {
             Log.d("Tag__1", "writeRumUserToDatabase Exception: " + e.getMessage());
