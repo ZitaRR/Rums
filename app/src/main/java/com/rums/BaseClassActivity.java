@@ -29,7 +29,7 @@ public class BaseClassActivity extends AppCompatActivity {
     private PersistantStorage storage;
     protected static RumUser currentRumUser;
     private static BaseClassActivity activityForRepositoryCallback;
-    private static Boolean repositoryReady = false;
+    private static Boolean isRepositoryReady = false;
 
 
     @Override
@@ -123,7 +123,7 @@ public class BaseClassActivity extends AppCompatActivity {
 
     public void repositoryIsInitialized(Class<?> type) {
         Log.d("Tag__1", "repositoryIsInitialized in baseclass - type: " + type.toString());
-        setRepositoryReady(true);
+        setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
 //        if(getCurrentRumUser() != null) {
@@ -230,12 +230,12 @@ public class BaseClassActivity extends AppCompatActivity {
         return activityForRepositoryCallback;
     }
 
-    public static void setRepositoryReady(Boolean repositoryReady) {
-        BaseClassActivity.repositoryReady = repositoryReady;
+    public static void setIsRepositoryReady(Boolean isRepositoryReady) {
+        BaseClassActivity.isRepositoryReady = isRepositoryReady;
     }
 
-    public static Boolean getRepositoryReady() {
-        return repositoryReady;
+    public static Boolean getIsRepositoryReady() {
+        return isRepositoryReady;
     }
 
 

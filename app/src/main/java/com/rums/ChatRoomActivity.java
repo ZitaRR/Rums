@@ -23,6 +23,8 @@ public class ChatRoomActivity extends BaseClassActivity {
     ArrayAdapter<String> adapter;
     ListView listView;
     ArrayList<Message> messages;
+    Menu actionBarMenu;
+    MenuItem nameMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,16 @@ public class ChatRoomActivity extends BaseClassActivity {
         setContentView(R.layout.activity_chat_room);
         super.init();
         setupListViewAdapter();
-        fillMessagesList();
-
+        if(getIsRepositoryReady()) {
+            setupFromDatabase();
+        }
 
     }
 
+    protected void setupFromDatabase() {
+        fillMessagesList();
+        setRoomName();
+    }
 
     private void setupListViewAdapter() {
         names = new ArrayList<>();
@@ -54,11 +61,11 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
     private void fillMessagesList() {
-        if(getRepositoryReady()) {
-//            Log.d("Tag__1", "it's ready: ");
-        } else {
-//            Log.d("Tag__1", "it's NOT ready: ");
-        }
+//        if(getRepositoryReady()) {
+////            Log.d("Tag__1", "it's ready: ");
+//        } else {
+////            Log.d("Tag__1", "it's NOT ready: ");
+//        }
     }
 
     @Override
@@ -66,18 +73,15 @@ public class ChatRoomActivity extends BaseClassActivity {
         super.onCreateOptionsMenu(menu);
         if(!omitOptionsMenu) {
             getMenuInflater().inflate(R.menu.menu_chat_room, menu);
-            MenuItem nameMenuItem = menu.findItem(R.id.chat_room_name_menu_item);
-            Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
-
-            if(nameMenuItem != null) {
-                nameMenuItem.setTitle("Kalle");
-            }
+            actionBarMenu = menu;
         }
         return true;
     }
 
     private ChatRoom getCurrentChatRoom() {
         RumUser user = getCurrentRumUser();
+        Log.d("Tag__3", "user " + user);
+
         if(user != null) {
             ChatRoom room = user.getCurrentChatRoom();;
             if(room != null) {
@@ -87,13 +91,25 @@ public class ChatRoomActivity extends BaseClassActivity {
         return null;
     }
 
+    private void setRoomName() {
+        ChatRoom room = getCurrentChatRoom();
+        Log.d("Tag__3", "room " + room);
+        if(room != null) {
+            nameMenuItem = actionBarMenu.findItem(R.id.chat_room_name_menu_item);
+            Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
+            if(nameMenuItem != null) {
+                nameMenuItem.setTitle("Kalle");
+            }
+        }
+    }
+
 
     @Override
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
         RumUser user = getCurrentRumUser();
         Log.d("Tag__1", "repositoryIsInitialized in ChatRoomActivity user: " + user);
-        fillMessagesList();
+        setupFromDatabase();
     }
 
 
