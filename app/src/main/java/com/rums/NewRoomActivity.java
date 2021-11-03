@@ -42,9 +42,7 @@ public class NewRoomActivity extends BaseClassActivity {
     private RecyclerView userRow;
     private MyAdapter myAdapter;
     private Toolbar actionBar;
-
     private PersistantStorage storage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,29 +89,28 @@ public class NewRoomActivity extends BaseClassActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @SuppressLint("ResourceType")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         //checkBox.setChecked(false);
         int id = item.getItemId();
+
+        // Här trycker man när man är valt sina användare/boxar
         if (id == R.id.add_done) {
 
-            String itemChecked = "Users added to groupchat!";
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
             final FrameLayout frameView = new FrameLayout(this);
             builder.setView(frameView)
 
+                    // Om nöjd med val, namn på charrummet sätts.
                    .setPositiveButton(R.string.say_hello, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-/*                            *
+/*
                             for(int i = 0; i <userRow.getChildCount(); i++) {
                             if (checkBox.isChecked()) {
 
-                             itemChecked += checkBox;
+                             itemChecked += checkBox.listView.getItemAtPosition(i)
                             setNewChat(userList);
                             }
                             }*/
@@ -137,15 +134,15 @@ public class NewRoomActivity extends BaseClassActivity {
             alertDialog.show();
             alertDialog.getWindow().setLayout(900, 500);
 
-           Toast.makeText(this,itemChecked, Toast.LENGTH_SHORT).show();
-
         }
         return super.onOptionsItemSelected(item);
     }
 
-
      private void showSettingsActivity () {
-        Intent intent = new Intent(this, ChatRoomActivity.class);
+
+         Toast.makeText(this,"Users added to groupchat!", Toast.LENGTH_SHORT).show();
+
+         Intent intent = new Intent(this, ChatRoomActivity.class);
         startActivity(intent);
     }
 

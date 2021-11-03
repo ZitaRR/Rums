@@ -63,7 +63,7 @@
                 android:padding="1dp"
                 android:textSize="11sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/user_email"
+                app:layout_constraintBottom_toTopOf="@+id/users_email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"

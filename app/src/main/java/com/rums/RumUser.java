@@ -8,22 +8,6 @@ public class RumUser implements Identity {
 
     private boolean isChecked;
 
-    public boolean getChecked() {
-        return isChecked;
-    }
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
-    private int position;
-
-    public int getPosition(int position) {
-        return this.position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     public RumUser(){}
 
     public RumUser(String id){
@@ -56,5 +40,12 @@ public class RumUser implements Identity {
 
     public String getEmail(){
         return email;
+    }
+
+    public boolean getChecked() {
+        return isChecked;
+    }
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

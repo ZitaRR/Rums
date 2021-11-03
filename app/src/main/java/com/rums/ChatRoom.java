@@ -89,4 +89,5 @@ public class ChatRoom implements Identity {
     public void setMessages(HashMap<String, Message> messages) {
         this.messages = messages;
     }
+
 }

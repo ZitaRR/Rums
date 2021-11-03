@@ -43,26 +43,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         return viewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
+        //ChatRoom currentRoom= newChat.get(position);
         RumUser currentUser = mUserList.get(position);
         currentUser.getChecked();
 
         holder.userName.setText(currentUser.getUsername());
         holder.userEmail.setText(currentUser.getEmail());
-
-        TextView tv = holder.userName;
-        tv.setText(currentUser.getUsername());
-
-            holder.inviteBox.setChecked(currentUser.getChecked());
+        holder.inviteBox.setChecked(currentUser.getChecked());
 
             holder.inviteBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                currentUser.setChecked(holder.inviteBox.isChecked());
-                    Toast.makeText(view.getContext(), "Position: " + (currentUser.getUsername()), Toast.LENGTH_LONG).show();
 
+                // Här blir användare valda genom checkboxar
+                public void onClick(View view) {
+                    if (holder.inviteBox.isChecked()) {
+                        currentUser.setChecked(holder.inviteBox.isChecked());
+                        Toast.makeText(view.getContext(), (currentUser.getUsername()), Toast.LENGTH_LONG).show();
+
+                    }
                 }
             });
     }
@@ -84,7 +86,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
             userEmail = itemView.findViewById(R.id.users_email);
             inviteBox = itemView.findViewById(R.id.check_Box);
             userPic = itemView.findViewById(R.id.user_pic);
-
         }
     }
 
@@ -123,7 +124,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
             notifyDataSetChanged();
         }
     };
-
 
 }
 
