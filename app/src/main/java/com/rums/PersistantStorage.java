@@ -14,8 +14,8 @@ public class PersistantStorage {
 
         instance = this;
 
-        users = new Repository<>(RumUser.class);
-        rooms = new Repository<>(ChatRoom.class);
+        users = new Repository<>(RumUser.class, new BaseClassActivity());
+        rooms = new Repository<>(ChatRoom.class, new BaseClassActivity());
     }
 
     public Repository<RumUser> getUsers(){
