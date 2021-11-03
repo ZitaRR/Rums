@@ -56,6 +56,10 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
         });
     }
 
+    public String getUniqueKey() {
+        return reference.push().getKey();
+    }
+
     @Override
     public T getById(String id) {
         return entities
