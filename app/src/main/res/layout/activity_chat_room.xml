@@ -7,15 +7,15 @@
     tools:context=".ChatRoomActivity">
 
 
-
+    <include layout="@layout/main_actionbar" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="541dp"
         android:layout_above="@+id/image_message_image_layout"
         android:background="@color/medium_dark_gray"
+        android:orientation="vertical"
 
         >
 
@@ -49,15 +49,6 @@
             app:layout_constraintTop_toBottomOf="@+id/rum_name">
 
         </ListView>
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/messageges_RecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/medium_dark_gray"
-            android:paddingHorizontal="16dp" />
 
 
     </LinearLayout>
