@@ -37,6 +37,9 @@ public class LoginActivity extends BaseClassActivity {
         login = findViewById(R.id.button_login);
         auth = FirebaseAuth.getInstance();
 
+        //Test if RumUsers can be read from database (if already logged in)
+        testReadFromDatabase();
+
         //Här ska det ju hända lite mer än vad som händer i nuläget, man bara loggas in som det är nu.
         login.setOnClickListener(new View.OnClickListener() {
             @Override
