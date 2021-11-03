@@ -32,12 +32,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         setupListViewAdapter();
         fillMessagesList();
 
-        MenuItem nameMenuItem = findViewById(R.id.chat_room_name_menu_item);
-        Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
 
-        if(nameMenuItem != null) {
-            nameMenuItem.setTitle("Kalle");
-        }
     }
 
 
@@ -71,8 +66,25 @@ public class ChatRoomActivity extends BaseClassActivity {
         super.onCreateOptionsMenu(menu);
         if(!omitOptionsMenu) {
             getMenuInflater().inflate(R.menu.menu_chat_room, menu);
+            MenuItem nameMenuItem = menu.findItem(R.id.chat_room_name_menu_item);
+            Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
+
+            if(nameMenuItem != null) {
+                nameMenuItem.setTitle("Kalle");
+            }
         }
         return true;
+    }
+
+    private ChatRoom getCurrentChatRoom() {
+        RumUser user = getCurrentRumUser();
+        if(user != null) {
+            ChatRoom room = user.getCurrentChatRoom();;
+            if(room != null) {
+                return room;
+            }
+        }
+        return null;
     }
 
 
