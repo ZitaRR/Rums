@@ -6,9 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".UserProfile">
 
-    <include layout="@layout/main_actionbar"/>
+    <include
+        android:id="@+id/include"
+        layout="@layout/main_actionbar" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -21,7 +24,39 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_midpoint"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include" />-->
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_main"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="999dp"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toTopOf="@+id/input_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="12dp"
+            app:cardCornerRadius="999dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_phone" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
 
     <EditText
         android:id="@+id/input_username"

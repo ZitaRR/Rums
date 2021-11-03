@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private EditText editUsername, editAge, editPhone, editDescription;
     private Switch switchNotification;
     private Button buttonSave;
-    private CircleImageView profilePicture;
+    private ImageView profilePicture;
 
     private String username, userDescription;
     private int userAge, userPhone;
@@ -51,7 +52,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         editPhone = (EditText) findViewById(R.id.input_user_phone);
         editDescription = (EditText) findViewById(R.id.input_description);
         buttonSave = (Button) findViewById(R.id.button_save);
-        profilePicture = (CircleImageView) findViewById(R.id.profile_picture);
+        profilePicture = (ImageView) findViewById(R.id.profile_picture);
         switchNotification = (Switch) findViewById(R.id.switch_notifications);
 
         buttonSave.setOnClickListener(this);
