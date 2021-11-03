@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class BaseClassActivity extends AppCompatActivity {
 
     private Toolbar actionBar;
@@ -122,6 +125,15 @@ public class BaseClassActivity extends AppCompatActivity {
         Log.d("Tag__1", "repositoryIsInitialized in baseclass - type: " + type.toString());
         setRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
+        //Test:
+//        if(getCurrentRumUser() != null) {
+//            makeChatRoom("A roooom name", null, false, getCurrentRumUser().getId(), null);
+//        }
+    }
+
+    private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
+        String ID = storage.getRooms().getUniqueKey();
+        return new ChatRoom("Kkkkkk", roomName, usersByID, isPrivate, adminByUserID, messages);
     }
 
 
@@ -139,7 +151,12 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     protected RumUser setupNewRumUser() {
-        return new RumUser(getFirebaseUserUID(), getFirebaseUser().getDisplayName(), getFirebaseUser().getEmail());
+        FirebaseUser firebaseUser = getFirebaseUser();
+        if(firebaseUser != null) {
+            return new RumUser(getFirebaseUserUID(), getFirebaseUser().getDisplayName(), getFirebaseUser().getEmail());
+        } else {
+            return null;
+        }
     }
 
     protected Boolean writeRumUserToDatabase(RumUser rumUser) {
