@@ -49,7 +49,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void setActionBar() {
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
-        if(shouldHaveBackArrowInActionBar) {
+        if(getShouldHaveBackArrowInActionBar()) {
             ActionBar ab = getSupportActionBar();
             if (ab != null) {
                 ab.setDisplayHomeAsUpEnabled(true);
@@ -216,6 +216,14 @@ public class BaseClassActivity extends AppCompatActivity {
     }
     public void setCurrentRumUser(RumUser currentRumUser) {
         this.currentRumUser = currentRumUser;
+    }
+
+    public Boolean getShouldHaveBackArrowInActionBar() {
+        return shouldHaveBackArrowInActionBar;
+    }
+
+    public void setShouldHaveBackArrowInActionBar(Boolean shouldHaveBackArrowInActionBar) {
+        this.shouldHaveBackArrowInActionBar = shouldHaveBackArrowInActionBar;
     }
 
     public static BaseClassActivity getActivityForRepositoryCallback() {
