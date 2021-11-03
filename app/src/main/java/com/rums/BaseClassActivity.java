@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -113,70 +114,92 @@ public class BaseClassActivity extends AppCompatActivity {
     protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
-            rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
-            setCurrentRumUser(rumUser);
+//          rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
+            rumUser = getRumUserByID(UID);
+                    setCurrentRumUser(rumUser);
         } catch (Exception e) {
             Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
             rumUser = setupNewRumUser();
+            Log.d("Tag__1", "rumUser rumUser: " + rumUser.getId());
+
             writeRumUserToDatabase(rumUser);
         }
         return rumUser;
     }
 
-    protected void moveUserToChatRoom(ArrayList<String> usersByID, ChatRoom chatRoom) {
-        RumUser currentUser = getCurrentRumUser();
-        if((currentUser != null) && (chatRoom != null)) {
-            currentUser.setCurrentChatRoomID(chatRoom.getId());
-            currentUser.setCurrentChatRoom(chatRoom);
-            chatRoom.setUsersByID(usersByID);
-            startSomeActivity(ChatRoomActivity.class);
-        } else {
-            Log.d("Tag_1", "currentUser or chatRoom is null");
+    //Should be able to use storage.getUsers().getById(UID) instead, but that throws No value present.
+    protected RumUser getRumUserByID(String UID) {
+        RumUser foundRumUser = null;
+        List<RumUser> users = storage.getUsers().getAll();
+        Log.d("Tag__1", "users: " + users);
+
+        for (RumUser user : users) {
+            Log.d("Tag__1", "user: " + user.getId());
+
+            if (user.getId().equals(UID)) {
+                foundRumUser = user;
+            }
         }
+        return foundRumUser;
     }
 
-    protected void logUserEtcToConsole(String tag) {
-        RumUser currentUser = getCurrentRumUser();
-        if(currentUser != null) {
-            Log.d(tag, "currentUser " + currentUser);
-        } else {
-            Log.d(tag, "currentUser is null");
+
+
+
+        protected void moveUserToChatRoom(ArrayList<String> usersByID, ChatRoom chatRoom) {
+            RumUser currentUser = getCurrentRumUser();
+            if((currentUser != null) && (chatRoom != null)) {
+                currentUser.setCurrentChatRoomID(chatRoom.getId());
+                currentUser.setCurrentChatRoom(chatRoom);
+                chatRoom.setUsersByID(usersByID);
+                startSomeActivity(ChatRoomActivity.class);
+            } else {
+                Log.d("Tag_1", "currentUser or chatRoom is null");
+            }
         }
-    }
 
-
-    protected boolean isLoggedIn() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null){
-            Log.d("Tag_1", "User IS logged in!");
-            return true;
-        } else {
-            Log.d("Tag_1", "User is not logged in...");
-            return false;
+        protected void logUserEtcToConsole(String tag) {
+            RumUser currentUser = getCurrentRumUser();
+            if(currentUser != null) {
+                Log.d(tag, "currentUser " + currentUser);
+            } else {
+                Log.d(tag, "currentUser is null");
+            }
         }
+
+
+        protected boolean isLoggedIn() {
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if(currentUser != null){
+                Log.d("Tag_1", "User IS logged in!");
+                return true;
+            } else {
+                Log.d("Tag_1", "User is not logged in...");
+                return false;
+            }
+        }
+
+        protected FirebaseUser getFirebaseUser() {
+            return FirebaseAuth.getInstance().getCurrentUser();
+        }
+
+        protected String getFirebaseUserUID() {
+            return getFirebaseUser().getUid();
+        }
+
+        protected void startSomeActivity(Class<?> cls) {
+            Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
+            startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+        }
+
+        public RumUser getCurrentRumUser() {
+            return currentRumUser;
+        }
+        public void setCurrentRumUser(RumUser currentRumUser) {
+            this.currentRumUser = currentRumUser;
+        }
+
+
+
+
     }
-
-    protected FirebaseUser getFirebaseUser() {
-        return FirebaseAuth.getInstance().getCurrentUser();
-    }
-
-    protected String getFirebaseUserUID() {
-        return getFirebaseUser().getUid();
-    }
-
-    protected void startSomeActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
-        startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
-    }
-
-    public RumUser getCurrentRumUser() {
-        return currentRumUser;
-    }
-    public void setCurrentRumUser(RumUser currentRumUser) {
-        this.currentRumUser = currentRumUser;
-    }
-
-
-
-
-}
