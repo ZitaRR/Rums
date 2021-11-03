@@ -1,16 +1,21 @@
 package com.rums;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,11 +28,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private Button buttonSave;
     private CircleImageView profilePicture;
 
-    private String username;
-    private String userDescription;
-    private int userAge;
-    private int userPhone;
-    private boolean userNotific;
+    private String username, userDescription;
+    private int userAge, userPhone;
+    private boolean userNotification;
 
 
     @Override
@@ -35,8 +38,13 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        actionBar = findViewById(R.id.main_actionbar);
+        actionBar = (Toolbar) findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
 
         editUsername = (EditText) findViewById(R.id.input_username);
         editAge = (EditText) findViewById(R.id.input_user_age);
@@ -73,7 +81,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-
     // Inte klar, tror behöver Firebase Storage
     private void changeProfilePicture() {
 
@@ -87,45 +94,45 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     private void saveChanges() {
 
+        String inputUsername = editUsername.getText().toString();
+        String inputDescription = editDescription.getText().toString();
+        String inputAge = editAge.getText().toString();
+        String inputPhone = editPhone.getText().toString();
+
         boolean successfulSave = true;
 
-        // Om användarnamn är mindre än 5 eller mer än 13 karaktärer, så får man felmeddelande.
-        if(editUsername.getText().toString().length() < 5 || editUsername.getText().toString().length() > 13) {
+        // Användarnamn. Vilkor: Mellan 5 och 13 karaktärer.
+        if(inputUsername.length() < 5 || inputUsername.length() > 13) {
            Toast.makeText(UserProfile.this, "Username must be between 5 and 13 characters.", Toast.LENGTH_SHORT).show();
            successfulSave = false;
         } else {
-            setUsername(editUsername.getText().toString());
+            setUsername(inputUsername);
         }
 
-        if (!editDescription.getText().toString().isEmpty()) {
-            setUserDescription(editDescription.getText().toString());
+        if (!inputDescription.isEmpty()) {
+            setUserDescription(inputDescription);
         }
 
-        // Programmet kraschar om den försöker parsa ett tomt värde, så behöver se så det inte är tomt.
-        // Behövs inget max-värde, satt max 3 siffror i EditText elementet, så 999 är max
-        if (editAge.getText().toString().length() > 1) {
-           setUserAge(Integer.parseInt(editAge.getText().toString()));
+        if (!inputAge.isEmpty()) {
+           setUserAge((Integer.parseInt(inputAge)));
         }
 
-        if (editPhone.getText().toString().length() > 1) {
-            setUserPhone(Integer.parseInt(editPhone.getText().toString()));
+        if (!inputPhone.isEmpty()) {
+            setUserPhone(Integer.parseInt(inputPhone));
         }
 
         if (successfulSave) {
             Toast.makeText(UserProfile.this, "Save Successful", Toast.LENGTH_SHORT).show();
             changeDatabase();
-            // StartnextActivity
+            Intent i = new Intent(UserProfile.this, HomeActivity.class);
+            startActivity(i);
         }
 
     }
 
     private void changeDatabase() {
-        // När värden ändrats, skicka upp i sfären på nått sätt
+        // När värden ändrats, skicka till User.Class eller databas eller nått? Dunno?
     }
-
-
-
-
 
     // Getters & Setters
 
@@ -133,20 +140,54 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         this.username = username;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setUserAge(int user_age) {
         this.userAge = user_age;
+    }
+
+    public int getUserAge() {
+        return userAge;
     }
 
     public void setUserPhone(int user_phone) {
         this.userPhone = user_phone;
     }
 
+    public int getUserPhone() {
+        return userPhone;
+    }
+
     public void setUserDescription(String user_description) {
         this.userDescription = user_description;
     }
 
+    public String getUserDescription() {
+        return userDescription;
+    }
+
     public void setNotifications(boolean notifications) {
-        this.userNotific = notifications;
+        this.userNotification = notifications;
+    }
+
+    public boolean isUserNotification() {
+        return userNotification;
+    }
+
+
+    // För att kunna använda bakåtknappen. Inte det mest effektiva sättet att göra det förmodligen men enda som jag fick att fungera.
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Intent i = new Intent(UserProfile.this, HomeActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

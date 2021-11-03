@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseClassActivity {
 
     private TextView register;
     private EditText email;
@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        PersistantStorage.getInstance();
         register = findViewById(R.id.text_register);
         email = findViewById(R.id.edit_login_mail);
         password = findViewById(R.id.edit_login_password);
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(LoginActivity.this, xxx.class));
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
 
         });

@@ -12,16 +12,10 @@
     <color name="medium_gray">#AAAAAA</color>
     <color name="light_light_gray">#CCCCCC</color>
     <color name="medium_light_gray">#9A9A9A</color>
-    <color name="slightly_darker_gray">#717171</color>
     <color name="darker_gray">#5C5C5C</color>
     <color name="medium_dark_gray">#323232</color>
     <color name="dark_dark_gray">#2E2E2E</color>
-    <color name="very_dark_gray">#252525</color>
-
     <color name="lighter_gray">#A8A8A8</color>
-
-    <color name="gray_icon_color">#ACACAC</color>
-
 
     <color name="light_purple">#C6ADFF</color>
     <color name="darker_purple">#9D7DE6</color>
@@ -29,8 +23,6 @@
 
     <color name="transparent">#00C6ADFF</color>
     <!--    ................... -->
-
-
 
 
 </resources>
