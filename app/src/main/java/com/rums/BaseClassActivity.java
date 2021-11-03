@@ -9,14 +9,10 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -25,22 +21,22 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Class<?> previousActivityClass;
     protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
-    protected Boolean omitOptionsMenu = false;
     private PersistantStorage storage;
-    protected RumUser currentRumUser;
-
+    protected static RumUser currentRumUser;
+    private static BaseClassActivity activityForRepositoryCallback;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
+        init(); //Why does this need to be explicitly called, super.init(), in subclasses?
     }
 
     protected void init() {
         setActionBar();
         getPreviousActivity();
+        activityForRepositoryCallback = this;
         storage = PersistantStorage.getInstance();
     }
 
@@ -68,14 +64,6 @@ public class BaseClassActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(!omitOptionsMenu) {
-            getMenuInflater().inflate(R.menu.menu_home, menu);
-        }
-        return true;
-    }
-
     @Override      //Back arrow in ActionBar, etc.
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getClass() == androidx.appcompat.view.menu.ActionMenuItem.class) {
@@ -92,6 +80,44 @@ public class BaseClassActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected boolean isLoggedIn() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            Log.d("Tag__1", "User IS logged in");
+            return true;
+        } else {
+            Log.d("Tag__1", "User is not logged in");
+            return false;
+        }
+    }
+
+    protected FirebaseUser getFirebaseUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    protected String getFirebaseUserUID() {
+        return getFirebaseUser().getUid();
+    }
+
+    public void repositoryIsInitialized(Class<?> type) {
+        Log.d("Tag__1", "repositoryIsInitialized - type: " + type.toString());
+        readRumUserFromDatabase(getFirebaseUserUID());
+    }
+
+
+    protected void testReadFromDatabase() {
+        if(isLoggedIn()) {
+            PersistantStorage storage = PersistantStorage.getInstance();
+            RumUser rumUser;
+            String firebaseUserUID = getFirebaseUserUID();
+            try {
+                rumUser = storage.getUsers().getById(firebaseUserUID);
+            } catch (Exception e) {
+                Log.d("Tag__1", "Exception: " + e + " - firebaseUserUID is " + firebaseUserUID);
+            }
+        }
     }
 
     protected RumUser setupNewRumUser() {
@@ -114,92 +140,54 @@ public class BaseClassActivity extends AppCompatActivity {
     protected RumUser readRumUserFromDatabase(String UID) {
         RumUser rumUser;
         try {
-//          rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
-            rumUser = getRumUserByID(UID);
-                    setCurrentRumUser(rumUser);
+            rumUser = getStorage().getUsers().getById(UID); //getById() should return null if not successful
+//            rumUser = getRumUserByID(UID);
+            setCurrentRumUser(rumUser);
+//            Log.d("Tag__1", "readRumUserFromDatabase getCurrentRumUser(): " + getCurrentRumUser());
         } catch (Exception e) {
             Log.d("Tag__1", "readRumUserFromDatabase Exception: " + e.getMessage());
             rumUser = setupNewRumUser();
-            Log.d("Tag__1", "rumUser rumUser: " + rumUser.getId());
-
-            writeRumUserToDatabase(rumUser);
         }
         return rumUser;
     }
 
-    //Should be able to use storage.getUsers().getById(UID) instead, but that throws No value present.
-    protected RumUser getRumUserByID(String UID) {
-        RumUser foundRumUser = null;
-        List<RumUser> users = storage.getUsers().getAll();
-        Log.d("Tag__1", "users: " + users);
 
-        for (RumUser user : users) {
-            Log.d("Tag__1", "user: " + user.getId());
-
-            if (user.getId().equals(UID)) {
-                foundRumUser = user;
-            }
+    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+        RumUser currentUser = getCurrentRumUser();
+        if((currentUser != null) || (chatRoom != null)) {
+            currentUser.setCurrentChatRoomID(chatRoom.getId());
+            currentUser.setCurrentChatRoom(chatRoom);
+            startSomeActivity(ChatRoomActivity.class);
+        } else {
+            Log.d("Tag_1", "currentUser or chatRoom is null");
         }
-        return foundRumUser;
+    }
+
+
+    protected void startSomeActivity(Class<?> cls) {
+        Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
+        startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    protected PersistantStorage getStorage() {
+        if(storage == null) {
+            storage = PersistantStorage.getInstance();
+        }
+        return storage;
+    }
+
+    public RumUser getCurrentRumUser() {
+        return currentRumUser;
+    }
+    public void setCurrentRumUser(RumUser currentRumUser) {
+        this.currentRumUser = currentRumUser;
+    }
+
+    public static BaseClassActivity getActivityForRepositoryCallback() {
+        return activityForRepositoryCallback;
     }
 
 
 
 
-        protected void moveUserToChatRoom(ArrayList<String> usersByID, ChatRoom chatRoom) {
-            RumUser currentUser = getCurrentRumUser();
-            if((currentUser != null) && (chatRoom != null)) {
-                currentUser.setCurrentChatRoomID(chatRoom.getId());
-                currentUser.setCurrentChatRoom(chatRoom);
-                chatRoom.setUsersByID(usersByID);
-                startSomeActivity(ChatRoomActivity.class);
-            } else {
-                Log.d("Tag_1", "currentUser or chatRoom is null");
-            }
-        }
-
-        protected void logUserEtcToConsole(String tag) {
-            RumUser currentUser = getCurrentRumUser();
-            if(currentUser != null) {
-                Log.d(tag, "currentUser " + currentUser);
-            } else {
-                Log.d(tag, "currentUser is null");
-            }
-        }
-
-
-        protected boolean isLoggedIn() {
-            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            if(currentUser != null){
-                Log.d("Tag_1", "User IS logged in!");
-                return true;
-            } else {
-                Log.d("Tag_1", "User is not logged in...");
-                return false;
-            }
-        }
-
-        protected FirebaseUser getFirebaseUser() {
-            return FirebaseAuth.getInstance().getCurrentUser();
-        }
-
-        protected String getFirebaseUserUID() {
-            return getFirebaseUser().getUid();
-        }
-
-        protected void startSomeActivity(Class<?> cls) {
-            Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
-            startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
-        }
-
-        public RumUser getCurrentRumUser() {
-            return currentRumUser;
-        }
-        public void setCurrentRumUser(RumUser currentRumUser) {
-            this.currentRumUser = currentRumUser;
-        }
-
-
-
-
-    }
+}

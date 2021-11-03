@@ -27,7 +27,6 @@ public class ChatRoomActivity extends BaseClassActivity {
         setContentView(R.layout.activity_chat_room);
         super.init();
         setupListViewAdapter();
-        logUserEtcToConsole("Tag__1");
     }
 
 

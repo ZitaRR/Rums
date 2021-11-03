@@ -21,7 +21,7 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
     private boolean initialized = false;
 
     public Repository(Class<T> type){
-        context = FirebaseDatabase.getInstance("https://iths-167a4-default-rtdb.europe-west1.firebasedatabase.app/");
+        context = FirebaseDatabase.getInstance();
         reference = context.getReference(type.getSimpleName());
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -42,6 +42,7 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
 
                 if(!initialized){
                     initialized = true;
+                    BaseClassActivity.getActivityForRepositoryCallback().repositoryIsInitialized(type);
                     return;
                 }
 
