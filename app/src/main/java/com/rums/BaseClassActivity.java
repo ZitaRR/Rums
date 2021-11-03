@@ -100,6 +100,12 @@ public class BaseClassActivity extends AppCompatActivity {
         return getFirebaseUser().getUid();
     }
 
+    public static void repositoryIsInitted(Class<?> type) {
+        Log.d("Tag__1", "repositoryIsInitted type: " + type.toString());
+
+    }
+
+
     protected void testReadFromDatabase() {
         if(isLoggedIn()) {
             PersistantStorage storage = PersistantStorage.getInstance();

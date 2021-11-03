@@ -42,6 +42,7 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
 
                 if(!initialized){
                     initialized = true;
+                    BaseClassActivity.repositoryIsInitted(type);
                     return;
                 }
 
