@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_phone" />
+                android:src="@drawable/ic_rums_ikon" />
         </androidx.cardview.widget.CardView>
 
     </androidx.cardview.widget.CardView>
