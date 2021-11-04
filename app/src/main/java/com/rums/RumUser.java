@@ -1,10 +1,15 @@
 package com.rums;
 
+import android.util.Log;
+
+import com.google.firebase.database.DatabaseReference;
+
 public class RumUser implements Identity {
     private String id;
     private String username;
     private String password;
     private String email;
+    private PersistantStorage storage;
 
 
 
@@ -13,7 +18,9 @@ public class RumUser implements Identity {
     private String currentChatRoomID;
     private ChatRoom currentChatRoom; //Probably save to db, since it's a NoSQL db.
 
-    public RumUser(){}
+    public RumUser(){
+        storage = PersistantStorage.getInstance();
+    }
 
     public RumUser(String id){
         this.id = id;
@@ -23,6 +30,20 @@ public class RumUser implements Identity {
         this.id = id;
         this.username = username;
         this.email = email;
+    }
+
+    public void sendMessage(String messageText, String currentTime) {
+        Message message = new Message(getId(), getUsername(), null, messageText, currentTime);
+
+        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
+
+        String newMessageKey = chatRoomMessagesPath.push().getKey();
+//
+        chatRoomMessagesPath.child(newMessageKey).setValue(message);
+
+        st
+
+
     }
 
     public String getId(){

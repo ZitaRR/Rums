@@ -7,6 +7,7 @@ public class Message implements Identity {
     private String avatarImageURL;
 //  Kanske (så småningom) nöja oss med userID och messageText. nickName och avatar kan ju hämtas via userID
     private String messageText;
+    private String timeStamp;
 
     public Message() {
     }
@@ -16,6 +17,14 @@ public class Message implements Identity {
         this.nickName = nickName;
         this.avatarImageURL = avatarImageURL;
         this.messageText = messageText;
+    }
+
+    public Message(String userID, String nickName, String avatarImageURL, String messageText, String timeStamp) {
+        this.userID = userID;
+        this.nickName = nickName;
+        this.avatarImageURL = avatarImageURL;
+        this.messageText = messageText;
+        this.timeStamp = timeStamp;
     }
 
     @Override

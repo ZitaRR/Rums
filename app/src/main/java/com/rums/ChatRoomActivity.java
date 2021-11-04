@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -80,6 +81,16 @@ public class ChatRoomActivity extends BaseClassActivity {
         }
         return true;
     }
+
+//    public void sendMessageButtonMethod(View view) {
+//        EditText editText = findViewById(R.id.message_EditText);
+//        String messageText = editText.getText().toString();
+//        if(messageText.length() > 0) {
+//            RumUser rumUser = getCurrentRumUser();
+//            rumUser.sendMessage(messageText, currentTime(null));
+//            editText.setText(""); //But what if message couldn't be delivered?
+//        }
+//    }
 
     private ChatRoom getCurrentChatRoom() {
         RumUser user = getCurrentRumUser();
