@@ -133,11 +133,11 @@ public class BaseClassActivity extends AppCompatActivity {
 
         //Test:
         //Create a ChatRoom and save to database
-        if(getCurrentRumUser() != null) {
-            if(type == ChatRoom.class) {
-                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
-            }
-        }
+//        if(getCurrentRumUser() != null) {
+//            if(type == ChatRoom.class) {
+//                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
+//            }
+//        }
 
         //Enter a ChatRoom:
         moveUserToChatRoom(getChatRoomAtIndex(1));
