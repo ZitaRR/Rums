@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -100,12 +101,17 @@ public class NewRoomActivity extends BaseClassActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             final FrameLayout frameView = new FrameLayout(this);
-            builder.setView(frameView)
 
+            builder.setView(frameView)
                     // Om nöjd med val, namn på charrummet sätts.
                    .setPositiveButton(R.string.say_hello, new DialogInterface.OnClickListener() {
+
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+
+                           /* EditText nameRoom = findViewById(R.id.name_Room);
+                            String nameRoomTxt = nameRoom.getText().toString();
+                            Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
 
                             // moveToChatRoom ();
 /*
@@ -120,6 +126,7 @@ public class NewRoomActivity extends BaseClassActivity {
                             showSettingsActivity();
                             finish();
                         }
+
                     })
 
                     .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
@@ -128,10 +135,11 @@ public class NewRoomActivity extends BaseClassActivity {
                         }
                     });
 
+
             final AlertDialog alertDialog = builder.create();
             LayoutInflater inflater = alertDialog.getLayoutInflater();
 
-            View dialoglayout = inflater.inflate(R.layout.dialog_nameroom, frameView);
+            View dialog = inflater.inflate(R.layout.dialog_nameroom, frameView);
 
             alertDialog.show();
             alertDialog.getWindow().setLayout(900, 500);
@@ -145,7 +153,7 @@ public class NewRoomActivity extends BaseClassActivity {
          Toast.makeText(this,"Users added to groupchat!", Toast.LENGTH_SHORT).show();
 
          Intent intent = new Intent(this, ChatRoomActivity.class);
-        startActivity(intent);
+         startActivity(intent);
     }
 
 }

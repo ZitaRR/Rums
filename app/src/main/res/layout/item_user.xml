@@ -51,7 +51,6 @@
                 android:text="@string/u_email"
                 android:textSize="11sp"
                 android:textStyle="bold"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/users_email"
                 app:layout_constraintStart_toEndOf="@+id/user_pic"

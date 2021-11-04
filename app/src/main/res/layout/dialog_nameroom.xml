@@ -17,7 +17,7 @@
         app:layout_constraintVertical_bias="0.152">
 
         <EditText
-            android:id="@+id/nameRoom"
+            android:id="@+id/name_Room"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:ems="10"
@@ -29,30 +29,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.295" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/okButton"-->
-        <!--            android:layout_width="60dp"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:textSize="8sp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.773"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_bias="0.854" />-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/noButton"-->
-        <!--            android:layout_width="60dp"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:layout_marginBottom="16dp"-->
-        <!--            android:textSize="8sp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toStartOf="@+id/okButton"-->
-        <!--            app:layout_constraintHorizontal_bias="0.585"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/nameRoom"-->
-        <!--            app:layout_constraintVertical_bias="1.0" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

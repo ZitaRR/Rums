@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -62,8 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
                 public void onClick(View view) {
                     if (holder.inviteBox.isChecked()) {
                         currentUser.setChecked(holder.inviteBox.isChecked());
-                        Toast.makeText(view.getContext(), (currentUser.getUsername()), Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(view.getContext(), (currentUser.getUsername()), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -24,6 +24,19 @@ public class LoginActivity extends BaseClassActivity {
     private EditText password;
     private Button login;
     private FirebaseAuth auth;
+    private FirebaseUser fUser;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(fUser != null) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
