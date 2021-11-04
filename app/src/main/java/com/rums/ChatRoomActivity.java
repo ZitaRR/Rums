@@ -50,8 +50,13 @@ public class ChatRoomActivity extends BaseClassActivity {
         String currentChatRoomID = getCurrentChatRoom().getId();
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
-            for (ChatRoom room: rooms) {
-                Log.d("Tag__6", "roomroomroom subscription: " + room);
+            ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
+            adapter.clear();
+            for (Message message: theCurrentChatRoom.getMessages()) {
+                Log.d("Tag__6", "roomroomroom subscription: " + message);
+
+                //Fyll
+                adapter.add(message.getMessageText());
             }
         });
     }
