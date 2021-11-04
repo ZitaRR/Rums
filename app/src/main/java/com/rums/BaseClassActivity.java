@@ -179,6 +179,7 @@ public class BaseClassActivity extends AppCompatActivity {
     private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, ArrayList<Message> messages) {
         String ID = getStorage().getRooms().getUniqueKey();
         ChatRoom room = new ChatRoom(ID, roomName, usersByID, isPrivate, adminByUserID, messages);
+        Log.d("Tag__5", "room.getMessages(): " + room.getMessages());
         writeChatRoomToDatabase(room);
         return room;
     }
