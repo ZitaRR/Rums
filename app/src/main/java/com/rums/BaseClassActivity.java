@@ -44,6 +44,7 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     protected void init() {
+//        Log.d("Tag__100", "init i Base class");
         setActionBar();
         getPreviousActivity();
         activityForRepositoryCallback = this;
@@ -139,7 +140,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        }
 
         //Enter a ChatRoom:
-//        moveUserToChatRoom(getChatRoomAtIndex(2));
+        moveUserToChatRoom(getChatRoomAtIndex(1));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
@@ -223,6 +224,28 @@ public class BaseClassActivity extends AppCompatActivity {
             rumUser = setupNewRumUser();
         }
         return rumUser;
+    }
+
+    //To avoid crash. Null check is still needed:
+//    Repository<RumUser> users = getRumUsersRepository();
+//        if(users != null) {
+//        //Do stuff...
+//    }
+    protected Repository<RumUser> getRumUsersRepository() {
+        try {
+            return getStorage().getUsers();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    protected Repository<ChatRoom> getChatRoomsRepository() {
+        try {
+            return getStorage().getRooms();
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
 

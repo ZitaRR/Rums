@@ -9,7 +9,6 @@ public class StartActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         omitOptionsMenu = true;
-        init();
     }
 
     @Override

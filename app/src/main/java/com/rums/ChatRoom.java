@@ -20,15 +20,18 @@ public class ChatRoom implements Identity {
     public ChatRoom(String ID, String name, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, ArrayList<Message> messages) {
         this.id = ID;
         this.name = name;
-        this.usersByID = usersByID;
         this.isPrivate = isPrivate;
         this.adminByUserID = adminByUserID;
+        if(usersByID != null) {
+            this.usersByID = usersByID;
+        } else {
+            this.usersByID = new ArrayList<>();
+        }
 
         if(messages != null) {
             this.messages = messages;
         } else {
-            Log.d("Tag__6", "NEWWWWWW ");
-
+//            Log.d("Tag__6", "NEWWWWWW ");
             this.messages = new ArrayList<>();
         }
     }
