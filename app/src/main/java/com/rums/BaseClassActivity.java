@@ -144,7 +144,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        for (ChatRoom room: rooms) {
 //            Log.d("Tag__4", "roomroom: " + room);
 //        }
-        moveUserToChatRoom(getChatRoomAtIndex(0));
+        moveUserToChatRoom(getChatRoomAtIndex(2));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
@@ -167,6 +167,8 @@ public class BaseClassActivity extends AppCompatActivity {
         Log.d("Tag__4", "length " + length);
 
         if(index < rooms.size() - 1) {
+            Log.d("Tag__4", "ROOM ID " + rooms.get(index).getId());
+
             return rooms.get(index);
         } else {
             Log.d("Tag__4", "index is past last element of chat room list");
