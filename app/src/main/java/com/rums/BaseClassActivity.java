@@ -225,6 +225,28 @@ public class BaseClassActivity extends AppCompatActivity {
         return rumUser;
     }
 
+    //To avoid crash. Null check is still needed:
+//    Repository<RumUser> users = getRumUsersRepository();
+//        if(users != null) {
+//        //Do stuff...
+//    }
+    protected Repository<RumUser> getRumUsersRepository() {
+        try {
+            return getStorage().getUsers();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    protected Repository<ChatRoom> getChatRoomsRepository() {
+        try {
+            return getStorage().getRooms();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
