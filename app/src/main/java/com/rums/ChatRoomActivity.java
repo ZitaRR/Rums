@@ -35,13 +35,13 @@ public class ChatRoomActivity extends BaseClassActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
-
-        setupListViewAdapter();
-        if(getIsRepositoryReady()) {
-            Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());
-            setupFromDatabase();
-            setupSubscriptionForMessages();
-        }
+//        super.init();
+//        setupListViewAdapter();
+//        if(getIsRepositoryReady()) {
+//            Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());
+////            setupFromDatabase();
+////            setupSubscriptionForMessages();
+//        }
 
     }
 
@@ -122,7 +122,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         String messageText = editText.getText().toString();
         if(messageText.length() > 0) {
             Log.d("Tag__6", "getCurrentChatRoom() " + getCurrentChatRoom());
-            sendMessage(messageText);
+//            sendMessage(messageText);
 //            RumUser rumUser = getCurrentRumUser();
 //            rumUser.sendMessage(messageText, currentTime(null), getCurrentChatRoom().getId(), getStorage());
             editText.setText(""); //But what if message couldn't be delivered?
