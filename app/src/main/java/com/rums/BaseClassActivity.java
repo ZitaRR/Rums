@@ -140,6 +140,20 @@ public class BaseClassActivity extends AppCompatActivity {
 //                Log.d("Tag__4", "useruseruser: " + user);
 //            }
 //        });
+        ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
+        for (ChatRoom room: rooms) {
+            Log.d("Tag__4", "roomroom: " + room);
+        }
+    }
+
+    protected ChatRoom getChatRoomAtIndex(int index) {
+        ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
+        if(index < rooms.size() - 1) {
+            return rooms.get(index);
+        } else {
+            Log.d("Tag__4", "index is past last element of chat room list");
+        }
+        return null;
     }
 
     private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
