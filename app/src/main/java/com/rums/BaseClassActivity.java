@@ -18,6 +18,9 @@ public class BaseClassActivity extends AppCompatActivity {
     protected Class<?> previousActivityClass;
     protected Class<?> specificActivityClassForBackArrow;
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
+    private PersistantStorage storage;
+    protected RumUser currentRumUser;
+
 
 
     @Override
@@ -30,6 +33,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void init() {
         setActionBar();
         getPreviousActivity();
+        storage = PersistantStorage.getInstance();
     }
 
     protected void setActionBar() {
@@ -74,20 +78,40 @@ public class BaseClassActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void moveUserToChatRoom(ChatRoom chatRoom) {
+    protected RumUser getRumUserFromDatabase(String UID) {
+        RumUser rumUser;
+        try {
+            rumUser = storage.getUsers().getById(UID); //getById() should return null if not successful
+            setCurrentRumUser(rumUser);
+        } catch (Exception e) {
+            Log.d("Tag_1", "Exception: " + e.getMessage());
+            rumUser = null;
+        }
+        return rumUser;
+    }
 
-//        RumUser currentUser = getCurrentRumUser;
-//        ChatRoom room = getChatRoomByID(String roomID);
-//        if(room != null) {
-//            currentUser.setCurrentChatRoomID = room.ID;
-//            currentUser.setCurrentChatRoom = room;
-//            startSomeActivity(ChatRoomActivity.class);
-//        }
-//    }
+
+    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+        RumUser currentUser = getCurrentRumUser();
+        if((currentUser != null) || (chatRoom != null)) {
+            currentUser.setCurrentChatRoomID(chatRoom.getId());
+            currentUser.setCurrentChatRoom(chatRoom);
+            startSomeActivity(ChatRoomActivity.class);
+        } else {
+            Log.d("Tag_1", "currentUser or chatRoom is null");
+        }
+    }
 
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    public RumUser getCurrentRumUser() {
+        return currentRumUser;
+    }
+    public void setCurrentRumUser(RumUser currentRumUser) {
+        this.currentRumUser = currentRumUser;
     }
 
 

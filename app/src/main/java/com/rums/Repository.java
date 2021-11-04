@@ -9,13 +9,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Repository<T extends Identity> implements Crud<T> {
+public class Repository<T extends Identity> implements Crud<T>, EventHandler<List<T>> {
     private FirebaseDatabase context;
     private DatabaseReference reference;
     private List<T> entities = new ArrayList<>();
+    private List<Consumer<T>> listeners = new ArrayList<>();
+    private boolean initialized = false;
 
     public Repository(Class<T> type){
         context = FirebaseDatabase.getInstance();
@@ -25,13 +28,24 @@ public class Repository<T extends Identity> implements Crud<T> {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.exists()){
+                    initialized = true;
                     return;
                 }
 
                 for(DataSnapshot data : snapshot.getChildren()){
                     T entity = data.getValue(type);
+                    if(exists(entity)){
+                        continue;
+                    }
                     entities.add(entity);
                 }
+
+                if(!initialized){
+                    initialized = true;
+                    return;
+                }
+
+                publish();
             }
 
             @Override
@@ -99,6 +113,39 @@ public class Repository<T extends Identity> implements Crud<T> {
 
     @Override
     public void commit() {
+        if(!initialized){
+            throw new IllegalStateException("Repository has not yet been initialized");
+        }
+
         reference.setValue(entities);
+    }
+
+    @Override
+    public void subscribe(Consumer event) {
+        if(listeners.contains(event)){
+            return;
+        }
+
+        listeners.add(event);
+    }
+
+    @Override
+    public void unsubscribe(Consumer event) {
+        if(!listeners.contains(event)){
+            return;
+        }
+
+        listeners.remove(event);
+    }
+
+    @Override
+    public void publish() {
+        if(!initialized){
+            throw new IllegalStateException("Repository has not yet been initialized");
+        }
+
+        for(Consumer event : listeners){
+            event.accept(entities);
+        }
     }
 }

@@ -8,6 +8,9 @@ public class RumUser implements Identity {
 
     private boolean isChecked;
 
+    private String currentChatRoomID;
+    private ChatRoom currentChatRoom; //Probably save to db, since it's a NoSQL db.
+
     public RumUser(){}
 
     public RumUser(String id){
@@ -42,10 +45,28 @@ public class RumUser implements Identity {
         return email;
     }
 
+
     public boolean getChecked() {
         return isChecked;
     }
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
+
+    public String getCurrentChatRoomID() {
+        return currentChatRoomID;
+    }
+
+    public void setCurrentChatRoomID(String currentChatRoomID) {
+        this.currentChatRoomID = currentChatRoomID;
+    }
+
+    public ChatRoom getCurrentChatRoom() {
+        return currentChatRoom;
+    }
+
+    public void setCurrentChatRoom(ChatRoom currentChatRoom) {
+        this.currentChatRoom = currentChatRoom;
+    }
+
 }
