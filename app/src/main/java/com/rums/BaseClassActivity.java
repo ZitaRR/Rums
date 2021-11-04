@@ -133,13 +133,13 @@ public class BaseClassActivity extends AppCompatActivity {
 //            }
 //        }
         //Subscription. Returnerar dock inget initialt.
-        storage.getUsers().subscribe((userList) -> {
-            List<RumUser> users = (List<RumUser>) userList;
-            Log.d("Tag__4", "repositoryIsInitialized in baseclass - users: " + users);
-            for (RumUser user: users) {
-                Log.d("Tag__4", "useruseruser: " + user);
-            }
-        });
+//        storage.getUsers().subscribe((userList) -> {
+//            List<RumUser> users = (List<RumUser>) userList;
+//            Log.d("Tag__4", "repositoryIsInitialized in baseclass - users: " + users);
+//            for (RumUser user: users) {
+//                Log.d("Tag__4", "useruseruser: " + user);
+//            }
+//        });
     }
 
     private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
