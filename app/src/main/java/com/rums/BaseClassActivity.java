@@ -140,7 +140,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        }
 
         //Enter a ChatRoom:
-        moveUserToChatRoom(getChatRoomAtIndex(1));
+//        moveUserToChatRoom(getChatRoomAtIndex(1));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
@@ -161,7 +161,6 @@ public class BaseClassActivity extends AppCompatActivity {
         ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
         int length = rooms.size();
         Log.d("Tag__6", "length " + length + " index " + index);
-
         if(index <= length - 1) {
             Log.d("Tag__4", "ROOM ID " + rooms.get(index).getId());
 
