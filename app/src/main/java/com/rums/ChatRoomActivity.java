@@ -45,15 +45,27 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     }
 
+    //Subscription. Returnerar dock inget initialt.
     protected void setupSubscriptionForMessages() {
-//        Subscription. Returnerar dock inget initialt.
-        String currentChatRoomID = getCurrentChatRoom().getId();
+        RumUser user = getCurrentRumUser();
+        ChatRoom room = getCurrentChatRoom();
+        if(user != null && room != null) {
+            String currentChatRoomID = room.getId();
+            try {
+                subscibeForMessages(currentChatRoomID);
+            } catch (Exception e) {
+                Log.d("Tag__70", "Exception, subscibeForMessages: " + e);
+            }
+        }
+    }
+
+    protected void subscibeForMessages(String currentChatRoomID) {
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
             ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
             adapter.clear();
             for (Message message: theCurrentChatRoom.getMessages()) {
-                Log.d("Tag__6", "roomroomroom subscription: " + message);
+//                Log.d("Tag__6", "roomroomroom subscription: " + message);
 
                 //Fyll
                 adapter.add(message.getMessageText());
@@ -62,7 +74,8 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
 
-        protected void setupFromDatabase() {
+
+    protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
         fillMessagesList();
         setRoomName(actionBarMenu, "____ONE____");
@@ -120,7 +133,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         //For now:
         String messageTextWithUsername = getCurrentRumUser().getUsername() + ": " + messageText;
 
-       Log.d("Tag__6", "getCurrentRumUser().getUsername() " + getCurrentRumUser().getUsername());
+        Log.d("Tag__6", "getCurrentRumUser().getUsername() " + getCurrentRumUser().getUsername());
 
 
         String messageID = getStorage().getRooms().getUniqueKey();

@@ -147,7 +147,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        for (ChatRoom room: rooms) {
 //            Log.d("Tag__4", "roomroom: " + room);
 //        }
-        moveUserToChatRoom(getChatRoomAtIndex(2));
+//        moveUserToChatRoom(getChatRoomAtIndex(2));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
