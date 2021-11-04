@@ -167,14 +167,14 @@ public class BaseClassActivity extends AppCompatActivity {
     protected ChatRoom getChatRoomAtIndex(int index) {
         ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
         int length = rooms.size();
-        Log.d("Tag__4", "length " + length);
+        Log.d("Tag__6", "length " + length + " index " + index);
 
         if(index < rooms.size() - 1) {
             Log.d("Tag__4", "ROOM ID " + rooms.get(index).getId());
 
             return rooms.get(index);
         } else {
-            Log.d("Tag__4", "index is past last element of chat room list");
+            Log.d("Tag__6", "index is past last element of chat room list");
         }
         return null;
     }
@@ -193,7 +193,7 @@ public class BaseClassActivity extends AppCompatActivity {
         try {
             rooms.commit();
         } catch (Exception e) {
-            Log.d("Tag__1", "Exception: " + e);
+            Log.d("Tag__6", "Exception: " + e);
         }
     }
 
