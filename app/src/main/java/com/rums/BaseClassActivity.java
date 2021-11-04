@@ -129,24 +129,16 @@ public class BaseClassActivity extends AppCompatActivity {
         Log.d("Tag__6", "repositoryIsInitialized in baseclass - type: " + type.toString());
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
+
         //Test:
+        //Create a ChatRoom and save to database
 //        if(getCurrentRumUser() != null) {
 //            if(type == ChatRoom.class) {
 //                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
 //            }
 //        }
-        //Subscription. Returnerar dock inget initialt.
-//        storage.getUsers().subscribe((userList) -> {
-//            List<RumUser> users = (List<RumUser>) userList;
-//            Log.d("Tag__4", "repositoryIsInitialized in baseclass - users: " + users);
-//            for (RumUser user: users) {
-//                Log.d("Tag__4", "useruseruser: " + user);
-//            }
-//        });
-//        ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
-//        for (ChatRoom room: rooms) {
-//            Log.d("Tag__4", "roomroom: " + room);
-//        }
+
+        //Enter a ChatRoom:
 //        moveUserToChatRoom(getChatRoomAtIndex(2));
     }
 
