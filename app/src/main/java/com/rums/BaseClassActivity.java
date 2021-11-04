@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -122,7 +123,7 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     public void repositoryIsInitialized(Class<?> type) {
-        Log.d("Tag__1", "repositoryIsInitialized in baseclass - type: " + type.toString());
+        Log.d("Tag__4", "repositoryIsInitialized in baseclass - type: " + type.toString());
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
@@ -131,6 +132,14 @@ public class BaseClassActivity extends AppCompatActivity {
 //                makeChatRoom("A roooom name", null, false, getCurrentRumUser().getId(), null);
 //            }
 //        }
+        //Subscription. Returnerar dock inget initialt.
+        storage.getUsers().subscribe((userList) -> {
+            List<RumUser> users = (List<RumUser>) userList;
+            Log.d("Tag__4", "repositoryIsInitialized in baseclass - users: " + users);
+            for (RumUser user: users) {
+                Log.d("Tag__4", "useruseruser: " + user);
+            }
+        });
     }
 
     private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
