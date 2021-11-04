@@ -41,7 +41,7 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     protected void setupFromDatabase() {
         fillMessagesList();
-        setRoomName("____ONE____");
+        setRoomName(actionBarMenu, "____ONE____");
     }
 
     private void setupListViewAdapter() {
@@ -75,7 +75,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         if(!omitOptionsMenu) {
             getMenuInflater().inflate(R.menu.menu_chat_room, menu);
             actionBarMenu = menu;
-            setRoomName("____TWO____");
+            setRoomName(menu, "____TWO____");
         }
         return true;
     }
@@ -93,12 +93,12 @@ public class ChatRoomActivity extends BaseClassActivity {
         return null;
     }
 
-    private void setRoomName(String callNumber) {
+    private void setRoomName(Menu menu, String callNumber) {
         ChatRoom room = getCurrentChatRoom();
         Log.d("Tag__4", "setRoomName getCurrentChatRoom " + room + " callNumber " + callNumber);
         if(room != null) {
-            if(actionBarMenu != null) {
-                nameMenuItem = actionBarMenu.findItem(R.id.chat_room_name_menu_item);
+            if(menu != null) {
+                nameMenuItem = menu.findItem(R.id.chat_room_name_menu_item);
             Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
             if(nameMenuItem != null) {
                 nameMenuItem.setTitle("Kalle");
