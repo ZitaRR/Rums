@@ -15,9 +15,12 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -234,6 +237,23 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    //Timestamp as string, in the current timezone.
+    //This should really be a timezone-agnostic object (Date or Calendar),
+    // and the display string should take into account the timestamp of the device.
+    protected String currentTime(String pattern) {
+        TimeZone timeZone = TimeZone.getDefault();
+        Calendar calendar = Calendar.getInstance(timeZone);
+        String formatPattern;
+        if(pattern != null) {
+            formatPattern = pattern;
+        } else {
+            formatPattern = "d MMMM HH:mm";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
+        dateFormat.setTimeZone(timeZone);
+        return dateFormat.format(calendar.getTime());
     }
 
     protected PersistantStorage getStorage() {

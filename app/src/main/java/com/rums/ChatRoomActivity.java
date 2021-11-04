@@ -126,24 +126,6 @@ public class ChatRoomActivity extends BaseClassActivity {
         }
     }
 
-    //Timestamp as string, in the current timezone.
-    //This should really be a timezone-agnostic object (Date or Calendar),
-    // and the display string should take into account the timestamp of the device.
-    protected String currentTime(String pattern) {
-        TimeZone timeZone = TimeZone.getDefault();
-        Calendar calendar = Calendar.getInstance(timeZone);
-        String formatPattern;
-        if(pattern != null) {
-            formatPattern = pattern;
-        } else {
-            formatPattern = "d MMMM HH:mm";
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
-        dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(calendar.getTime());
-    }
-
-
     @Override
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
