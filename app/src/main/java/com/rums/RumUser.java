@@ -34,7 +34,7 @@ public class RumUser implements Identity {
 ////
 //        chatRoomMessagesPath.child(newMessageKey).setValue(message);
 //
-//        storage.getRooms().getById(chatRoomID).getMessages().insert()
+        storage.getRooms().getById(chatRoomID).getMessages();
 //                storage.getRums().insert(room);
 
 

@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class ChatRoomActivity extends BaseClassActivity {
 
@@ -82,15 +85,15 @@ public class ChatRoomActivity extends BaseClassActivity {
         return true;
     }
 
-//    public void sendMessageButtonMethod(View view) {
-//        EditText editText = findViewById(R.id.message_EditText);
-//        String messageText = editText.getText().toString();
-//        if(messageText.length() > 0) {
-//            RumUser rumUser = getCurrentRumUser();
-//            rumUser.sendMessage(messageText, currentTime(null));
-//            editText.setText(""); //But what if message couldn't be delivered?
-//        }
-//    }
+    public void sendMessageButtonMethod(View view) {
+        EditText editText = findViewById(R.id.message_EditText);
+        String messageText = editText.getText().toString();
+        if(messageText.length() > 0) {
+            RumUser rumUser = getCurrentRumUser();
+            rumUser.sendMessage(messageText, currentTime(null));
+            editText.setText(""); //But what if message couldn't be delivered?
+        }
+    }
 
     private ChatRoom getCurrentChatRoom() {
         RumUser user = getCurrentRumUser();
@@ -120,6 +123,23 @@ public class ChatRoomActivity extends BaseClassActivity {
                 }
             }
         }
+    }
+
+    //Timestamp as string, in the current timezone.
+    //This should really be a timezone-agnostic object (Date or Calendar),
+    // and the display string should take into account the timestamp of the device.
+    protected String currentTime(String pattern) {
+        TimeZone timeZone = TimeZone.getDefault();
+        Calendar calendar = Calendar.getInstance(timeZone);
+        String formatPattern;
+        if(pattern != null) {
+            formatPattern = pattern;
+        } else {
+            formatPattern = "d MMMM HH:mm";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
+        dateFormat.setTimeZone(timeZone);
+        return dateFormat.format(calendar.getTime());
     }
 
 
