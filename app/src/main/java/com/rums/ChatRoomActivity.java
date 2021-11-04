@@ -33,6 +33,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         super.init();
         setupListViewAdapter();
         if(getIsRepositoryReady()) {
+            Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());
             setupFromDatabase();
         }
 
@@ -93,12 +94,14 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     private void setRoomName() {
         ChatRoom room = getCurrentChatRoom();
-        Log.d("Tag__3", "room " + room);
+        Log.d("Tag__4", "getCurrentChatRoom " + room);
         if(room != null) {
-            nameMenuItem = actionBarMenu.findItem(R.id.chat_room_name_menu_item);
+            if(actionBarMenu != null) {
+                nameMenuItem = actionBarMenu.findItem(R.id.chat_room_name_menu_item);
             Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
             if(nameMenuItem != null) {
                 nameMenuItem.setTitle("Kalle");
+            }
             }
         }
     }
