@@ -44,6 +44,7 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     protected void init() {
+//        Log.d("Tag__100", "init i Base class");
         setActionBar();
         getPreviousActivity();
         activityForRepositoryCallback = this;
