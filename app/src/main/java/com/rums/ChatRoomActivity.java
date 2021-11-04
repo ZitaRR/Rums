@@ -41,7 +41,7 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     protected void setupFromDatabase() {
         fillMessagesList();
-        setRoomName();
+        setRoomName("____ONE____");
     }
 
     private void setupListViewAdapter() {
@@ -75,6 +75,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         if(!omitOptionsMenu) {
             getMenuInflater().inflate(R.menu.menu_chat_room, menu);
             actionBarMenu = menu;
+            setRoomName("____TWO____");
         }
         return true;
     }
@@ -92,9 +93,9 @@ public class ChatRoomActivity extends BaseClassActivity {
         return null;
     }
 
-    private void setRoomName() {
+    private void setRoomName(String callNumber) {
         ChatRoom room = getCurrentChatRoom();
-        Log.d("Tag__4", "getCurrentChatRoom " + room);
+        Log.d("Tag__4", "setRoomName getCurrentChatRoom " + room + " callNumber " + callNumber);
         if(room != null) {
             if(actionBarMenu != null) {
                 nameMenuItem = actionBarMenu.findItem(R.id.chat_room_name_menu_item);
@@ -111,7 +112,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
         RumUser user = getCurrentRumUser();
-        Log.d("Tag__1", "repositoryIsInitialized in ChatRoomActivity user: " + user);
+        Log.d("Tag__4", "repositoryIsInitialized in ChatRoomActivity user: " + user);
         setupFromDatabase();
     }
 
