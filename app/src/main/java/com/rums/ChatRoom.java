@@ -1,5 +1,7 @@
 package com.rums;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,12 +12,12 @@ public class ChatRoom implements Identity {
     private ArrayList<String> usersByID;
     private Boolean isPrivate;
     private String adminByUserID;
-    private HashMap<String, Message> messages;
+    private ArrayList<Message> messages;
 
     public ChatRoom() {
     }
 
-    public ChatRoom(String ID, String name, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
+    public ChatRoom(String ID, String name, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, ArrayList<Message> messages) {
         this.id = ID;
         this.name = name;
         this.usersByID = usersByID;
@@ -25,7 +27,9 @@ public class ChatRoom implements Identity {
         if(messages != null) {
             this.messages = messages;
         } else {
-            this.messages = new HashMap<>();
+            Log.d("Tag__6", "NEWWWWWW ");
+
+            this.messages = new ArrayList<>();
         }
     }
 
@@ -82,11 +86,11 @@ public class ChatRoom implements Identity {
         this.adminByUserID = adminByUserID;
     }
 
-    public HashMap<String, Message> getMessages() {
+    public ArrayList<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(HashMap<String, Message> messages) {
+    public void setMessages(ArrayList<Message> messages) {
         this.messages = messages;
     }
 }

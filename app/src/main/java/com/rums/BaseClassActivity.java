@@ -15,8 +15,12 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.TimeZone;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -122,20 +126,55 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     public void repositoryIsInitialized(Class<?> type) {
-        Log.d("Tag__1", "repositoryIsInitialized in baseclass - type: " + type.toString());
+        Log.d("Tag__6", "repositoryIsInitialized in baseclass - type: " + type.toString());
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
+
         //Test:
+        //Create a ChatRoom and save to database
 //        if(getCurrentRumUser() != null) {
 //            if(type == ChatRoom.class) {
-//                makeChatRoom("A roooom name", null, false, getCurrentRumUser().getId(), null);
+//                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
 //            }
 //        }
+
+        //Enter a ChatRoom:
+//        moveUserToChatRoom(getChatRoomAtIndex(2));
     }
 
-    private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
+    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+        Log.d("Tag__6", "moveUserToChatRoom " + chatRoom);
+        if(chatRoom != null) {
+            RumUser currentUser = getCurrentRumUser();
+            if (currentUser != null) {
+                currentUser.setCurrentChatRoomID(chatRoom.getId());
+                currentUser.setCurrentChatRoom(chatRoom);
+                startSomeActivity(ChatRoomActivity.class);
+            } else {
+                Log.d("Tag__6", "currentUser is null");
+            }
+        }
+    }
+
+    protected ChatRoom getChatRoomAtIndex(int index) {
+        ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
+        int length = rooms.size();
+        Log.d("Tag__6", "length " + length + " index " + index);
+
+        if(index <= length - 1) {
+            Log.d("Tag__4", "ROOM ID " + rooms.get(index).getId());
+
+            return rooms.get(index);
+        } else {
+            Log.d("Tag__6", "index is past last element of chat room list");
+        }
+        return null;
+    }
+
+    private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, ArrayList<Message> messages) {
         String ID = getStorage().getRooms().getUniqueKey();
         ChatRoom room = new ChatRoom(ID, roomName, usersByID, isPrivate, adminByUserID, messages);
+        Log.d("Tag__6", "makeChatRoom room.getMessages(): " + room.getMessages());
         writeChatRoomToDatabase(room);
         return room;
     }
@@ -146,7 +185,7 @@ public class BaseClassActivity extends AppCompatActivity {
         try {
             rooms.commit();
         } catch (Exception e) {
-            Log.d("Tag__1", "Exception: " + e);
+            Log.d("Tag__6", "Exception: " + e);
         }
     }
 
@@ -187,21 +226,26 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
 
-    protected void moveUserToChatRoom(ChatRoom chatRoom) {
-        RumUser currentUser = getCurrentRumUser();
-        if((currentUser != null) || (chatRoom != null)) {
-            currentUser.setCurrentChatRoomID(chatRoom.getId());
-            currentUser.setCurrentChatRoom(chatRoom);
-            startSomeActivity(ChatRoomActivity.class);
-        } else {
-            Log.d("Tag_1", "currentUser or chatRoom is null");
-        }
-    }
-
-
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    //Timestamp as string, in the current timezone.
+    //This should really be a timezone-agnostic object (Date or Calendar),
+    // and the display string should take into account the timestamp of the device.
+    protected String currentTime(String pattern) {
+        TimeZone timeZone = TimeZone.getDefault();
+        Calendar calendar = Calendar.getInstance(timeZone);
+        String formatPattern;
+        if(pattern != null) {
+            formatPattern = pattern;
+        } else {
+            formatPattern = "d MMMM HH:mm";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
+        dateFormat.setTimeZone(timeZone);
+        return dateFormat.format(calendar.getTime());
     }
 
     protected PersistantStorage getStorage() {
