@@ -37,7 +37,7 @@ public class RumUser implements Identity {
 //
         Log.d("Tag__6", "storage.getRooms().getById(chatRoomID).getMessages() " + storage.getRooms().getById(chatRoomID).getMessages());
 
-//        storage.getRooms().getById(chatRoomID).getMessages()
+//        storage.getRooms().getById(chatRoomID).
 //                storage.getRums().insert(room);
 
 

@@ -130,11 +130,11 @@ public class BaseClassActivity extends AppCompatActivity {
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
-//        if(getCurrentRumUser() != null) {
-//            if(type == ChatRoom.class) {
-//                makeChatRoom("Ett nytt namn", null, false, getCurrentRumUser().getId(), null);
-//            }
-//        }
+        if(getCurrentRumUser() != null) {
+            if(type == ChatRoom.class) {
+                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
+            }
+        }
         //Subscription. Returnerar dock inget initialt.
 //        storage.getUsers().subscribe((userList) -> {
 //            List<RumUser> users = (List<RumUser>) userList;
@@ -147,7 +147,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        for (ChatRoom room: rooms) {
 //            Log.d("Tag__4", "roomroom: " + room);
 //        }
-        moveUserToChatRoom(getChatRoomAtIndex(1));
+        moveUserToChatRoom(getChatRoomAtIndex(2));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
@@ -182,7 +182,7 @@ public class BaseClassActivity extends AppCompatActivity {
     private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, ArrayList<Message> messages) {
         String ID = getStorage().getRooms().getUniqueKey();
         ChatRoom room = new ChatRoom(ID, roomName, usersByID, isPrivate, adminByUserID, messages);
-        Log.d("Tag__5", "room.getMessages(): " + room.getMessages());
+        Log.d("Tag__6", "makeChatRoom room.getMessages(): " + room.getMessages());
         writeChatRoomToDatabase(room);
         return room;
     }

@@ -1,5 +1,7 @@
 package com.rums;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,6 +27,8 @@ public class ChatRoom implements Identity {
         if(messages != null) {
             this.messages = messages;
         } else {
+            Log.d("Tag__6", "NEWWWWWW ");
+
             this.messages = new ArrayList<>();
         }
     }
