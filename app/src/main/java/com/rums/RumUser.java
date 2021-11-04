@@ -25,23 +25,23 @@ public class RumUser implements Identity {
         this.email = email;
     }
 
-    public void sendMessage(String messageText, String currentTime, String chatRoomID, PersistantStorage storage) {
-        String messageID = storage.getRooms().getUniqueKey();
-        Message message = new Message(getId(), getUsername(), null, messageText, messageID, currentTime);
-
-//        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
+//    public void sendMessage(String messageText, String currentTime, String chatRoomID, PersistantStorage storage) {
+//        String messageID = storage.getRooms().getUniqueKey();
+//        Message message = new Message(getId(), getUsername(), null, messageText, messageID, currentTime);
 //
-//        String newMessageKey = chatRoomMessagesPath.push().getKey();
+////        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
 ////
-//        chatRoomMessagesPath.child(newMessageKey).setValue(message);
+////        String newMessageKey = chatRoomMessagesPath.push().getKey();
+//////
+////        chatRoomMessagesPath.child(newMessageKey).setValue(message);
+////
+//        Log.d("Tag__6", "storage.getRooms().getById(chatRoomID).getMessages() " + storage.getRooms().getById(chatRoomID).getMessages());
 //
-        Log.d("Tag__6", "storage.getRooms().getById(chatRoomID).getMessages() " + storage.getRooms().getById(chatRoomID).getMessages());
-
-//        storage.getRooms().getById(chatRoomID).
-//                storage.getRums().insert(room);
-
-
-    }
+////        storage.getRooms().getById(chatRoomID).
+////                storage.getRums().insert(room);
+//
+//
+//    }
 
     public String getId(){
         return id;

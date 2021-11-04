@@ -96,6 +96,29 @@ public class ChatRoomActivity extends BaseClassActivity {
         }
     }
 
+    public void sendMessage(String messageText) {
+        String messageID = storage.getRooms().getUniqueKey();
+        RumUser user = getCurrentRumUser();
+//        String chatRoomID = getCurrentChatRoom().getId();
+        ChatRoom chatRoom = getCurrentChatRoom();
+        String timeStamp = currentTime(null);
+        Message message = new Message(user.getId(), user.getUsername(), null, messageText, messageID, timeStamp);
+
+        chatRoom.getMessages().add(message);
+//        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
+//
+//        String newMessageKey = chatRoomMessagesPath.push().getKey();
+////
+//        chatRoomMessagesPath.child(newMessageKey).setValue(message);
+//
+//        Log.d("Tag__6", "storage.getRooms().getById(chatRoomID).getMessages() " + storage.getRooms().getById(chatRoomID).getMessages());
+
+//        storage.getRooms().getById(chatRoomID).
+//                storage.getRums().insert(room);
+
+
+    }
+
     private ChatRoom getCurrentChatRoom() {
         RumUser user = getCurrentRumUser();
         Log.d("Tag__3", "user " + user);
