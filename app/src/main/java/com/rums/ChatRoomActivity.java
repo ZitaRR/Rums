@@ -44,7 +44,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
     protected void setupFromDatabase() {
-        Log.d("Tag__4", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
+        Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
         fillMessagesList();
         setRoomName(actionBarMenu, "____ONE____");
     }
@@ -89,9 +89,10 @@ public class ChatRoomActivity extends BaseClassActivity {
         EditText editText = findViewById(R.id.message_EditText);
         String messageText = editText.getText().toString();
         if(messageText.length() > 0) {
-            RumUser rumUser = getCurrentRumUser();
-            rumUser.sendMessage(messageText, currentTime(null));
-            editText.setText(""); //But what if message couldn't be delivered?
+            Log.d("Tag__6", "getCurrentChatRoom() " + getCurrentChatRoom());
+//            RumUser rumUser = getCurrentRumUser();
+//            rumUser.sendMessage(messageText, currentTime(null), getCurrentChatRoom().getId(), getStorage());
+//            editText.setText(""); //But what if message couldn't be delivered?
         }
     }
 
@@ -147,7 +148,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
         RumUser user = getCurrentRumUser();
-        Log.d("Tag__4", "repositoryIsInitialized in ChatRoomActivity user: " + user);
+        Log.d("Tag__6", "repositoryIsInitialized in ChatRoomActivity user: " + user);
         setupFromDatabase();
     }
 

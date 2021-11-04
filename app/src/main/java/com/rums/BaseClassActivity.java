@@ -123,7 +123,7 @@ public class BaseClassActivity extends AppCompatActivity {
     }
 
     public void repositoryIsInitialized(Class<?> type) {
-        Log.d("Tag__4", "repositoryIsInitialized in baseclass - type: " + type.toString());
+        Log.d("Tag__6", "repositoryIsInitialized in baseclass - type: " + type.toString());
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
@@ -144,19 +144,19 @@ public class BaseClassActivity extends AppCompatActivity {
 //        for (ChatRoom room: rooms) {
 //            Log.d("Tag__4", "roomroom: " + room);
 //        }
-        moveUserToChatRoom(getChatRoomAtIndex(2));
+        moveUserToChatRoom(getChatRoomAtIndex(1));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
-        Log.d("Tag__4", "moveUserToChatRoom " + chatRoom);
+        Log.d("Tag__6", "moveUserToChatRoom " + chatRoom);
         if(chatRoom != null) {
             RumUser currentUser = getCurrentRumUser();
             if (currentUser != null) {
                 currentUser.setCurrentChatRoomID(chatRoom.getId());
                 currentUser.setCurrentChatRoom(chatRoom);
                 startSomeActivity(ChatRoomActivity.class);
-//            } else {
-//                Log.d("Tag__4", "currentUser or chatRoom is null");
+            } else {
+                Log.d("Tag__6", "currentUser is null");
             }
         }
     }
