@@ -140,14 +140,32 @@ public class BaseClassActivity extends AppCompatActivity {
 //                Log.d("Tag__4", "useruseruser: " + user);
 //            }
 //        });
-        ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
-        for (ChatRoom room: rooms) {
-            Log.d("Tag__4", "roomroom: " + room);
+//        ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
+//        for (ChatRoom room: rooms) {
+//            Log.d("Tag__4", "roomroom: " + room);
+//        }
+        moveUserToChatRoom(getChatRoomAtIndex(0));
+    }
+
+    protected void moveUserToChatRoom(ChatRoom chatRoom) {
+        Log.d("Tag__4", "moveUserToChatRoom " + chatRoom);
+        if(chatRoom != null) {
+            RumUser currentUser = getCurrentRumUser();
+            if (currentUser != null) {
+                currentUser.setCurrentChatRoomID(chatRoom.getId());
+                currentUser.setCurrentChatRoom(chatRoom);
+                startSomeActivity(ChatRoomActivity.class);
+//            } else {
+//                Log.d("Tag__4", "currentUser or chatRoom is null");
+            }
         }
     }
 
     protected ChatRoom getChatRoomAtIndex(int index) {
         ArrayList<ChatRoom> rooms = (ArrayList<ChatRoom>)getStorage().getRooms().getAll();
+        int length = rooms.size();
+        Log.d("Tag__4", "length " + length);
+
         if(index < rooms.size() - 1) {
             return rooms.get(index);
         } else {
@@ -207,18 +225,6 @@ public class BaseClassActivity extends AppCompatActivity {
             rumUser = setupNewRumUser();
         }
         return rumUser;
-    }
-
-
-    protected void moveUserToChatRoom(ChatRoom chatRoom) {
-        RumUser currentUser = getCurrentRumUser();
-        if((currentUser != null) || (chatRoom != null)) {
-            currentUser.setCurrentChatRoomID(chatRoom.getId());
-            currentUser.setCurrentChatRoom(chatRoom);
-            startSomeActivity(ChatRoomActivity.class);
-        } else {
-            Log.d("Tag_1", "currentUser or chatRoom is null");
-        }
     }
 
 
