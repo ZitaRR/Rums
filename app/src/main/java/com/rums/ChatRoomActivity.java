@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 public class ChatRoomActivity extends BaseClassActivity {
@@ -39,11 +40,24 @@ public class ChatRoomActivity extends BaseClassActivity {
         if(getIsRepositoryReady()) {
             Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());
             setupFromDatabase();
+            setupSubscriptionForMessages();
         }
 
     }
 
-    protected void setupFromDatabase() {
+    protected void setupSubscriptionForMessages() {
+//        Subscription. Returnerar dock inget initialt.
+        String currentChatRoomID = getCurrentChatRoom().getId();
+        getStorage().getRooms().subscribe((roomList) -> {
+            List<ChatRoom> rooms = (List<ChatRoom>) roomList;
+            for (ChatRoom room: rooms) {
+                Log.d("Tag__6", "roomroomroom subscription: " + room);
+            }
+        });
+    }
+
+
+        protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
         fillMessagesList();
         setRoomName(actionBarMenu, "____ONE____");
