@@ -106,6 +106,9 @@ public class ChatRoomActivity extends BaseClassActivity {
         Message message = new Message(user.getId(), user.getUsername(), null, messageText, messageID, timeStamp);
 
         chatRoom.getMessages().add(message);
+
+        getStorage().getRooms().update(chatRoom);
+        getStorage().getRooms().commit();
 //        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
 //
 //        String newMessageKey = chatRoomMessagesPath.push().getKey();
