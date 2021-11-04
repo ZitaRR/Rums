@@ -90,14 +90,15 @@ public class ChatRoomActivity extends BaseClassActivity {
         String messageText = editText.getText().toString();
         if(messageText.length() > 0) {
             Log.d("Tag__6", "getCurrentChatRoom() " + getCurrentChatRoom());
-            RumUser rumUser = getCurrentRumUser();
-            rumUser.sendMessage(messageText, currentTime(null), getCurrentChatRoom().getId(), getStorage());
+            sendMessage(messageText);
+//            RumUser rumUser = getCurrentRumUser();
+//            rumUser.sendMessage(messageText, currentTime(null), getCurrentChatRoom().getId(), getStorage());
             editText.setText(""); //But what if message couldn't be delivered?
         }
     }
 
     public void sendMessage(String messageText) {
-        String messageID = storage.getRooms().getUniqueKey();
+        String messageID = getStorage().getRooms().getUniqueKey();
         RumUser user = getCurrentRumUser();
 //        String chatRoomID = getCurrentChatRoom().getId();
         ChatRoom chatRoom = getCurrentChatRoom();
