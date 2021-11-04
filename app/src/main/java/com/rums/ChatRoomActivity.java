@@ -133,32 +133,26 @@ public class ChatRoomActivity extends BaseClassActivity {
         //For now:
         String messageTextWithUsername = getCurrentRumUser().getUsername() + ": " + messageText;
 
-        Log.d("Tag__6", "getCurrentRumUser().getUsername() " + getCurrentRumUser().getUsername());
-
-
+//        Log.d("Tag__6", "getCurrentRumUser().getUsername() " + getCurrentRumUser().getUsername());
         String messageID = getStorage().getRooms().getUniqueKey();
         RumUser user = getCurrentRumUser();
-//        String chatRoomID = getCurrentChatRoom().getId();
         ChatRoom chatRoom = getCurrentChatRoom();
         String timeStamp = currentTime(null);
         Message message = new Message(user.getId(), user.getUsername(), null, messageTextWithUsername, messageID, timeStamp);
 
-        chatRoom.getMessages().add(message);
-
+        addMessageToChatRoom(message);
         getStorage().getRooms().update(chatRoom);
         getStorage().getRooms().commit();
-//        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
-//
-//        String newMessageKey = chatRoomMessagesPath.push().getKey();
-////
-//        chatRoomMessagesPath.child(newMessageKey).setValue(message);
-//
-//        Log.d("Tag__6", "storage.getRooms().getById(chatRoomID).getMessages() " + storage.getRooms().getById(chatRoomID).getMessages());
+    }
 
-//        storage.getRooms().getById(chatRoomID).
-//                storage.getRums().insert(room);
-
-
+    private void addMessageToChatRoom(Message message) {
+        ChatRoom room = getCurrentChatRoom();
+        if(room != null) {
+            if(room.getMessages() == null) {
+                room.setMessages(new ArrayList<>());
+            }
+            room.getMessages().add(message);
+        }
     }
 
     private ChatRoom getCurrentChatRoom() {
