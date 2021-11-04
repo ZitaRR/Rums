@@ -9,17 +9,10 @@ public class RumUser implements Identity {
     private String username;
     private String password;
     private String email;
-    private PersistantStorage storage;
-
-
-
-
-
     private String currentChatRoomID;
     private ChatRoom currentChatRoom; //Probably save to db, since it's a NoSQL db.
 
     public RumUser(){
-        storage = PersistantStorage.getInstance();
     }
 
     public RumUser(String id){
@@ -32,16 +25,17 @@ public class RumUser implements Identity {
         this.email = email;
     }
 
-    public void sendMessage(String messageText, String currentTime) {
+    public void sendMessage(String messageText, String currentTime, String chatRoomID, PersistantStorage storage) {
         Message message = new Message(getId(), getUsername(), null, messageText, currentTime);
 
-        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
-
-        String newMessageKey = chatRoomMessagesPath.push().getKey();
+//        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
 //
-        chatRoomMessagesPath.child(newMessageKey).setValue(message);
-
-        st
+//        String newMessageKey = chatRoomMessagesPath.push().getKey();
+////
+//        chatRoomMessagesPath.child(newMessageKey).setValue(message);
+//
+//        storage.getRooms().getById(chatRoomID).getMessages().insert()
+//                storage.getRums().insert(room);
 
 
     }
