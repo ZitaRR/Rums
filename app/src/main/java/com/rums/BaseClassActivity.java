@@ -130,11 +130,11 @@ public class BaseClassActivity extends AppCompatActivity {
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
-        if(getCurrentRumUser() != null) {
-            if(type == ChatRoom.class) {
-                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
-            }
-        }
+//        if(getCurrentRumUser() != null) {
+//            if(type == ChatRoom.class) {
+//                makeChatRoom("Hm hm", null, false, getCurrentRumUser().getId(), null);
+//            }
+//        }
         //Subscription. Returnerar dock inget initialt.
 //        storage.getUsers().subscribe((userList) -> {
 //            List<RumUser> users = (List<RumUser>) userList;
