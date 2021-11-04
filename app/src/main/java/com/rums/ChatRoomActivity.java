@@ -120,12 +120,15 @@ public class ChatRoomActivity extends BaseClassActivity {
         //For now:
         String messageTextWithUsername = getCurrentRumUser().getUsername() + ": " + messageText;
 
+       Log.d("Tag__6", "getCurrentRumUser().getUsername() " + getCurrentRumUser().getUsername());
+
+
         String messageID = getStorage().getRooms().getUniqueKey();
         RumUser user = getCurrentRumUser();
 //        String chatRoomID = getCurrentChatRoom().getId();
         ChatRoom chatRoom = getCurrentChatRoom();
         String timeStamp = currentTime(null);
-        Message message = new Message(user.getId(), user.getUsername(), null, messageText, messageID, timeStamp);
+        Message message = new Message(user.getId(), user.getUsername(), null, messageTextWithUsername, messageID, timeStamp);
 
         chatRoom.getMessages().add(message);
 
