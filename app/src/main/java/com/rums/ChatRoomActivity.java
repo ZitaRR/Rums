@@ -117,6 +117,9 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
     public void sendMessage(String messageText) {
+        //For now:
+        String messageTextWithUsername = getCurrentRumUser().getUsername() + ": " + messageText;
+
         String messageID = getStorage().getRooms().getUniqueKey();
         RumUser user = getCurrentRumUser();
 //        String chatRoomID = getCurrentChatRoom().getId();
