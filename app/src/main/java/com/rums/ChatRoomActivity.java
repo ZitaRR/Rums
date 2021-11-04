@@ -96,13 +96,16 @@ public class ChatRoomActivity extends BaseClassActivity {
     private void setRoomName(Menu menu, String callNumber) {
         ChatRoom room = getCurrentChatRoom();
         Log.d("Tag__4", "setRoomName getCurrentChatRoom " + room + " callNumber " + callNumber);
-        if(room != null) {
-            if(menu != null) {
+        if (room != null) {
+            if (menu != null) {
                 nameMenuItem = menu.findItem(R.id.chat_room_name_menu_item);
-            Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
-            if(nameMenuItem != null) {
-                nameMenuItem.setTitle("Kalle");
-            }
+                Log.d("Tag_2", "nameMenuItem " + nameMenuItem);
+                if (nameMenuItem != null) {
+                    String name = room.getName();
+                    if (name != null) {
+                        nameMenuItem.setTitle(name);
+                    }
+                }
             }
         }
     }
