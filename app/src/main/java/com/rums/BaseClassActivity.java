@@ -127,11 +127,11 @@ public class BaseClassActivity extends AppCompatActivity {
         setIsRepositoryReady(true);
         readRumUserFromDatabase(getFirebaseUserUID());
         //Test:
-//        if(getCurrentRumUser() != null) {
-//            if(type == ChatRoom.class) {
-//                makeChatRoom("A roooom name", null, false, getCurrentRumUser().getId(), null);
-//            }
-//        }
+        if(getCurrentRumUser() != null) {
+            if(type == ChatRoom.class) {
+                makeChatRoom("Ett nytt namn", null, false, getCurrentRumUser().getId(), null);
+            }
+        }
         //Subscription. Returnerar dock inget initialt.
 //        storage.getUsers().subscribe((userList) -> {
 //            List<RumUser> users = (List<RumUser>) userList;
@@ -176,7 +176,7 @@ public class BaseClassActivity extends AppCompatActivity {
         return null;
     }
 
-    private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, HashMap<String, Message> messages) {
+    private ChatRoom makeChatRoom(String roomName, ArrayList<String> usersByID, Boolean isPrivate, String adminByUserID, ArrayList<Message> messages) {
         String ID = getStorage().getRooms().getUniqueKey();
         ChatRoom room = new ChatRoom(ID, roomName, usersByID, isPrivate, adminByUserID, messages);
         writeChatRoomToDatabase(room);

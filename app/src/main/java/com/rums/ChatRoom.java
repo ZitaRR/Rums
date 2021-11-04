@@ -82,11 +82,11 @@ public class ChatRoom implements Identity {
         this.adminByUserID = adminByUserID;
     }
 
-    public HashMap<String, Message> getMessages() {
+    public ArrayList<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(HashMap<String, Message> messages) {
+    public void setMessages(ArrayList<Message> messages) {
         this.messages = messages;
     }
 }

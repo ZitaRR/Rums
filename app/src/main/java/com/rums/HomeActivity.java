@@ -66,8 +66,8 @@ public class HomeActivity extends AppCompatActivity {
         // Skapar tillfälligt ChatRoom-objekt för att se så recycler fungerar
         ArrayList<String> striiings = new ArrayList<>();
         striiings.add("Hej");
-        HashMap<String, Message> hashMap = new HashMap<>();
-        ChatRoom room = new ChatRoom("ID", "ChatRoom", striiings, true, "adminid", hashMap);
+//        HashMap<String, Message> hashMap = new HashMap<>();
+        ChatRoom room = new ChatRoom("ID", "ChatRoom", striiings, true, "adminid", null);
         chatRooms.add(room);
 
         // Recyclerview
