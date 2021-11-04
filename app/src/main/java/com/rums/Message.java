@@ -19,11 +19,12 @@ public class Message implements Identity {
         this.messageText = messageText;
     }
 
-    public Message(String userID, String nickName, String avatarImageURL, String messageText, String timeStamp) {
+    public Message(String userID, String nickName, String avatarImageURL, String messageText, String ID, String timeStamp) {
         this.userID = userID;
         this.nickName = nickName;
         this.avatarImageURL = avatarImageURL;
         this.messageText = messageText;
+        this.id = ID;
         this.timeStamp = timeStamp;
     }
 

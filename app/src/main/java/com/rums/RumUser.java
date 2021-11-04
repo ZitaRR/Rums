@@ -26,7 +26,8 @@ public class RumUser implements Identity {
     }
 
     public void sendMessage(String messageText, String currentTime, String chatRoomID, PersistantStorage storage) {
-        Message message = new Message(getId(), getUsername(), null, messageText, currentTime);
+        String messageID = storage.getRooms().getUniqueKey();
+        Message message = new Message(getId(), getUsername(), null, messageText, messageID, currentTime);
 
 //        DatabaseReference chatRoomMessagesPath = FirebaseSingleton.getInstance().getChatRoomPath(currentChatRoomID + "/messages");
 //
@@ -34,7 +35,7 @@ public class RumUser implements Identity {
 ////
 //        chatRoomMessagesPath.child(newMessageKey).setValue(message);
 //
-        storage.getRooms().getById(chatRoomID).getMessages();
+//        storage.getRooms().getById(chatRoomID).getMessages()
 //                storage.getRums().insert(room);
 
 
