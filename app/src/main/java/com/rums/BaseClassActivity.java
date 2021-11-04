@@ -169,7 +169,7 @@ public class BaseClassActivity extends AppCompatActivity {
         int length = rooms.size();
         Log.d("Tag__6", "length " + length + " index " + index);
 
-        if(index < rooms.size() - 1) {
+        if(index <= length - 1) {
             Log.d("Tag__4", "ROOM ID " + rooms.get(index).getId());
 
             return rooms.get(index);
