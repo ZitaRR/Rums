@@ -40,6 +40,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
     protected void setupFromDatabase() {
+        Log.d("Tag__4", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
         fillMessagesList();
         setRoomName(actionBarMenu, "____ONE____");
     }
