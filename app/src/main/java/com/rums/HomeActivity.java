@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.google.firebase.auth.FirebaseAuth;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class HomeActivity extends BaseClassActivity {
 
@@ -26,25 +29,22 @@ public class HomeActivity extends BaseClassActivity {
     private RecyclerView homeRecycler;
     private ImageButton buttonNewRoom;
 
-    // Test för att få till recycler bara
-    ArrayList<String> chatRoomNames = new ArrayList<>();
-    ArrayList<String> chatUserNames = new ArrayList<>();
-
+    private PersistantStorage storage;
+    ArrayList<ChatRoom> chatRooms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        storage = PersistantStorage.getInstance();
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
-
         homeRecycler = findViewById(R.id.recycler_home);
-
         testActivity = findViewById(R.id.button_test_activity);
-
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
 
+        // När man trycker på gröna knappen nere till höger, skapa nytt rum
         buttonNewRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +54,7 @@ public class HomeActivity extends BaseClassActivity {
             }
         });
 
+        // När man trycker på Button test activity (ska tas bort)
         testActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,18 +63,22 @@ public class HomeActivity extends BaseClassActivity {
             }
         });
 
-        chatRoomNames.add("ChattOne");
-        chatRoomNames.add("ChattTwooo");
-        chatUserNames.add("Kalle");
-        chatUserNames.add("Johan");
-        HomeAdapter homeAdapter = new HomeAdapter(this, chatRoomNames, chatUserNames);
+        // Lagrar chatRooms med info från databas (finns inget just nu)
+        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getAll();
+
+        // Skapar tillfälligt ChatRoom-objekt för att se så recycler fungerar
+        ArrayList<String> striiings = new ArrayList<>();
+        striiings.add("Hej");
+//        HashMap<String, Message> hashMap = new HashMap<>();
+        ChatRoom room = new ChatRoom("ID", "ChatRoom", striiings, true, "adminid", null);
+        chatRooms.add(room);
+
+        // Recyclerview
+        HomeAdapter homeAdapter = new HomeAdapter(this, chatRooms);
         homeRecycler.setAdapter(homeAdapter);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-
-
     }
-
 
     // Meny i toolbar funktionalitet (Sign-out & Edit-profile)
     @Override

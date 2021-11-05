@@ -25,6 +25,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -45,8 +46,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
 
     static final int CAMERA_PERM_CODE     = 101;
@@ -57,8 +56,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     private EditText editUsername, editAge, editPhone, editDescription;
     private Switch switchNotification;
+    private ImageView profilePicture;
     private Button buttonSave, buttonCamera;
-    private CircleImageView profilePicture;
 
     private String username, userDescription;
     private int userAge, userPhone;
@@ -74,7 +73,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onStart() {
         super.onStart();
-        Picasso.get().load(fUser.getPhotoUrl()).into(profilePicture);
+        if (fUser.getPhotoUrl() == null) {
+            profilePicture.setImageDrawable(getDrawable(R.drawable.ic_rums_ikon));
+        } else {
+            Picasso.get().load(fUser.getPhotoUrl()).into(profilePicture);
+        }
     }
 
     @Override
@@ -96,7 +99,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         editDescription = (EditText) findViewById(R.id.input_description);
         buttonCamera = findViewById(R.id.button_camera);
         buttonSave = (Button) findViewById(R.id.button_save);
-        profilePicture = (CircleImageView) findViewById(R.id.profile_picture);
+        profilePicture = (ImageView) findViewById(R.id.profile_picture);
         switchNotification = (Switch) findViewById(R.id.switch_notifications);
 
         //Instantiate Firebase
