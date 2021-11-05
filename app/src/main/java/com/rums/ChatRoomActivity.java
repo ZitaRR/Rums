@@ -84,13 +84,16 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     private void updateMessagesList(ChatRoom  chatRoom) {
         adapter.clear();
-        for (Message message: chatRoom.getMessages()) {
+        ArrayList<Message> messages = chatRoom.getMessages();
+        if (messages != null) {
+            for (Message message : chatRoom.getMessages()) {
 //                Log.d("Tag__6", "roomroomroom subscription: " + message);
-            //Fyll
-            adapter.add(message.getMessageText());
+                //Fyll
+                adapter.add(message.getMessageText());
+            }
+            scrollToBottom();
+            listUpdatedOnce = true;
         }
-        scrollToBottom();
-        listUpdatedOnce = true;
     }
 
     private ChatRoom getChatRoomFromDatabase(String roomID) {
@@ -101,6 +104,8 @@ public class ChatRoomActivity extends BaseClassActivity {
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
 //        fillMessagesList();
+        Log.d("Tag__6", "getChatRoomFromDatabase(getCurrentChatRoom().getId()) " + getChatRoomFromDatabase(getCurrentChatRoom().getId()));
+
         updateMessagesList(getChatRoomFromDatabase(getCurrentChatRoom().getId()));
         setRoomName(actionBarMenu, "____ONE____");
     }
