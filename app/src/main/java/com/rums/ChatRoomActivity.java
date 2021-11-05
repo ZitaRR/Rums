@@ -73,7 +73,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         });
     }
 
-    protected ChatRoom getChatRoomFromDatabase(String roomID) {
+    private ChatRoom getChatRoomFromDatabase(String roomID) {
         return getStorage().getRooms().getById(roomID);
     }
 
@@ -103,22 +103,17 @@ public class ChatRoomActivity extends BaseClassActivity {
 //        listView.post(() -> listView.setSelection(listView.getCount() - 1));
     }
 
-    private void updateMessagesList(ChatRoom chatRoom) {
-
-        List<ChatRoom> rooms = (List<ChatRoom>) roomList;
-        ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
+    private void updateMessagesList(ChatRoom  chatRoom) {
         adapter.clear();
-        for (Message message: theCurrentChatRoom.getMessages()) {
+        for (Message message: chatRoom.getMessages()) {
 //                Log.d("Tag__6", "roomroomroom subscription: " + message);
-
             //Fyll
             adapter.add(message.getMessageText());
         }
-
     }
 
 
-        private void fillMessagesList() {
+    private void fillMessagesList() {
 //        if(getRepositoryReady()) {
 ////            Log.d("Tag__1", "it's ready: ");
 //        } else {
