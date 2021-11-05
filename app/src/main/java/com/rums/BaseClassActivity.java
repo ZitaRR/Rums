@@ -18,8 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
 import java.util.TimeZone;
 
 public class BaseClassActivity extends AppCompatActivity {
@@ -32,7 +30,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
     private PersistantStorage storage;
     protected static RumUser currentRumUser;
-    private static BaseClassActivity activityForRepositoryCallback;
+    private static BaseClassActivity currentInstance;
     private static Boolean isRepositoryReady = false;
 
 
@@ -47,7 +45,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        Log.d("Tag__100", "init i Base class");
         setActionBar();
         getPreviousActivity();
-        activityForRepositoryCallback = this;
+        currentInstance = this;
         storage = PersistantStorage.getInstance();
     }
 
@@ -292,8 +290,8 @@ public class BaseClassActivity extends AppCompatActivity {
         this.shouldHaveBackArrowInActionBar = shouldHaveBackArrowInActionBar;
     }
 
-    public static BaseClassActivity getActivityForRepositoryCallback() {
-        return activityForRepositoryCallback;
+    public static BaseClassActivity getCurrentInstance() {
+        return currentInstance;
     }
 
     public static void setIsRepositoryReady(Boolean isRepositoryReady) {
