@@ -82,6 +82,17 @@ public class ChatRoomActivity extends BaseClassActivity {
         });
     }
 
+    private void updateMessagesList(ChatRoom  chatRoom) {
+        adapter.clear();
+        for (Message message: chatRoom.getMessages()) {
+//                Log.d("Tag__6", "roomroomroom subscription: " + message);
+            //Fyll
+            adapter.add(message.getMessageText());
+        }
+        scrollToBottom();
+        listUpdatedOnce = true;
+    }
+
     private ChatRoom getChatRoomFromDatabase(String roomID) {
         return getStorage().getRooms().getById(roomID);
     }
@@ -111,14 +122,7 @@ public class ChatRoomActivity extends BaseClassActivity {
 //        listView.post(() -> listView.setSelection(listView.getCount() - 1));
     }
 
-    private void updateMessagesList(ChatRoom  chatRoom) {
-        adapter.clear();
-        for (Message message: chatRoom.getMessages()) {
-//                Log.d("Tag__6", "roomroomroom subscription: " + message);
-            //Fyll
-            adapter.add(message.getMessageText());
-        }
-    }
+
 
 
     private void fillMessagesList() {
