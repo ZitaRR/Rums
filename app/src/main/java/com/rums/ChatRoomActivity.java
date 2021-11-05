@@ -63,7 +63,6 @@ public class ChatRoomActivity extends BaseClassActivity {
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
             ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
-            adapter.clear();
             updateMessagesList(theCurrentChatRoom);
 //            for (Message message: theCurrentChatRoom.getMessages()) {
 ////                Log.d("Tag__6", "roomroomroom subscription: " + message);
@@ -78,9 +77,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         return getStorage().getRooms().getById(roomID);
     }
 
-
-
-
+    
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
 //        fillMessagesList();
