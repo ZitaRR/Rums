@@ -77,7 +77,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         return getStorage().getRooms().getById(roomID);
     }
 
-    
+
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
 //        fillMessagesList();
@@ -96,7 +96,7 @@ public class ChatRoomActivity extends BaseClassActivity {
 //        }
 
         adapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
-        listView = findViewById(R.id.list_view);
+        listView = findViewById(R.id.messages_listview);
         listView.setAdapter(adapter);
         //Scroll to bottom:
 //        listView.post(() -> listView.setSelection(listView.getCount() - 1));
