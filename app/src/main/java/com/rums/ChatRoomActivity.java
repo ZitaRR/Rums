@@ -73,6 +73,11 @@ public class ChatRoomActivity extends BaseClassActivity {
         });
     }
 
+    protected ChatRoom getChatRoomFromDatabase(String roomID) {
+        return getStorage().getRooms().getById(roomID);
+    }
+
+
 
 
     protected void setupFromDatabase() {
@@ -83,22 +88,37 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     private void setupListViewAdapter() {
         names = new ArrayList<>();
-        int duplicates = 1;
-        for(int i = 0; i<duplicates; i++) {
-            names.add("Kalle");
-            names.add("Bille");
-            names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
-                    "som fortsätter vidare och vidare och vidare.");
-        }
+//        int duplicates = 1;
+//        for(int i = 0; i<duplicates; i++) {
+//            names.add("Kalle");
+//            names.add("Bille");
+//            names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
+//                    "som fortsätter vidare och vidare och vidare.");
+//        }
 
         adapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
         listView = findViewById(R.id.list_view);
         listView.setAdapter(adapter);
         //Scroll to bottom:
-        listView.post(() -> listView.setSelection(listView.getCount() - 1));
+//        listView.post(() -> listView.setSelection(listView.getCount() - 1));
     }
 
-    private void fillMessagesList() {
+    private void updateMessagesList(ChatRoom chatRoom) {
+
+        List<ChatRoom> rooms = (List<ChatRoom>) roomList;
+        ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
+        adapter.clear();
+        for (Message message: theCurrentChatRoom.getMessages()) {
+//                Log.d("Tag__6", "roomroomroom subscription: " + message);
+
+            //Fyll
+            adapter.add(message.getMessageText());
+        }
+
+    }
+
+
+        private void fillMessagesList() {
 //        if(getRepositoryReady()) {
 ////            Log.d("Tag__1", "it's ready: ");
 //        } else {
