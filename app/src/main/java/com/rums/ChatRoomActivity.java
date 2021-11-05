@@ -3,6 +3,7 @@ package com.rums;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ChatRoomActivity extends BaseClassActivity {
 
@@ -28,6 +31,10 @@ public class ChatRoomActivity extends BaseClassActivity {
     ArrayAdapter<String> adapter;
     ListView listView;
     ArrayList<Message> messages;
+    protected Boolean listUpdatedOnce = false;
+    Timer timer;
+    TimerTask timerTask;
+    final Handler handler = new Handler();
     Menu actionBarMenu;
     MenuItem nameMenuItem;
 
@@ -41,6 +48,8 @@ public class ChatRoomActivity extends BaseClassActivity {
             Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());
             setupFromDatabase();
             setupSubscriptionForMessages();
+            addClickListenerForWriteMessageEditText();
+
         }
 
     }
@@ -196,6 +205,62 @@ public class ChatRoomActivity extends BaseClassActivity {
                     }
                 }
             }
+        }
+    }
+
+    //Scroll to bottom after keyboard appears
+    private void addClickListenerForWriteMessageEditText() {
+        EditText messageField = findViewById(R.id.message_EditText);
+        messageField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean isFocus) {
+                if (isFocus) {
+                    Log.d("Tag_71", "onClick ");
+                    startScrollTimerOnce(350);
+                }
+            }
+        });
+    }
+
+    //Stop timer in some onPause, destroy etc...
+    public void startScrollTimerOnce(int delay) {
+        stopScrollTimerIfItsRunning();
+        timer = new Timer();
+        initializeTimerTask("scrollToBottom");
+        timer.schedule(timerTask, delay);
+    }
+
+    public void stopScrollTimerIfItsRunning() {
+        //stop the timer, if it's not already null
+        if (timer != null) {
+            Log.d("Tag_31", "REALLY stop timer ");
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+    }
+
+    public void initializeTimerTask(String methodName) {
+        timerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        if(methodName.equals("scrollToBottom")) {
+                            scrollToBottom();
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    private void scrollToBottom() {
+        if (listUpdatedOnce) {
+            Log.d("Tag__110", "SMOOTH ");
+
+            listView.smoothScrollToPosition(listView.getCount() - 1);
+        } else {
+            listView.post(() -> listView.setSelection(listView.getCount() - 1));
         }
     }
 
