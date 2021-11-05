@@ -64,12 +64,13 @@ public class ChatRoomActivity extends BaseClassActivity {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
             ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
             adapter.clear();
-            for (Message message: theCurrentChatRoom.getMessages()) {
-//                Log.d("Tag__6", "roomroomroom subscription: " + message);
-
-                //Fyll
-                adapter.add(message.getMessageText());
-            }
+            updateMessagesList(theCurrentChatRoom);
+//            for (Message message: theCurrentChatRoom.getMessages()) {
+////                Log.d("Tag__6", "roomroomroom subscription: " + message);
+//
+//                //Fyll
+//                adapter.add(message.getMessageText());
+//            }
         });
     }
 
@@ -82,7 +83,8 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
-        fillMessagesList();
+//        fillMessagesList();
+        updateMessagesList(getChatRoomFromDatabase(getCurrentChatRoom().getId()));
         setRoomName(actionBarMenu, "____ONE____");
     }
 
