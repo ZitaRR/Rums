@@ -281,7 +281,7 @@ public class BaseClassActivity extends AppCompatActivity {
         } else {
             Picasso.get()
                     .load(avatarURL)
-                    .error(R.drawable.ic_baseline_account_circle_24)
+                    .error(R.drawable.ic_baseline_account_circle_24) //Or something similar (maybe  ic_rums_ikon)
                     .into(imageView);
         }
     }
