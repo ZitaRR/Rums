@@ -14,11 +14,14 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -266,6 +269,21 @@ public class BaseClassActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
         dateFormat.setTimeZone(timeZone);
         return dateFormat.format(calendar.getTime());
+    }
+
+    protected void profilePicToImageView(String rumUserID, CircleImageView imageView) {
+        RumUser rumUser = getStorage().getUsers().getById(rumUserID);
+        Log.d("Tag_67", "setImageViewImage rumUser " + rumUser);
+        String avatarURL = rumUser.getAvatarImageURL();
+        if(avatarURL == null) {
+//            avatarURL = "https://blahhablhygarykalona.se";
+            imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+        } else {
+            Picasso.get()
+                    .load(avatarURL)
+                    .error(R.drawable.ic_baseline_account_circle_24)
+                    .into(imageView);
+        }
     }
 
     protected PersistantStorage getStorage() {
