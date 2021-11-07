@@ -1,19 +1,27 @@
 package com.rums;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
@@ -24,11 +32,13 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChatRoomActivity extends BaseClassActivity {
 
     private static final int GALLERY_REQUEST = 100;
     ArrayList<String> names;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<Message> adapter;
     ListView listView;
     ArrayList<Message> messages;
     protected Boolean listUpdatedOnce = false;
@@ -111,7 +121,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
     private void setupListViewAdapter() {
-        names = new ArrayList<>();
+        messages = new ArrayList<>();
 //        int duplicates = 1;
 //        for(int i = 0; i<duplicates; i++) {
 //            names.add("Kalle");
@@ -120,7 +130,7 @@ public class ChatRoomActivity extends BaseClassActivity {
 //                    "som fortsätter vidare och vidare och vidare.");
 //        }
 
-        adapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
+        adapter = new MessagesAdapter(this, messages);
         listView = findViewById(R.id.messages_listview);
         listView.setAdapter(adapter);
         //Scroll to bottom:
@@ -305,6 +315,49 @@ public class ChatRoomActivity extends BaseClassActivity {
             Log.d("TAG", "Pic Uri: " + imageUri);
         } else {
             Toast.makeText(this,"Pic from gallery NOT ok", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected class MessagesAdapter extends ArrayAdapter<Message> {
+        private Context mContext;
+        private ArrayList<Message> messageslist = new ArrayList<>();
+
+        protected MessagesAdapter(@NonNull Context context, ArrayList<Message> list) {
+            super(context, 0 , list);
+            mContext = context;
+            messageslist = list;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View listItem = convertView;
+
+            if (listItem == null) {
+                listItem = LayoutInflater.from(mContext).inflate(R.layout.chat_bubble_list_item, parent, false);
+            }
+            Message currentMessage = messageslist.get(position);
+            String thisID = currentMessage.getId();
+            if (thisID != null) {
+                CircleImageView imageView = (CircleImageView) listItem.findViewById(R.id.chat_rum_user_profilepic_imageview);
+                RumUser_Old poster = RumUsersManager.getInstance((MyActivityBaseClass) getContext()).getRumUserByID(currentMessage.getUserID());
+
+                if (poster != null) {
+                    profilePicToImageView(poster.getId(), imageView);
+//
+                    TextView nickNameView = (TextView) listItem.findViewById(R.id.chat_rum_user_name_textview);
+                    nickNameView.setText(currentMessage.getNickName());
+
+                    TextView timeStampView = (TextView) listItem.findViewById(R.id.chat_timestamp_textview);
+                    if (currentMessage.getTimeStamp() != null) {
+                        timeStampView.setText(currentMessage.getTimeStamp());
+                    }
+                    TextView messageView = (TextView) listItem.findViewById(R.id.chat_message_textview);
+                    messageView.setText(currentMessage.getMessageText());
+                }
+            }
+            return listItem;
         }
     }
 }
