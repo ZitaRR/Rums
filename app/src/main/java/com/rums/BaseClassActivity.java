@@ -141,7 +141,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        }
 
         //Enter a ChatRoom:
-//        moveUserToChatRoom(getChatRoomAtIndex(1));
+        moveUserToChatRoom(getChatRoomAtIndex(1));
     }
 
     protected void moveUserToChatRoom(ChatRoom chatRoom) {
