@@ -180,7 +180,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         RumUser user = getCurrentRumUser();
         ChatRoom chatRoom = getCurrentChatRoom();
         String timeStamp = currentTime(null);
-        Message message = new Message(user.getId(), user.getUsername(), null, messageTextWithUsername, messageID, timeStamp);
+        Message message = new Message(user.getId(), user.getUsername(), null, messageText, messageID, timeStamp);
 
         addMessageToChatRoom(message);
         getStorage().getRooms().update(chatRoom);
