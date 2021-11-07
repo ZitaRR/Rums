@@ -99,7 +99,7 @@ public class ChatRoomActivity extends BaseClassActivity {
             for (Message message : chatRoom.getMessages()) {
 //                Log.d("Tag__6", "roomroomroom subscription: " + message);
                 //Fyll
-                adapter.add(message.getMessageText());
+                adapter.add(message);
             }
             scrollToBottom();
             listUpdatedOnce = true;
@@ -341,7 +341,7 @@ public class ChatRoomActivity extends BaseClassActivity {
             String thisID = currentMessage.getId();
             if (thisID != null) {
                 CircleImageView imageView = (CircleImageView) listItem.findViewById(R.id.chat_rum_user_profilepic_imageview);
-                RumUser_Old poster = RumUsersManager.getInstance((MyActivityBaseClass) getContext()).getRumUserByID(currentMessage.getUserID());
+                RumUser poster = getCurrentRumUser();
 
                 if (poster != null) {
                     profilePicToImageView(poster.getId(), imageView);
