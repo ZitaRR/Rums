@@ -82,8 +82,8 @@ public class ChatRoomActivity extends BaseClassActivity {
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
 //            ChatRoom theCurrentChatRoom = rooms.getById(currentChatRoomID);
-//            updateMessagesList(theCurrentChatRoom);
             ChatRoom currentChatRoom = getChatRoomByID(rooms, currentChatRoomID);
+            updateMessagesList(currentChatRoom);
             for (Message message: currentChatRoom.getMessages()) {
                 Log.d("Tag__601", "currentChatRoom subscription: " + message);
             }
