@@ -93,6 +93,7 @@ public class ChatRoomActivity extends BaseClassActivity {
     }
 
     private void updateMessagesList(ChatRoom  chatRoom) {
+        Log.d("Tag__600", "updateMessagesList: ");
         adapter.clear();
         ArrayList<Message> messages = chatRoom.getMessages();
         if (messages != null) {
