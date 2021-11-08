@@ -1,8 +1,6 @@
 package com.rums;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +16,6 @@ import android.widget.ImageButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class HomeActivity extends BaseClassActivity {
     private Button testActivity;
@@ -33,8 +30,7 @@ public class HomeActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
-        setOnClickListeners();
-
+        setUpClickers();
     }
 
     @Override
@@ -46,24 +42,19 @@ public class HomeActivity extends BaseClassActivity {
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
 
         if(getIsRepositoryReady()) {
+            getUsersChatRooms();
             setUpRecyclerView();
         }
 
     }
 
-    @Override
-    public void repositoryIsInitialized(Class<?> type) {
-        super.repositoryIsInitialized(type);
-    }
-
-    private void setOnClickListeners() {
+    private void setUpClickers() {
 
         // När man trycker på gröna knappen nere till höger, skapa nytt rum
         buttonNewRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this, NewRoomActivity.class);
-                startActivity(i);
+                startSomeActivity(NewRoomActivity.class);
 
             }
         });
@@ -72,18 +63,28 @@ public class HomeActivity extends BaseClassActivity {
         testActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this, NewRoomActivity.class);
-                startActivity(i);
+                startSomeActivity(ChatRoomActivity.class);
             }
         });
     }
 
+    private void getUsersChatRooms(){
+        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(chatRoom -> chatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
+    }
+
     private void setUpRecyclerView() {
 
-        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(chatRoom -> chatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
         HomeAdapter homeAdapter = new HomeAdapter(this, chatRooms);
         homeRecycler.setAdapter(homeAdapter);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void repositoryIsInitialized(Class<?> type) {
+        super.repositoryIsInitialized(type);
+        //Krachar...?
+        //getUsersChatRooms();
+
     }
 
     @Override
@@ -99,12 +100,10 @@ public class HomeActivity extends BaseClassActivity {
         switch (item.getItemId()){
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
+                startSomeActivity(LoginActivity.class);
                 return true;
             case R.id.menu_profile:
-                startActivity(new Intent(this, UserProfile.class));
-                finish();
+                startSomeActivity(UserProfile.class);
                 return true;
         }
         return false;
