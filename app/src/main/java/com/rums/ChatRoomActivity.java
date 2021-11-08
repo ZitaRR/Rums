@@ -84,14 +84,28 @@ public class ChatRoomActivity extends BaseClassActivity {
 //            ChatRoom theCurrentChatRoom = rooms.getById(currentChatRoomID);
 //            updateMessagesList(theCurrentChatRoom);
             ChatRoom currentChatRoom = getChatRoomByID(rooms, currentChatRoomID);
-            for (Message message: currentChatRoom.getMessages()) {
-                Log.d("Tag__601", "currentChatRoom subscription: " + message);
-            }
+            updateMessagesList(currentChatRoom);
+
+            printMessages(currentChatRoom);
+
+//            for (Message message: currentChatRoom.getMessages()) {
+//                Log.d("Tag__601", "currentChatRoom subscription: " + message);
+//            }
 //
 //                //Fyll
 //                adapter.add(message.getMessageText());
 //            }
         });
+    }
+
+    private void printMessages(ChatRoom currentChatRoom) {
+        ArrayList<Message> messages = currentChatRoom.getMessages();
+        if(messages != null) {
+            for (Message message: messages) {
+                Log.d("Tag__601", "subscription: message.getMessageText() " + message.getMessageText());
+
+            }
+        }
     }
 
     protected ChatRoom getChatRoomByID(List<ChatRoom> rooms, String UID) {
