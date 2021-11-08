@@ -98,7 +98,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         ArrayList<Message> messages = chatRoom.getMessages();
         if (messages != null) {
             for (Message message : chatRoom.getMessages()) {
-//                Log.d("Tag__6", "roomroomroom subscription: " + message);
+                Log.d("Tag__600", "messages subscription: " + message);
                 //Fyll
                 adapter.add(message);
             }
