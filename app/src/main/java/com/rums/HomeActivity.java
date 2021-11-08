@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ public class HomeActivity extends BaseClassActivity {
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
 
         if(getIsRepositoryReady()) {
+            Log.d("Tag__1", "Hellooo");
             getUsersChatRooms();
             setUpRecyclerView();
         }
@@ -69,7 +71,8 @@ public class HomeActivity extends BaseClassActivity {
     }
 
     private void getUsersChatRooms(){
-        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(ChatRoom -> ChatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
+      //chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(ChatRoom -> ChatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
+      chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getAll();
     }
 
     private void setUpRecyclerView() {
@@ -83,6 +86,7 @@ public class HomeActivity extends BaseClassActivity {
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
         getUsersChatRooms();
+        setUpRecyclerView();
 
     }
 
