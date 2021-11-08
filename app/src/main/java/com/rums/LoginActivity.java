@@ -35,9 +35,11 @@ public class LoginActivity extends BaseClassActivity {
 
         //Check for user existence
         if (fUser != null){
+            super.init();
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         }
+
     }
 
     @Override

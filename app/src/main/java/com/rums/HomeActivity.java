@@ -82,8 +82,7 @@ public class HomeActivity extends BaseClassActivity {
     @Override
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
-        //Krachar...?
-        //getUsersChatRooms();
+        getUsersChatRooms();
 
     }
 
