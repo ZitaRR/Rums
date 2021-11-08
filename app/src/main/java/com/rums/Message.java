@@ -79,4 +79,14 @@ public class Message implements Identity {
     public void setMessageText(String messageText) {
         this.messageText = messageText;
     }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+
 }
