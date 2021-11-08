@@ -81,15 +81,32 @@ public class ChatRoomActivity extends BaseClassActivity {
     protected void subscibeForMessages(String currentChatRoomID) {
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
-            ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
-            updateMessagesList(theCurrentChatRoom);
-//            for (Message message: theCurrentChatRoom.getMessages()) {
-////                Log.d("Tag__6", "roomroomroom subscription: " + message);
+//            ChatRoom theCurrentChatRoom = rooms.getById(currentChatRoomID);
+//            updateMessagesList(theCurrentChatRoom);
+            ChatRoom currentChatRoom = getChatRoomByID(rooms, currentChatRoomID);
+            for (Message message: currentChatRoom.getMessages()) {
+                Log.d("Tag__601", "currentChatRoom subscription: " + message);
+            }
 //
 //                //Fyll
 //                adapter.add(message.getMessageText());
 //            }
         });
+    }
+
+    protected ChatRoom getChatRoomByID(List<ChatRoom> rooms, String UID) {
+        ChatRoom foundChatRoom = null;
+//        List<RumUser> users = storage.getUsers().getAll();
+//        Log.d("Tag__1", "users: " + users);
+
+        for (ChatRoom room : rooms) {
+//            Log.d("Tag__1", "user: " + user.getId());
+
+            if (room.getId().equals(UID)) {
+                foundChatRoom = room;
+            }
+        }
+        return foundChatRoom;
     }
 
     private void updateMessagesList(ChatRoom  chatRoom) {
@@ -98,7 +115,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         ArrayList<Message> messages = chatRoom.getMessages();
         if (messages != null) {
             for (Message message : chatRoom.getMessages()) {
-                Log.d("Tag__600", "messages subscription: " + message);
+//                Log.d("Tag__600", "messages subscription: " + message);
                 //Fyll
                 adapter.add(message);
             }
