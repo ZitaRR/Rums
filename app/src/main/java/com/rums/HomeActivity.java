@@ -38,7 +38,7 @@ public class HomeActivity extends BaseClassActivity {
         super.init();
         storage = PersistantStorage.getInstance();
         homeRecycler = findViewById(R.id.recycler_home);
-        testActivity = findViewById(R.id.button_test_activity);
+//        testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
 
         if(getIsRepositoryReady()) {
@@ -59,17 +59,17 @@ public class HomeActivity extends BaseClassActivity {
             }
         });
 
-        // När man trycker på Button test activity (ska tas bort)
+        /*// När man trycker på Button test activity (ska tas bort)
         testActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startSomeActivity(ChatRoomActivity.class);
             }
-        });
+        });*/
     }
 
     private void getUsersChatRooms(){
-        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(chatRoom -> chatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
+        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(ChatRoom -> ChatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
     }
 
     private void setUpRecyclerView() {
