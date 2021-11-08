@@ -11,6 +11,7 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -57,7 +58,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private EditText editUsername, editAge, editPhone, editDescription;
     private Switch switchNotification;
     private ImageView profilePicture;
-    private Button buttonSave, buttonCamera;
+    private Button buttonSave;
 
     private String username, userDescription;
     private int userAge, userPhone;
@@ -97,7 +98,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         editAge = (EditText) findViewById(R.id.input_user_age);
         editPhone = (EditText) findViewById(R.id.input_user_phone);
         editDescription = (EditText) findViewById(R.id.input_description);
-        buttonCamera = findViewById(R.id.button_camera);
         buttonSave = (Button) findViewById(R.id.button_save);
         profilePicture = (ImageView) findViewById(R.id.profile_picture);
         switchNotification = (Switch) findViewById(R.id.switch_notifications);
@@ -107,8 +107,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         fUser            = FirebaseAuth.getInstance().getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-
-        buttonCamera.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
         profilePicture.setOnClickListener(this);
         switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -128,17 +126,43 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.profile_picture:
-                changeProfilePicture();
+                openDialog();
                 break;
             case R.id.button_save:
                 saveChanges();
                 break;
-            case R.id.button_camera:
-                askCameraPermission();
         }
     }
+    private void openDialog(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_profile_picture);
 
+        Button cameraThroughDialog  = dialog.findViewById(R.id.button_dialog_camera);
+        Button galleryThroughDialog = dialog.findViewById(R.id.button_dialog_gallery);
+        Button cancel               = dialog.findViewById(R.id.button_dialog_cancel);
 
+        galleryThroughDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeProfilePicture();
+                dialog.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        cameraThroughDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                askCameraPermission();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
     private void changeProfilePicture() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(gallery, GALLERY_REQUEST_CODE);
@@ -222,7 +246,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(Uri uri) {
                         UserProfileChangeRequest updatePic = new UserProfileChangeRequest.Builder()
-                                .setPhotoUri(contentUri)
+                                .setPhotoUri(uri)
                                 .build();
                         fUser.updateProfile(updatePic)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -289,7 +313,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }
 
     }
-
     private void changeDatabase() {
         // När värden ändrats, skicka till User.Class eller databas eller nått? Dunno?
     }
