@@ -366,9 +366,10 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                Intent i = new Intent(UserProfile.this, HomeActivity.class);
-                startActivity(i);
-                finish();
+                startSomeActivity(HomeActivity.class);
+//                Intent i = new Intent(UserProfile.this, HomeActivity.class);
+//                startActivity(i);
+//                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

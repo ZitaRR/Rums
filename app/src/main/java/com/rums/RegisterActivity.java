@@ -88,8 +88,9 @@ public class RegisterActivity extends BaseClassActivity {
                     Toast.makeText(RegisterActivity.this, "Registration complete, signing in",
                             Toast.LENGTH_SHORT).show();
                     init();
-                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                    finish();
+                    startSomeActivity(HomeActivity.class);
+//                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+//                    finish();
                 }else{
                     Toast.makeText(RegisterActivity.this, "Registration failed",
                             Toast.LENGTH_SHORT).show();
