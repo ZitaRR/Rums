@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeActivity extends BaseClassActivity {
-    private Toolbar actionBar;
     private Button testActivity;
     private RecyclerView homeRecycler;
     private ImageButton buttonNewRoom;
@@ -35,7 +34,6 @@ public class HomeActivity extends BaseClassActivity {
         setContentView(R.layout.activity_home);
         init();
         setOnClickListeners();
-        setUpRecyclerView();
 
     }
 
@@ -47,6 +45,15 @@ public class HomeActivity extends BaseClassActivity {
         testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
 
+        if(getIsRepositoryReady()) {
+            setUpRecyclerView();
+        }
+
+    }
+
+    @Override
+    public void repositoryIsInitialized(Class<?> type) {
+        super.repositoryIsInitialized(type);
     }
 
     private void setOnClickListeners() {
@@ -73,23 +80,12 @@ public class HomeActivity extends BaseClassActivity {
 
     private void setUpRecyclerView() {
 
-        // Lagrar chatRooms med info från databas (finns inget just nu)
-        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getAll();
-
-        // Skapar tillfälligt ChatRoom-objekt för att se så recycler fungerar
-        ArrayList<String> striiings = new ArrayList<>();
-        striiings.add("Hej");
-//        HashMap<String, Message> hashMap = new HashMap<>();
-        ChatRoom room = new ChatRoom("ID", "ChatRoom", striiings, true, "adminid", null);
-        chatRooms.add(room);
-
-        // Recyclerview
+        chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getRange(chatRoom -> chatRoom.getUsersByID().contains(getCurrentRumUser().getId()));
         HomeAdapter homeAdapter = new HomeAdapter(this, chatRooms);
         homeRecycler.setAdapter(homeAdapter);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    // Meny i toolbar funktionalitet (Sign-out & Edit-profile)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
