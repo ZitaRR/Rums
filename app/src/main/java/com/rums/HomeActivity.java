@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseClassActivity {
     private Toolbar actionBar;
     private Button testActivity;
     private RecyclerView homeRecycler;
@@ -33,13 +33,23 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        init();
+        setOnClickListeners();
+        setUpRecyclerView();
 
+    }
+
+    @Override
+    protected void init() {
+        super.init();
         storage = PersistantStorage.getInstance();
-        actionBar = findViewById(R.id.main_actionbar);
-        setSupportActionBar(actionBar);
         homeRecycler = findViewById(R.id.recycler_home);
         testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
+
+    }
+
+    private void setOnClickListeners() {
 
         // När man trycker på gröna knappen nere till höger, skapa nytt rum
         buttonNewRoom.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +69,9 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private void setUpRecyclerView() {
 
         // Lagrar chatRooms med info från databas (finns inget just nu)
         chatRooms = (ArrayList<ChatRoom>) storage.getRooms().getAll();
@@ -74,7 +87,6 @@ public class HomeActivity extends AppCompatActivity {
         HomeAdapter homeAdapter = new HomeAdapter(this, chatRooms);
         homeRecycler.setAdapter(homeAdapter);
         homeRecycler.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     // Meny i toolbar funktionalitet (Sign-out & Edit-profile)
