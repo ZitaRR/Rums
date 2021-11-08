@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class NewRoomActivity extends AppCompatActivity {
+public class NewRoomActivity extends BaseClassActivity {
 
     private ArrayList<User> userList;
     private RecyclerView userRow;
@@ -43,6 +43,8 @@ public class NewRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
+
+        super.init();
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);

@@ -47,7 +47,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserProfile extends AppCompatActivity implements View.OnClickListener {
+public class UserProfile extends BaseClassActivity implements View.OnClickListener {
 
     static final int CAMERA_PERM_CODE     = 101;
     static final int CAMERA_REQUEST_CODE  = 102;
@@ -85,6 +85,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        super.init();
 
         actionBar = (Toolbar) findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
@@ -365,9 +366,10 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                Intent i = new Intent(UserProfile.this, HomeActivity.class);
-                startActivity(i);
-                finish();
+                startSomeActivity(HomeActivity.class);
+//                Intent i = new Intent(UserProfile.this, HomeActivity.class);
+//                startActivity(i);
+//                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
