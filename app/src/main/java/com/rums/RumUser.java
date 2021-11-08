@@ -9,6 +9,7 @@ public class RumUser implements Identity {
     private String username;
     private String password;
     private String email;
+    private String avatarImageURL;
     private String currentChatRoomID;
     private ChatRoom currentChatRoom; //Probably save to db, since it's a NoSQL db.
 
@@ -69,6 +70,14 @@ public class RumUser implements Identity {
 
     public String getEmail(){
         return email;
+    }
+
+    public String getAvatarImageURL() {
+        return avatarImageURL;
+    }
+
+    public void setAvatarImageURL(String avatarImageURL) {
+        this.avatarImageURL = avatarImageURL;
     }
 
     public String getCurrentChatRoomID() {
