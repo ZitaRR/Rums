@@ -10,10 +10,12 @@
     <EditText
         android:id="@+id/edit_login_mail"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="36dp"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Email"
+        android:hint="enter email"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/edit_login_password"
@@ -21,14 +23,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.972" />
 
     <EditText
         android:id="@+id/edit_login_password"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="36dp"
+        android:textAlignment="center"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Password"
+        android:hint="enter password"
         android:inputType="textPassword"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
