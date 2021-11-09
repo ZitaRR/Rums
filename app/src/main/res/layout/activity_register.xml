@@ -15,78 +15,82 @@
         android:background="@drawable/login_custom_button"
         android:text="Register!"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/guideline7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <EditText
+        android:id="@+id/edit_register_email"
+        android:layout_width="271dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/loginreg_bubble_background"
+        android:ems="10"
+        android:hint="enter email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textColor="#E6FFFFFF"
+        android:textColorHint="#A6FFFFFF"
+
+        app:layout_constraintBottom_toTopOf="@+id/edit_password"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <EditText
-        android:id="@+id/edit_register_email"
-        android:layout_width="0dp"
-        android:layout_height="42sp"
-        android:ems="10"
-        android:hint="Enter email"
-        android:inputType="textEmailAddress"
-        android:textColor="#E6FFFFFF"
-        android:textColorHint="#A6FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
-
-    <EditText
         android:id="@+id/edit_password"
-        android:layout_width="0dp"
-        android:layout_height="42sp"
+        android:layout_width="271dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Enter password"
+        android:hint="enter password"
         android:inputType="textPassword"
+        android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/edit_confirm_password"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <EditText
         android:id="@+id/edit_confirm_password"
-        android:layout_width="0dp"
-        android:layout_height="42sp"
+        android:layout_width="271dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Confirm password"
+        android:hint="confirm password"
         android:inputType="textPassword"
+        android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/button_register_user"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/edit_password"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <EditText
         android:id="@+id/edit_username"
-        android:layout_width="0dp"
-        android:layout_height="42sp"
+        android:layout_width="271dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Enter username"
+        android:hint="enter username"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
-        android:textSize="16sp"
+
         app:layout_constraintBottom_toTopOf="@+id/edit_register_email"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -111,12 +115,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_rums_ikon_lilac" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="70dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
