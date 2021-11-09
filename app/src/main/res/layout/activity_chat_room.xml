@@ -16,7 +16,7 @@
         android:layout_below="@+id/main_actionbar"
         android:layout_marginTop="0dp"
 
-        android:background="@color/medium_dark_gray"
+        android:background="@drawable/ic_endless_constellation"
         android:orientation="vertical">
 
 

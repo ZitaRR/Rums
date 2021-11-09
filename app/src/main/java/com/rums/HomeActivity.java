@@ -44,9 +44,9 @@ public class HomeActivity extends BaseClassActivity {
 //        testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
         setShouldHaveBackArrowInActionBar(false);
-        ActionBar actionBar = getSupportActionBar();
+        //ActionBar actionBar = getSupportActionBar();
         // actionBar.setIcon(R.drawable.ic_rums_ikon_lilac);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
+        //actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
 
 
         if(getIsRepositoryReady()) {
