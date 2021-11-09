@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Rums</string>
+    <string name="app_name"></string>
     <string name="welcome_message">Welcome to Rums!</string>
 
     <string name="settings_hint_username">Username</string>
@@ -12,5 +12,4 @@
     <string name="u_name">Username:</string>
     <string name="u_phone">Phone:</string>
     <string name="search_menu">Search</string>
-
 </resources>
