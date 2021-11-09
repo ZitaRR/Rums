@@ -41,6 +41,7 @@ public class HomeActivity extends BaseClassActivity {
         homeRecycler = findViewById(R.id.recycler_home);
 //        testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
+        setShouldHaveBackArrowInActionBar(false);
 
         if(getIsRepositoryReady()) {
             Log.d("Tag__1", "Hellooo");
