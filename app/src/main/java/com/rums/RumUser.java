@@ -4,7 +4,10 @@ import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.ArrayList;
+
 public class RumUser implements Identity {
+
     private String id;
     private String username;
     private String password;

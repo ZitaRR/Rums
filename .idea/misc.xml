@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/chat_bubble_background.xml" value="0.27447916666666666" />
         <entry key="app/src/main/res/drawable-xhdpi/gradient_actionbar.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-xhdpi/gradient_button_login.xml" value="0.1" />
@@ -20,7 +21,7 @@
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/chat_bubble_list_item.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/dialog_nameroom.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_user.xml" value="0.5" />
         <entry key="app/src/main/res/layout/ley_out.xml" value="0.2759259259259259" />
         <entry key="app/src/main/res/layout/main_actionbar.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/menu/menu_menu.xml" value="0.13125" />

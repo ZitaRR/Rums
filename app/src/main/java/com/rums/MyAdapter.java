@@ -25,11 +25,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
     private ArrayList<RumUser> mUserList;
     private Context context;
     private ArrayList<RumUser> mFiltered;
+    ArrayList <String> selectedUsers = new ArrayList<>();
 
     public MyAdapter(Context context, ArrayList<RumUser> userList) {
         this.context = context;
         this.mUserList = userList;
         this.mFiltered = new ArrayList<>(userList);
+
     }
 
     @NonNull
@@ -64,8 +66,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
                     if (holder.inviteBox.isChecked()) {
                         currentUser.setChecked(holder.inviteBox.isChecked());
                         Toast.makeText(view.getContext(), (currentUser.getUsername()), Toast.LENGTH_SHORT).show();
+                        selectedUsers.add(currentUser.getId());
+                        selectedUsers.add(BaseClassActivity.getCurrentInstance().getCurrentRumUser().getId());
                     }
                 }
+
             });
     }
 
