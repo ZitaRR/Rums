@@ -131,7 +131,6 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
-//        fillMessagesList();
         Log.d("Tag__6", "getChatRoomFromDatabase(getCurrentChatRoom().getId()) " + getChatRoomFromDatabase(getCurrentChatRoom().getId()));
 
         updateMessagesList(getChatRoomFromDatabase(getCurrentChatRoom().getId()));
@@ -140,30 +139,11 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     private void setupListViewAdapter() {
         messages = new ArrayList<>();
-//        int duplicates = 1;
-//        for(int i = 0; i<duplicates; i++) {
-//            names.add("Kalle");
-//            names.add("Bille");
-//            names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
-//                    "som fortsätter vidare och vidare och vidare.");
-//        }
-
         adapter = new MessagesAdapter(this, messages);
         listView = findViewById(R.id.messages_listview);
         listView.setAdapter(adapter);
         //Scroll to bottom:
 //        listView.post(() -> listView.setSelection(listView.getCount() - 1));
-    }
-
-
-
-
-    private void fillMessagesList() {
-//        if(getRepositoryReady()) {
-////            Log.d("Tag__1", "it's ready: ");
-//        } else {
-////            Log.d("Tag__1", "it's NOT ready: ");
-//        }
     }
 
     @Override
