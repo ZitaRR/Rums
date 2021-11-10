@@ -50,39 +50,44 @@ public class NewRoomActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
 
-
-       // storage = PersistantStorage.getInstance();
-
-        super.init();
-
+        init();
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
-
     }
 
     @Override
     protected void init () {
         super.init();
-        if(getIsRepositoryReady()) {
-            userRow = findViewById(R.id.user_Row);
-            userRow.setLayoutManager(new LinearLayoutManager(this));
 
-            userList = (ArrayList<RumUser>) storage.getUsers().getAll();
-            myAdapter = new MyAdapter(this, userList);
-            userRow.setAdapter(myAdapter);
+        storage = PersistantStorage.getInstance();
+        userRow = findViewById(R.id.user_Row);
+
+        if(getIsRepositoryReady()) {
+
+            if (userRow != null) {
+                getUsersRumUsers();
+                setUpRecyclerView();
+            }
+
         }
+    }
+
+    private void getUsersRumUsers(){
+        userList = (ArrayList<RumUser>) getStorage().getUsers().getAll();
+    }
+
+    private void setUpRecyclerView() {
+        myAdapter = new MyAdapter(this, userList);
+        userRow.setAdapter(myAdapter);
+        userRow.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
 
-        userRow = findViewById(R.id.user_Row);
-        userRow.setLayoutManager(new LinearLayoutManager(this));
-
-        userList = (ArrayList<RumUser>) storage.getUsers().getAll();
-        myAdapter = new MyAdapter(this, userList);
-        userRow.setAdapter(myAdapter);
+        getUsersRumUsers();
+        setUpRecyclerView();
     }
 
     @Override

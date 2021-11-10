@@ -37,8 +37,8 @@ public class LoginActivity extends BaseClassActivity {
         if (fUser != null){
             super.init();
             startSomeActivity(HomeActivity.class);
-//            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-//            finish();
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
         }
     }
 

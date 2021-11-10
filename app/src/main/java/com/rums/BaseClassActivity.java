@@ -278,10 +278,10 @@ public class BaseClassActivity extends AppCompatActivity {
 //            avatarURL = "https://blahhablhygarykalona.se";
             imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
         } else {
-           /* Picasso.get()
+            Picasso.get()
                     .load(avatarURL)
                     .error(R.drawable.ic_baseline_account_circle_24) //Or something similar (maybe  ic_rums_ikon)
-                    .into(imageView);*/
+                    .into(imageView);
         }
     }
 
