@@ -38,6 +38,18 @@ public class HomeActivity extends BaseClassActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(getIsRepositoryReady()) {
+            Log.d("Tag__1", "Hellooo");
+            getUsersChatRooms();
+            setUpRecyclerView();
+        }
+
+    }
+
+    @Override
     protected void init() {
         super.init();
         storage = PersistantStorage.getInstance();

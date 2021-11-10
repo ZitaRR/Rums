@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -92,6 +93,14 @@ public class NewRoomActivity extends BaseClassActivity {
 
         getUsersRumUsers();
         setUpRecyclerView();
+/*
+        if(getCurrentRumUser() != null) {
+            if(type == ChatRoom.class) {
+                makeChatRoom("nameRoomTxt", null, false, getCurrentRumUser().getId(), null);
+            }
+        }
+        BaseClassActivity.getCurrentInstance().moveUserToChatRoom(getChatRoomAtIndex(2));
+        finish();*/
     }
 
     @Override
@@ -120,43 +129,52 @@ public class NewRoomActivity extends BaseClassActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void NameRoom () {
+
+        EditText nameRoom = findViewById(R.id.name_Room);
+        String nameRoomTxt = nameRoom.getText().toString();
+        Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
+    }
+
     @SuppressLint("ResourceType")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+
         //checkBox.setChecked(false);
         int id = item.getItemId();
+       // EditText nameRoom = findViewById(R.id.name_Room);
 
         // Här trycker man när man är valt sina användare/boxar
         if (id == R.id.add_done) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            final FrameLayout frameView = new FrameLayout(this);
+
+            FrameLayout frameView = new FrameLayout(this);
+
 
             builder.setView(frameView)
+
                     // Om nöjd med val, namn på charrummet sätts.
                    .setPositiveButton(R.string.say_hello, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            ChatRoom rm;
 
-                           /* EditText nameRoom = findViewById(R.id.name_Room);
-                            String nameRoomTxt = nameRoom.getText().toString();
-                            Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
 
-                            // moveToChatRoom ();
-/*
-                            for(int i = 0; i <userRow.getChildCount(); i++) {
-                            if (checkBox.isChecked()) {
+                            if(getCurrentRumUser() != null) {
+                                final EditText userInput = frameView.findViewById(R.id.name_Room);
+                                String nameRoomTxt = userInput.getText().toString();
+                                myAdapter.selectedUsers.add(getCurrentRumUser().getId());
 
-                             itemChecked += checkBox.listView.getItemAtPosition(i)
-                            setNewChat(userList);
+                                   rm = makeChatRoom(nameRoomTxt, myAdapter.selectedUsers, false, getCurrentRumUser().getId(), null);
+                                    BaseClassActivity.getCurrentInstance().moveUserToChatRoom(rm);
+                                Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
+
+                               // }
                             }
-                            }*/
-
-                            showSettingsActivity();
                             finish();
                         }
-
                     })
 
                     .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
