@@ -255,6 +255,18 @@ public class BaseClassActivity extends AppCompatActivity {
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
     }
 
+    protected void startSomeActivity(Class<?> cls, Boolean finishCurrentActivity) {
+        Intent intent;
+        if (finishCurrentActivity) {
+            intent = new Intent(this, cls);
+            startActivity(intent);
+            finish();
+        } else {
+            intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
+            startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+        }
+    }
+
     //Timestamp as string, in the current timezone.
     //This should really be a timezone-agnostic object (Date or Calendar),
     // and the display string should take into account the timestamp of the device.
