@@ -53,7 +53,7 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
     static final int CAMERA_REQUEST_CODE  = 102;
     static final int GALLERY_REQUEST_CODE = 103;
 
-    private Toolbar actionBar;
+    // private Toolbar actionBar;
 
     private EditText editUsername, editAge, editPhone, editDescription;
     private Switch switchNotification;
@@ -87,12 +87,12 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
         setContentView(R.layout.activity_user_profile);
         super.init();
 
-        actionBar = (Toolbar) findViewById(R.id.main_actionbar);
+        /*actionBar = (Toolbar) findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
-        }
+        }*/
 
 
         editUsername = (EditText) findViewById(R.id.input_username);

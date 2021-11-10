@@ -4,50 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_login"
+    android:background="@drawable/gradient_default_activity"
     tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/edit_login_mail"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="271dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Email"
+        android:hint="enter email"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/edit_login_password"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <EditText
         android:id="@+id/edit_login_password"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="271dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
-        android:hint="Password"
+        android:hint="enter password"
         android:inputType="textPassword"
+        android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/button_login"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.91" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <Button
         android:id="@+id/button_login"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/login_custom_button"
         android:text="Login"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        app:layout_constraintBottom_toTopOf="@+id/text_register"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
@@ -56,10 +57,10 @@
         android:id="@+id/text_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="116dp"
         android:text="Not registered? Click here to register a new account"
         android:textColor="#9AFFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,13 +87,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="70dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         app:layout_constraintGuide_end="70dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

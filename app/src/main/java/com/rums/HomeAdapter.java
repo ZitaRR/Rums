@@ -51,8 +51,7 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
     holder.homeChatRows.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent i = new Intent(context, ChatRoomActivity.class);
-            context.startActivity(i);
+            BaseClassActivity.getCurrentInstance().moveUserToChatRoom(currentRoom);
         }
     });
     }
