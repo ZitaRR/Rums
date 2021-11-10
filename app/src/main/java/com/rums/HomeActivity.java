@@ -41,13 +41,12 @@ public class HomeActivity extends BaseClassActivity {
         super.init();
         storage = PersistantStorage.getInstance();
         homeRecycler = findViewById(R.id.recycler_home);
-//        testActivity = findViewById(R.id.button_test_activity);
+//      testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
         setShouldHaveBackArrowInActionBar(false);
         //ActionBar actionBar = getSupportActionBar();
         // actionBar.setIcon(R.drawable.ic_rums_ikon_lilac);
         //actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
-
 
         if(getIsRepositoryReady()) {
             Log.d("Tag__1", "Hellooo");
