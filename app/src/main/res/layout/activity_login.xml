@@ -15,7 +15,7 @@
         android:background="@drawable/loginreg_bubble_background"
         android:ems="10"
         android:hint="enter email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textColor="#E6FFFFFF"
         android:textColorHint="#A6FFFFFF"
