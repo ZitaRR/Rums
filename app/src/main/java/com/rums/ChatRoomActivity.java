@@ -81,10 +81,12 @@ public class ChatRoomActivity extends BaseClassActivity {
     protected void subscibeForMessages(String currentChatRoomID) {
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
-            ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
-            updateMessagesList(theCurrentChatRoom);
-//            for (Message message: theCurrentChatRoom.getMessages()) {
-////                Log.d("Tag__6", "roomroomroom subscription: " + message);
+//            ChatRoom theCurrentChatRoom = rooms.getById(currentChatRoomID);
+            ChatRoom currentChatRoom = getChatRoomByID(rooms, currentChatRoomID);
+            updateMessagesList(currentChatRoom);
+            for (Message message: currentChatRoom.getMessages()) {
+                Log.d("Tag__601", "currentChatRoom subscription: " + message);
+            }
 //
 //                //Fyll
 //                adapter.add(message.getMessageText());
@@ -92,12 +94,28 @@ public class ChatRoomActivity extends BaseClassActivity {
         });
     }
 
+    protected ChatRoom getChatRoomByID(List<ChatRoom> rooms, String UID) {
+        ChatRoom foundChatRoom = null;
+//        List<RumUser> users = storage.getUsers().getAll();
+//        Log.d("Tag__1", "users: " + users);
+
+        for (ChatRoom room : rooms) {
+//            Log.d("Tag__1", "user: " + user.getId());
+
+            if (room.getId().equals(UID)) {
+                foundChatRoom = room;
+            }
+        }
+        return foundChatRoom;
+    }
+
     private void updateMessagesList(ChatRoom  chatRoom) {
+        Log.d("Tag__600", "updateMessagesList: ");
         adapter.clear();
         ArrayList<Message> messages = chatRoom.getMessages();
         if (messages != null) {
             for (Message message : chatRoom.getMessages()) {
-//                Log.d("Tag__6", "roomroomroom subscription: " + message);
+//                Log.d("Tag__600", "messages subscription: " + message);
                 //Fyll
                 adapter.add(message);
             }
@@ -113,7 +131,6 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
-//        fillMessagesList();
         Log.d("Tag__6", "getChatRoomFromDatabase(getCurrentChatRoom().getId()) " + getChatRoomFromDatabase(getCurrentChatRoom().getId()));
 
         updateMessagesList(getChatRoomFromDatabase(getCurrentChatRoom().getId()));
@@ -122,30 +139,11 @@ public class ChatRoomActivity extends BaseClassActivity {
 
     private void setupListViewAdapter() {
         messages = new ArrayList<>();
-//        int duplicates = 1;
-//        for(int i = 0; i<duplicates; i++) {
-//            names.add("Kalle");
-//            names.add("Bille");
-//            names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
-//                    "som fortsätter vidare och vidare och vidare.");
-//        }
-
         adapter = new MessagesAdapter(this, messages);
         listView = findViewById(R.id.messages_listview);
         listView.setAdapter(adapter);
         //Scroll to bottom:
 //        listView.post(() -> listView.setSelection(listView.getCount() - 1));
-    }
-
-
-
-
-    private void fillMessagesList() {
-//        if(getRepositoryReady()) {
-////            Log.d("Tag__1", "it's ready: ");
-//        } else {
-////            Log.d("Tag__1", "it's NOT ready: ");
-//        }
     }
 
     @Override

@@ -88,8 +88,9 @@ public class BaseClassActivity extends AppCompatActivity {
 
     @Override      //Back arrow in ActionBar, etc.
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemID = item.getItemId();
         if (item.getClass() == androidx.appcompat.view.menu.ActionMenuItem.class) {
-            switch (item.getItemId()) {
+            switch (itemID) {
                 case android.R.id.home:
                     if (specificActivityClassForBackArrow == null) {
                         if (previousActivityClass != null) {
@@ -99,7 +100,16 @@ public class BaseClassActivity extends AppCompatActivity {
                         startSomeActivity(specificActivityClassForBackArrow);
                     }
             }
-            return true;
+        } else {
+            switch (itemID) {
+                case R.id.menu_logout:
+                    FirebaseAuth.getInstance().signOut();
+                    startSomeActivity(LoginActivity.class);
+                    return true;
+                case R.id.menu_profile:
+                    startSomeActivity(UserProfile.class);
+                    return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
