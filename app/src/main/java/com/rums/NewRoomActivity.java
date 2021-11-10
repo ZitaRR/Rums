@@ -161,6 +161,7 @@ public class NewRoomActivity extends BaseClassActivity {
                             if(getCurrentRumUser() != null) {
                                 final EditText userInput = frameView.findViewById(R.id.name_Room);
                                 String nameRoomTxt = userInput.getText().toString();
+                                myAdapter.selectedUsers.add(getCurrentRumUser().getId());
 
                                    rm = makeChatRoom(nameRoomTxt, myAdapter.selectedUsers, false, getCurrentRumUser().getId(), null);
                                     BaseClassActivity.getCurrentInstance().moveUserToChatRoom(rm);

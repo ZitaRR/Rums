@@ -67,7 +67,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
                         currentUser.setChecked(holder.inviteBox.isChecked());
                         Toast.makeText(view.getContext(), (currentUser.getUsername()), Toast.LENGTH_SHORT).show();
                         selectedUsers.add(currentUser.getId());
-                        selectedUsers.add(BaseClassActivity.getCurrentInstance().getCurrentRumUser().getId());
                     }
                 }
 
