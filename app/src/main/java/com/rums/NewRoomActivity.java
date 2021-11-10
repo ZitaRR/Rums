@@ -7,15 +7,22 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -28,49 +35,59 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class NewRoomActivity extends BaseClassActivity {
 
-    private ArrayList<User> userList;
+    private ArrayList<RumUser> userList;
     private RecyclerView userRow;
     private MyAdapter myAdapter;
-    //private DatabaseReference database;
-
     private Toolbar actionBar;
-    private CheckBox checkBox;
+    private PersistantStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
 
-        super.init();
-
+        init();
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
+    }
 
-        userRow = (RecyclerView) findViewById(R.id.user_Row);
-        userRow.setLayoutManager(new LinearLayoutManager(this));
+    @Override
+    protected void init () {
+        super.init();
 
-        userList = User.createUsersList(10);
+        storage = PersistantStorage.getInstance();
+        userRow = findViewById(R.id.user_Row);
+
+        if(getIsRepositoryReady()) {
+
+            if (userRow != null) {
+                getUsersRumUsers();
+                setUpRecyclerView();
+            }
+
+        }
+    }
+
+    private void getUsersRumUsers(){
+        userList = (ArrayList<RumUser>) getStorage().getUsers().getAll();
+    }
+
+    private void setUpRecyclerView() {
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
+        userRow.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        /*database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    User user = dataSnapshot.getValue(User.class);
-                    userList.add(user);
-                }
-                myAdapter.notifyDataSetChanged();
-            }
+    @Override
+    public void repositoryIsInitialized(Class<?> type) {
+        super.repositoryIsInitialized(type);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
+        getUsersRumUsers();
+        setUpRecyclerView();
     }
 
     @Override
@@ -81,7 +98,7 @@ public class NewRoomActivity extends BaseClassActivity {
 
         MenuItem menuItem = menu.findItem(R.id.search_view);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setQueryHint("Search user"); // text-hint
+        searchView.setQueryHint("Search user");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -99,34 +116,70 @@ public class NewRoomActivity extends BaseClassActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("ResourceType")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         //checkBox.setChecked(false);
         int id = item.getItemId();
+
+        // Här trycker man när man är valt sina användare/boxar
         if (id == R.id.add_done) {
 
-            String itemChecked = "Users added to groupchat!";
-/*            for(int i = 0; i <userRow.getChildCount(); i++) {
-                if (checkBox.isChecked()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final FrameLayout frameView = new FrameLayout(this);
 
-                    itemChecked += checkBox;
-                    setNewChat(userList);
-                }
-            }*/
+            builder.setView(frameView)
+                    // Om nöjd med val, namn på charrummet sätts.
+                   .setPositiveButton(R.string.say_hello, new DialogInterface.OnClickListener() {
 
-            showSettingsActivity();
-           Toast.makeText(this,itemChecked, Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                           /* EditText nameRoom = findViewById(R.id.name_Room);
+                            String nameRoomTxt = nameRoom.getText().toString();
+                            Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
+
+                            // moveToChatRoom ();
+/*
+                            for(int i = 0; i <userRow.getChildCount(); i++) {
+                            if (checkBox.isChecked()) {
+
+                             itemChecked += checkBox.listView.getItemAtPosition(i)
+                            setNewChat(userList);
+                            }
+                            }*/
+
+                            showSettingsActivity();
+                            finish();
+                        }
+
+                    })
+
+                    .setNegativeButton(R.string.add_more, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+
+
+            final AlertDialog alertDialog = builder.create();
+            LayoutInflater inflater = alertDialog.getLayoutInflater();
+
+            View dialog = inflater.inflate(R.layout.dialog_nameroom, frameView);
+
+            alertDialog.show();
+            alertDialog.getWindow().setLayout(900, 500);
 
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void setNewChat(ArrayList<User> userList) {
-    }
-
      private void showSettingsActivity () {
-        Intent intent = new Intent(this, ChatRoomActivity.class);
-        startActivity(intent);
+
+         Toast.makeText(this,"Users added to groupchat!", Toast.LENGTH_SHORT).show();
+
+         Intent intent = new Intent(this, ChatRoomActivity.class);
+         startActivity(intent);
     }
 
 }

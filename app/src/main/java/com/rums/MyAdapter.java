@@ -2,14 +2,17 @@ package com.rums;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +22,11 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>implements Filterable {
 
-    private ArrayList<User> mUserList;
+    private ArrayList<RumUser> mUserList;
     private Context context;
-    private ArrayList<User> mFiltered;
+    private ArrayList<RumUser> mFiltered;
 
-    public MyAdapter(Context context, ArrayList<User> userList) {
+    public MyAdapter(Context context, ArrayList<RumUser> userList) {
         this.context = context;
         this.mUserList = userList;
         this.mFiltered = new ArrayList<>(userList);
@@ -41,26 +44,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         return viewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        User currentUser = mUserList.get(position);
-
+        //ChatRoom currentRoom= newChat.get(position);
+        RumUser currentUser = mUserList.get(position);
         currentUser.getChecked();
 
-        holder.userName.setText(currentUser.getName());
-        holder.userPhone.setText(currentUser.getPhone());
+        holder.userName.setText(currentUser.getUsername());
+        holder.userEmail.setText(currentUser.getEmail());
+        holder.inviteBox.setChecked(currentUser.getChecked());
 
-        TextView tv = holder.userName;
-        tv.setText(currentUser.getName());
-       // Checkbox invite = holder.inviteBox;
-
-            holder.inviteBox.setChecked(currentUser.getChecked());
             holder.inviteBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                   currentUser.setChecked(holder.inviteBox.isChecked());
 
+                // Här blir användare valda genom checkboxar
+                public void onClick(View view) {
+                    if (holder.inviteBox.isChecked()) {
+                        currentUser.setChecked(holder.inviteBox.isChecked());
+                        Toast.makeText(view.getContext(), (currentUser.getUsername()), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
     }
@@ -70,18 +74,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         return mUserList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView userName, userPhone;
+        public TextView userName, userEmail;
         public CheckBox inviteBox;
         public ImageView userPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            userName = (TextView)  itemView.findViewById(R.id.users_name);
-            userPhone = (TextView) itemView.findViewById(R.id.users_phone);
-            inviteBox = (CheckBox) itemView.findViewById(R.id.check_Box);
-            userPic = (ImageView) itemView.findViewById(R.id.user_pic);
+            userName = itemView.findViewById(R.id.users_name);
+            userEmail = itemView.findViewById(R.id.users_email);
+            inviteBox = itemView.findViewById(R.id.check_Box);
+            userPic = itemView.findViewById(R.id.user_pic);
         }
     }
 
@@ -94,14 +98,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<User> filteredList = new ArrayList<>();
+            List<RumUser> filteredList = new ArrayList<>();
             if (constraint == null || constraint.length()==0) {
                 filteredList.addAll(mFiltered);
             } else {
                 String filteredPattern = constraint.toString().toLowerCase().trim();
 
-                for (User item : mFiltered) {
-                    if (item.getName().toLowerCase().contains(filteredPattern)) {
+                for (RumUser item : mFiltered) {
+                    if (item.getUsername().toLowerCase().contains(filteredPattern)) {
                         filteredList.add(item);
                     }
                 }
@@ -120,5 +124,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
             notifyDataSetChanged();
         }
     };
+
 }
 
