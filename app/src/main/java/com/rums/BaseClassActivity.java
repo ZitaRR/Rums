@@ -14,13 +14,14 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
 import java.util.TimeZone;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BaseClassActivity extends AppCompatActivity {
 
@@ -32,7 +33,7 @@ public class BaseClassActivity extends AppCompatActivity {
     protected int PREVIOUS_ACTIVITY_REQUEST_CODE = 149;
     private PersistantStorage storage;
     protected static RumUser currentRumUser;
-    private static BaseClassActivity activityForRepositoryCallback;
+    private static BaseClassActivity currentInstance;
     private static Boolean isRepositoryReady = false;
 
 
@@ -47,7 +48,7 @@ public class BaseClassActivity extends AppCompatActivity {
 //        Log.d("Tag__100", "init i Base class");
         setActionBar();
         getPreviousActivity();
-        activityForRepositoryCallback = this;
+        currentInstance = this;
         storage = PersistantStorage.getInstance();
     }
 
@@ -270,6 +271,21 @@ public class BaseClassActivity extends AppCompatActivity {
         return dateFormat.format(calendar.getTime());
     }
 
+    protected void profilePicToImageView(String rumUserID, CircleImageView imageView) {
+        RumUser rumUser = getStorage().getUsers().getById(rumUserID);
+        Log.d("Tag_67", "setImageViewImage rumUser " + rumUser);
+        String avatarURL = rumUser.getAvatarImageURL();
+        if(avatarURL == null) {
+//            avatarURL = "https://blahhablhygarykalona.se";
+            imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+        } else {
+            Picasso.get()
+                    .load(avatarURL)
+                    .error(R.drawable.ic_baseline_account_circle_24) //Or something similar (maybe  ic_rums_ikon)
+                    .into(imageView);
+        }
+    }
+
     protected PersistantStorage getStorage() {
         if(storage == null) {
             storage = PersistantStorage.getInstance();
@@ -292,8 +308,8 @@ public class BaseClassActivity extends AppCompatActivity {
         this.shouldHaveBackArrowInActionBar = shouldHaveBackArrowInActionBar;
     }
 
-    public static BaseClassActivity getActivityForRepositoryCallback() {
-        return activityForRepositoryCallback;
+    public static BaseClassActivity getCurrentInstance() {
+        return currentInstance;
     }
 
     public static void setIsRepositoryReady(Boolean isRepositoryReady) {

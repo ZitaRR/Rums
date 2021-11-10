@@ -35,9 +35,12 @@ public class LoginActivity extends BaseClassActivity {
 
         //Check for user existence
         if (fUser != null){
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
+            super.init();
+            startSomeActivity(HomeActivity.class);
+//            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//            finish();
         }
+
     }
 
     @Override
@@ -66,8 +69,9 @@ public class LoginActivity extends BaseClassActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish();
+                startSomeActivity(RegisterActivity.class);
+//                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+//                finish();
             }
         });
     }
@@ -77,8 +81,9 @@ public class LoginActivity extends BaseClassActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                    finish();
+                    startSomeActivity(HomeActivity.class);
+//                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//                    finish();
                 }
                 else {
                     Toast.makeText(LoginActivity.this, "Login failed, please check credentials",

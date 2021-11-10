@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseClassActivity {
     //Widgets
     private EditText username, email, password, confirmPassword;
     private Button register;
@@ -63,6 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void init() {
+        super.init();
+    }
+
     private void registerUser(String email, String confirmPassword) {
         String username = this.username.getText().toString();
 
@@ -81,8 +87,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                     Toast.makeText(RegisterActivity.this, "Registration complete, signing in",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                    finish();
+                    init();
+                    startSomeActivity(HomeActivity.class);
+//                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+//                    finish();
                 }else{
                     Toast.makeText(RegisterActivity.this, "Registration failed",
                             Toast.LENGTH_SHORT).show();
