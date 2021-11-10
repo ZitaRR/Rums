@@ -39,7 +39,9 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
                     if(exists(entity)){
                         if(entity instanceof ChatRoom){
                             for(int i = 0; i < entities.size(); i++){
-                                entities.set(i, entity);
+                                if(entities.get(i).getId().equals(entity.getId())){
+                                    entities.set(i, entity);
+                                }
                             }
                         }
                     }
