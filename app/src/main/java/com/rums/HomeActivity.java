@@ -1,6 +1,7 @@
 package com.rums;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,8 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import java.util.List;
 import java.util.ArrayList;
+
+import android.widget.Toolbar;
+import java.util.List;
 
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
@@ -42,9 +45,12 @@ public class HomeActivity extends BaseClassActivity {
         super.init();
         storage = PersistantStorage.getInstance();
         homeRecycler = findViewById(R.id.recycler_home);
-//        testActivity = findViewById(R.id.button_test_activity);
+//      testActivity = findViewById(R.id.button_test_activity);
         buttonNewRoom = findViewById(R.id.imgbtn_newroom);
         setShouldHaveBackArrowInActionBar(false);
+        //ActionBar actionBar = getSupportActionBar();
+        // actionBar.setIcon(R.drawable.ic_rums_ikon_lilac);
+        //actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
 
         if(getIsRepositoryReady()) {
             Log.d("Tag__1", "Hellooo");
