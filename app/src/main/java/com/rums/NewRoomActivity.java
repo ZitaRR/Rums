@@ -50,9 +50,10 @@ public class NewRoomActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
 
-        init();
 
-        storage = PersistantStorage.getInstance();
+       // storage = PersistantStorage.getInstance();
+
+        super.init();
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);

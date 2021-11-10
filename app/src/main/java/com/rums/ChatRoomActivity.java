@@ -1,18 +1,27 @@
 package com.rums;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
@@ -20,14 +29,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatRoomActivity extends BaseClassActivity {
 
     private static final int GALLERY_REQUEST = 100;
     ArrayList<String> names;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<Message> adapter;
     ListView listView;
     ArrayList<Message> messages;
+    protected Boolean listUpdatedOnce = false;
+    Timer timer;
+    TimerTask timerTask;
+    final Handler handler = new Handler();
     Menu actionBarMenu;
     MenuItem nameMenuItem;
 
@@ -41,6 +58,8 @@ public class ChatRoomActivity extends BaseClassActivity {
             Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());
             setupFromDatabase();
             setupSubscriptionForMessages();
+            addClickListenerForWriteMessageEditText();
+
         }
 
     }
@@ -63,40 +82,63 @@ public class ChatRoomActivity extends BaseClassActivity {
         getStorage().getRooms().subscribe((roomList) -> {
             List<ChatRoom> rooms = (List<ChatRoom>) roomList;
             ChatRoom theCurrentChatRoom = getStorage().getRooms().getById(currentChatRoomID);
-            adapter.clear();
-            for (Message message: theCurrentChatRoom.getMessages()) {
-//                Log.d("Tag__6", "roomroomroom subscription: " + message);
-
-                //Fyll
-                adapter.add(message.getMessageText());
-            }
+            updateMessagesList(theCurrentChatRoom);
+//            for (Message message: theCurrentChatRoom.getMessages()) {
+////                Log.d("Tag__6", "roomroomroom subscription: " + message);
+//
+//                //Fyll
+//                adapter.add(message.getMessageText());
+//            }
         });
     }
 
+    private void updateMessagesList(ChatRoom  chatRoom) {
+        adapter.clear();
+        ArrayList<Message> messages = chatRoom.getMessages();
+        if (messages != null) {
+            for (Message message : chatRoom.getMessages()) {
+//                Log.d("Tag__6", "roomroomroom subscription: " + message);
+                //Fyll
+                adapter.add(message);
+            }
+            scrollToBottom();
+            listUpdatedOnce = true;
+        }
+    }
+
+    private ChatRoom getChatRoomFromDatabase(String roomID) {
+        return getStorage().getRooms().getById(roomID);
+    }
 
 
     protected void setupFromDatabase() {
         Log.d("Tag__6", "setupFromDatabase getCurrentRumUser " + getCurrentRumUser() + " getCurrentChatRoom " + getCurrentChatRoom());
-        fillMessagesList();
+//        fillMessagesList();
+        Log.d("Tag__6", "getChatRoomFromDatabase(getCurrentChatRoom().getId()) " + getChatRoomFromDatabase(getCurrentChatRoom().getId()));
+
+        updateMessagesList(getChatRoomFromDatabase(getCurrentChatRoom().getId()));
         setRoomName(actionBarMenu, "____ONE____");
     }
 
     private void setupListViewAdapter() {
-        names = new ArrayList<>();
-        int duplicates = 1;
-        for(int i = 0; i<duplicates; i++) {
-            names.add("Kalle");
-            names.add("Bille");
-            names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
-                    "som fortsätter vidare och vidare och vidare.");
-        }
+        messages = new ArrayList<>();
+//        int duplicates = 1;
+//        for(int i = 0; i<duplicates; i++) {
+//            names.add("Kalle");
+//            names.add("Bille");
+//            names.add("Mmmmmmmm. Mmmm. Ett längre meddelande som kanske wrappar. Är det så? Det får vi kolla. Ett långt, långt meddelande" +
+//                    "som fortsätter vidare och vidare och vidare.");
+//        }
 
-        adapter = new ArrayAdapter<>(this, R.layout.chat_bubble_list_item, names);
-        listView = findViewById(R.id.list_view);
+        adapter = new MessagesAdapter(this, messages);
+        listView = findViewById(R.id.messages_listview);
         listView.setAdapter(adapter);
         //Scroll to bottom:
-        listView.post(() -> listView.setSelection(listView.getCount() - 1));
+//        listView.post(() -> listView.setSelection(listView.getCount() - 1));
     }
+
+
+
 
     private void fillMessagesList() {
 //        if(getRepositoryReady()) {
@@ -138,7 +180,7 @@ public class ChatRoomActivity extends BaseClassActivity {
         RumUser user = getCurrentRumUser();
         ChatRoom chatRoom = getCurrentChatRoom();
         String timeStamp = currentTime(null);
-        Message message = new Message(user.getId(), user.getUsername(), null, messageTextWithUsername, messageID, timeStamp);
+        Message message = new Message(user.getId(), user.getUsername(), null, messageText, messageID, timeStamp);
 
         addMessageToChatRoom(message);
         getStorage().getRooms().update(chatRoom);
@@ -185,6 +227,62 @@ public class ChatRoomActivity extends BaseClassActivity {
         }
     }
 
+    //Scroll to bottom after keyboard appears
+    private void addClickListenerForWriteMessageEditText() {
+        EditText messageField = findViewById(R.id.message_EditText);
+        messageField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean isFocus) {
+                if (isFocus) {
+                    Log.d("Tag_71", "onClick ");
+                    startScrollTimerOnce(350);
+                }
+            }
+        });
+    }
+
+    //Stop timer in some onPause, destroy etc...
+    public void startScrollTimerOnce(int delay) {
+        stopScrollTimerIfItsRunning();
+        timer = new Timer();
+        initializeTimerTask("scrollToBottom");
+        timer.schedule(timerTask, delay);
+    }
+
+    public void stopScrollTimerIfItsRunning() {
+        //stop the timer, if it's not already null
+        if (timer != null) {
+            Log.d("Tag_31", "REALLY stop timer ");
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+    }
+
+    public void initializeTimerTask(String methodName) {
+        timerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        if(methodName.equals("scrollToBottom")) {
+                            scrollToBottom();
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    private void scrollToBottom() {
+        if (listUpdatedOnce) {
+            Log.d("Tag__110", "SMOOTH ");
+
+            listView.smoothScrollToPosition(listView.getCount() - 1);
+        } else {
+            listView.post(() -> listView.setSelection(listView.getCount() - 1));
+        }
+    }
+
     @Override
     public void repositoryIsInitialized(Class<?> type) {
         super.repositoryIsInitialized(type);
@@ -217,6 +315,49 @@ public class ChatRoomActivity extends BaseClassActivity {
             Log.d("TAG", "Pic Uri: " + imageUri);
         } else {
             Toast.makeText(this,"Pic from gallery NOT ok", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected class MessagesAdapter extends ArrayAdapter<Message> {
+        private Context mContext;
+        private ArrayList<Message> messageslist = new ArrayList<>();
+
+        protected MessagesAdapter(@NonNull Context context, ArrayList<Message> list) {
+            super(context, 0 , list);
+            mContext = context;
+            messageslist = list;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View listItem = convertView;
+
+            if (listItem == null) {
+                listItem = LayoutInflater.from(mContext).inflate(R.layout.chat_bubble_list_item, parent, false);
+            }
+            Message currentMessage = messageslist.get(position);
+            String thisID = currentMessage.getId();
+            if (thisID != null) {
+                CircleImageView imageView = (CircleImageView) listItem.findViewById(R.id.chat_rum_user_profilepic_imageview);
+                RumUser poster = getCurrentRumUser();
+
+                if (poster != null) {
+                    profilePicToImageView(poster.getId(), imageView);
+//
+                    TextView nickNameView = (TextView) listItem.findViewById(R.id.chat_rum_user_name_textview);
+                    nickNameView.setText(currentMessage.getNickName());
+
+                    TextView timeStampView = (TextView) listItem.findViewById(R.id.chat_timestamp_textview);
+                    if (currentMessage.getTimeStamp() != null) {
+                        timeStampView.setText(currentMessage.getTimeStamp());
+                    }
+                    TextView messageView = (TextView) listItem.findViewById(R.id.chat_message_textview);
+                    messageView.setText(currentMessage.getMessageText());
+                }
+            }
+            return listItem;
         }
     }
 }

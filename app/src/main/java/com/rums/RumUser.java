@@ -10,18 +10,18 @@ public class RumUser implements Identity {
     private String password;
     private String email;
     private boolean isChecked;
-
+    private String avatarImageURL;
     private String currentChatRoomID;
     private ChatRoom currentChatRoom; //Probably save to db, since it's a NoSQL db.
 
-    public RumUser(){
+    public RumUser() {
     }
 
-    public RumUser(String id){
+    public RumUser(String id) {
         this.id = id;
     }
 
-    public RumUser(String id, String username, String email){
+    public RumUser(String id, String username, String email) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -45,56 +45,65 @@ public class RumUser implements Identity {
 //
 //    }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public void setUsername(String value){
+    public void setUsername(String value) {
         username = value;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
-    public void setPassword(String value){
+    public void setPassword(String value) {
         password = value;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public void setEmail(String value){
+    public void setEmail(String value) {
         email = value;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
-
 
     public boolean getChecked() {
         return isChecked;
     }
+
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
 
-    public String getCurrentChatRoomID() {
-        return currentChatRoomID;
-    }
+        public String getAvatarImageURL () {
+            return avatarImageURL;
+        }
 
-    public void setCurrentChatRoomID(String currentChatRoomID) {
-        this.currentChatRoomID = currentChatRoomID;
-    }
+        public void setAvatarImageURL (String avatarImageURL){
+            this.avatarImageURL = avatarImageURL;
 
-    public ChatRoom getCurrentChatRoom() {
-        return currentChatRoom;
-    }
+        }
 
-    public void setCurrentChatRoom(ChatRoom currentChatRoom) {
-        this.currentChatRoom = currentChatRoom;
-    }
+        public String getCurrentChatRoomID () {
+            return currentChatRoomID;
+        }
+
+        public void setCurrentChatRoomID (String currentChatRoomID){
+            this.currentChatRoomID = currentChatRoomID;
+        }
+
+        public ChatRoom getCurrentChatRoom () {
+            return currentChatRoom;
+        }
+
+        public void setCurrentChatRoom (ChatRoom currentChatRoom){
+            this.currentChatRoom = currentChatRoom;
+        }
 
 }
