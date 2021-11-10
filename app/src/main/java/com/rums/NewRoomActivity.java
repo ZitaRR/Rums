@@ -50,10 +50,31 @@ public class NewRoomActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_room);
 
+        init();
+
         storage = PersistantStorage.getInstance();
 
         actionBar = findViewById(R.id.main_actionbar);
         setSupportActionBar(actionBar);
+
+    }
+
+    @Override
+    protected void init () {
+        super.init();
+        if(getIsRepositoryReady()) {
+            userRow = findViewById(R.id.user_Row);
+            userRow.setLayoutManager(new LinearLayoutManager(this));
+
+            userList = (ArrayList<RumUser>) storage.getUsers().getAll();
+            myAdapter = new MyAdapter(this, userList);
+            userRow.setAdapter(myAdapter);
+        }
+    }
+
+    @Override
+    public void repositoryIsInitialized(Class<?> type) {
+        super.repositoryIsInitialized(type);
 
         userRow = findViewById(R.id.user_Row);
         userRow.setLayoutManager(new LinearLayoutManager(this));
@@ -61,7 +82,6 @@ public class NewRoomActivity extends BaseClassActivity {
         userList = (ArrayList<RumUser>) storage.getUsers().getAll();
         myAdapter = new MyAdapter(this, userList);
         userRow.setAdapter(myAdapter);
-
     }
 
     @Override

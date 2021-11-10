@@ -28,7 +28,7 @@ public class LoginActivity extends BaseClassActivity {
     private FirebaseAuth auth;
     private FirebaseUser fUser;
 
-    @Override
+/*    @Override
     protected void onStart() {
         super.onStart();
         fUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -38,7 +38,7 @@ public class LoginActivity extends BaseClassActivity {
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         }
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
