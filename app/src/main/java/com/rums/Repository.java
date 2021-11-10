@@ -7,6 +7,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -34,19 +36,12 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
                     return;
                 }
 
+                ArrayList<T> temp = new ArrayList<>();
                 for(DataSnapshot data : snapshot.getChildren()){
                     T entity = data.getValue(type);
-                    if(exists(entity)){
-                        if(entity instanceof ChatRoom){
-                            for(int i = 0; i < entities.size(); i++){
-                                if(entities.get(i).getId().equals(entity.getId())){
-                                    entities.set(i, entity);
-                                }
-                            }
-                        }
-                    }
-                    entities.add(entity);
+                    temp.add(entity);
                 }
+                entities = temp;
 
                 if(!initialized){
                     initialized = true;
