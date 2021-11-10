@@ -47,11 +47,9 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void init() {
 //        Log.d("Tag__100", "init i Base class");
         setActionBar();
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
         getPreviousActivity();
         currentInstance = this;
         storage = PersistantStorage.getInstance();
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     protected void setActionBar() {

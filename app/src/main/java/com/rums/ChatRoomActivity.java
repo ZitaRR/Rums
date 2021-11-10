@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
@@ -53,6 +54,8 @@ public class ChatRoomActivity extends BaseClassActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
         super.init();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
         setupListViewAdapter();
         if(getIsRepositoryReady()) {
             Log.d("Tag__4", "getIsRepositoryReady: " + getIsRepositoryReady());

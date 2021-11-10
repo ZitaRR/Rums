@@ -1,6 +1,7 @@
 package com.rums;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
@@ -61,6 +62,9 @@ public class NewRoomActivity extends BaseClassActivity {
 
         storage = PersistantStorage.getInstance();
         userRow = findViewById(R.id.user_Row);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
 
         if(getIsRepositoryReady()) {
 
