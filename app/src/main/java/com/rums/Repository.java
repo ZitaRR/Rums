@@ -37,11 +37,10 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
                 for(DataSnapshot data : snapshot.getChildren()){
                     T entity = data.getValue(type);
                     if(exists(entity)){
-                        for(int i = 0; i < entities.size(); i++){
-                            if(!entities.get(i).getId().equals(entity.getId())){
-                                continue;
+                        if(entity instanceof ChatRoom){
+                            for(int i = 0; i < entities.size(); i++){
+                                entities.set(i, entity);
                             }
-                            entities.set(i, entity);
                         }
                     }
                     entities.add(entity);
