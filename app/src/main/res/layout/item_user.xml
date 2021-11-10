@@ -16,28 +16,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
+
         android:paddingTop="1dp"
         android:paddingBottom="1dp"
-        android:clickable="true">
-=======
+        android:clickable="true"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
         >
->>>>>>> dev
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-<<<<<<< HEAD
-            android:clickable="true">
-=======
-            android:background="@color/cardview_color"
-            >
->>>>>>> dev
+            android:clickable="true"
+            android:background="@color/cardview_color">
+
 
             <TextView
                 android:id="@+id/user_name"

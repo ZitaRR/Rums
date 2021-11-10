@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Rums</string>
     <string name="welcome_message">Welcome to Rums!</string>
     <string name="settings_hint_username">Username</string>
@@ -10,11 +11,7 @@
     <string name="u_name">Username:</string>
     <string name="u_email">Email:</string>
     <string name="search_menu">Search</string>
-<<<<<<< HEAD
-
     <string name="say_hello">Say Hello!</string>
     <string name="add_more">Add More!</string>
 
-=======
->>>>>>> dev
 </resources>

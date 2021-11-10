@@ -15,13 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import java.util.ArrayList;
-
 import android.widget.Toolbar;
 import java.util.List;
-
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
-
 
 public class HomeActivity extends BaseClassActivity {
 
