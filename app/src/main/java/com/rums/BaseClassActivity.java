@@ -47,9 +47,11 @@ public class BaseClassActivity extends AppCompatActivity {
     protected void init() {
 //        Log.d("Tag__100", "init i Base class");
         setActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_actionbar));
         getPreviousActivity();
         currentInstance = this;
         storage = PersistantStorage.getInstance();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     protected void setActionBar() {
@@ -248,10 +250,21 @@ public class BaseClassActivity extends AppCompatActivity {
 
     }
 
-
     protected void startSomeActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+    }
+
+    protected void startSomeActivity(Class<?> cls, Boolean finishCurrentActivity) {
+        Intent intent;
+        if (finishCurrentActivity) {
+            intent = new Intent(this, cls);
+            startActivity(intent);
+            finish();
+        } else {
+            intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
+            startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
+        }
     }
 
     //Timestamp as string, in the current timezone.

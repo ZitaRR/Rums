@@ -2,6 +2,7 @@ package com.rums;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,13 +49,12 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
     holder.myCircleView.setImageResource(R.drawable.rums_ikon);
 
     // När man klickar på en rad..
-    holder.homeChatRows.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            BaseClassActivity.getCurrentInstance().moveUserToChatRoom(currentRoom);
-
-        }
-    });
+        holder.homeChatRows.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseClassActivity.getCurrentInstance().moveUserToChatRoom(currentRoom);
+            }
+        });
     }
 
     @Override
