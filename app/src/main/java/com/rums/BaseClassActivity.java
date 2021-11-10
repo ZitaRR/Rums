@@ -255,75 +255,87 @@ public class BaseClassActivity extends AppCompatActivity {
         startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
     }
 
-    //Timestamp as string, in the current timezone.
-    //This should really be a timezone-agnostic object (Date or Calendar),
-    // and the display string should take into account the timestamp of the device.
-    protected String currentTime(String pattern) {
-        TimeZone timeZone = TimeZone.getDefault();
-        Calendar calendar = Calendar.getInstance(timeZone);
-        String formatPattern;
-        if(pattern != null) {
-            formatPattern = pattern;
+    protected void startSomeActivity(Class<?> cls, Boolean finishCurrentActivity) {
+        Intent intent;
+        if (finishCurrentActivity) {
+            intent = new Intent(this, cls);
+            startActivity(intent);
+            finish();
         } else {
-            formatPattern = "d MMMM HH:mm";
+            intent = new Intent(this, cls).putExtra("fromActivity", "someThing");
+            startActivityForResult(intent, PREVIOUS_ACTIVITY_REQUEST_CODE);
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
-        dateFormat.setTimeZone(timeZone);
-        return dateFormat.format(calendar.getTime());
     }
 
-    protected void profilePicToImageView(String rumUserID, CircleImageView imageView) {
-        RumUser rumUser = getStorage().getUsers().getById(rumUserID);
-        Log.d("Tag_67", "setImageViewImage rumUser " + rumUser);
-        String avatarURL = rumUser.getAvatarImageURL();
-        if(avatarURL == null) {
+        //Timestamp as string, in the current timezone.
+        //This should really be a timezone-agnostic object (Date or Calendar),
+        // and the display string should take into account the timestamp of the device.
+        protected String currentTime(String pattern) {
+            TimeZone timeZone = TimeZone.getDefault();
+            Calendar calendar = Calendar.getInstance(timeZone);
+            String formatPattern;
+            if(pattern != null) {
+                formatPattern = pattern;
+            } else {
+                formatPattern = "d MMMM HH:mm";
+            }
+            SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
+            dateFormat.setTimeZone(timeZone);
+            return dateFormat.format(calendar.getTime());
+        }
+
+        protected void profilePicToImageView(String rumUserID, CircleImageView imageView) {
+            RumUser rumUser = getStorage().getUsers().getById(rumUserID);
+            Log.d("Tag_67", "setImageViewImage rumUser " + rumUser);
+            String avatarURL = rumUser.getAvatarImageURL();
+            if(avatarURL == null) {
 //            avatarURL = "https://blahhablhygarykalona.se";
-            imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
-        } else {
-            Picasso.get()
-                    .load(avatarURL)
-                    .error(R.drawable.ic_baseline_account_circle_24) //Or something similar (maybe  ic_rums_ikon)
-                    .into(imageView);
+                imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+            } else {
+                Picasso.get()
+                        .load(avatarURL)
+                        .error(R.drawable.ic_baseline_account_circle_24) //Or something similar (maybe  ic_rums_ikon)
+                        .into(imageView);
+            }
         }
-    }
 
-    protected PersistantStorage getStorage() {
-        if(storage == null) {
-            storage = PersistantStorage.getInstance();
+        protected PersistantStorage getStorage() {
+            if(storage == null) {
+                storage = PersistantStorage.getInstance();
+            }
+            return storage;
         }
-        return storage;
+
+        public RumUser getCurrentRumUser() {
+            return currentRumUser;
+        }
+        public void setCurrentRumUser(RumUser currentRumUser) {
+            this.currentRumUser = currentRumUser;
+        }
+
+        public Boolean getShouldHaveBackArrowInActionBar() {
+            return shouldHaveBackArrowInActionBar;
+        }
+
+        public void setShouldHaveBackArrowInActionBar(Boolean shouldHaveBackArrowInActionBar) {
+            this.shouldHaveBackArrowInActionBar = shouldHaveBackArrowInActionBar;
+        }
+
+        public static BaseClassActivity getCurrentInstance() {
+            return currentInstance;
+        }
+
+        public static void setIsRepositoryReady(Boolean isRepositoryReady) {
+            BaseClassActivity.isRepositoryReady = isRepositoryReady;
+        }
+
+        public static Boolean getIsRepositoryReady() {
+            return isRepositoryReady;
+        }
+
+
+
+
+
+
     }
-
-    public RumUser getCurrentRumUser() {
-        return currentRumUser;
-    }
-    public void setCurrentRumUser(RumUser currentRumUser) {
-        this.currentRumUser = currentRumUser;
-    }
-
-    public Boolean getShouldHaveBackArrowInActionBar() {
-        return shouldHaveBackArrowInActionBar;
-    }
-
-    public void setShouldHaveBackArrowInActionBar(Boolean shouldHaveBackArrowInActionBar) {
-        this.shouldHaveBackArrowInActionBar = shouldHaveBackArrowInActionBar;
-    }
-
-    public static BaseClassActivity getCurrentInstance() {
-        return currentInstance;
-    }
-
-    public static void setIsRepositoryReady(Boolean isRepositoryReady) {
-        BaseClassActivity.isRepositoryReady = isRepositoryReady;
-    }
-
-    public static Boolean getIsRepositoryReady() {
-        return isRepositoryReady;
-    }
-
-
-
-
-
-
-}
