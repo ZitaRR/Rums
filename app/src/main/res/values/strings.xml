@@ -11,7 +11,10 @@
     <string name="u_name">Username:</string>
     <string name="u_email">Email:</string>
     <string name="search_menu">Search</string>
-    <string name="say_hello">Say Hello!</string>
-    <string name="add_more">Add More!</string>
+
+
+
+    <string name="say_hello"><font fgcolor="#C6CACA">say hello</font></string>
+    <string name="add_more"><font fgcolor="#C6CACA">add more</font></string>
 
 </resources>

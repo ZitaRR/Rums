@@ -186,7 +186,8 @@ public class NewRoomActivity extends BaseClassActivity {
             View dialog = inflater.inflate(R.layout.dialog_nameroom, frameView);
 
             alertDialog.show();
-            alertDialog.getWindow().setLayout(900, 500);
+            alertDialog.getWindow().setLayout(800, 400);
+            alertDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_dialog));
 
         }
         return super.onOptionsItemSelected(item);
