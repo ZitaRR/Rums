@@ -15,7 +15,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginBottom="52dp"
-        app:civ_border_color="@color/black"
+        app:civ_border_color="@color/purple_500"
         app:civ_border_width="1dp"
         app:layout_constraintBottom_toTopOf="@+id/input_username"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
@@ -96,16 +96,6 @@
         app:layout_constraintTop_toBottomOf="@+id/input_user_phone" />
 
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="200dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="32dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/input_description" />
-
     <ImageView
         android:id="@+id/icon_username"
         android:layout_width="wrap_content"
@@ -158,13 +148,16 @@
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
+        android:background="@drawable/loginreg_bubble_background"
+        android:textColor="@color/input_text_color"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
         android:text="@string/settings_button_apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/input_description"
+        app:layout_constraintVertical_bias="0.37" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_midpoint"
@@ -178,14 +171,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="40dp" />
+        app:layout_constraintGuide_begin="70dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="40dp" />
+        app:layout_constraintGuide_end="70dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_center_vertically"
