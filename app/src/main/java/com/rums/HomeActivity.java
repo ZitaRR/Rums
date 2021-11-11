@@ -47,6 +47,13 @@ public class HomeActivity extends BaseClassActivity {
             setUpRecyclerView();
         }
 
+
+    }
+
+    public void getUsersInChatRoom() {
+
+
+
     }
 
     @Override

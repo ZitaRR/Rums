@@ -56,7 +56,7 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
     // private Toolbar actionBar;
 
     private EditText editUsername, editAge, editPhone, editDescription;
-    private Switch switchNotification;
+    //private Switch switchNotification;
     private ImageView profilePicture;
     private Button buttonSave;
 
@@ -75,7 +75,7 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
     protected void onStart() {
         super.onStart();
         if (fUser.getPhotoUrl() == null) {
-            profilePicture.setImageDrawable(getDrawable(R.drawable.ic_rums_ikon));
+            profilePicture.setImageDrawable(getDrawable(R.mipmap.ic_rums_icon_white_1_circle));
         } else {
             Picasso.get().load(fUser.getPhotoUrl()).into(profilePicture);
         }
@@ -101,7 +101,6 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
         editDescription = (EditText) findViewById(R.id.input_description);
         buttonSave = (Button) findViewById(R.id.button_save);
         profilePicture = (ImageView) findViewById(R.id.profile_picture);
-        switchNotification = (Switch) findViewById(R.id.switch_notifications);
 
         //Instantiate Firebase
         auth             = FirebaseAuth.getInstance();
@@ -110,8 +109,8 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
 
         buttonSave.setOnClickListener(this);
         profilePicture.setOnClickListener(this);
-        switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
+        //switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /*@Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (switchNotification.isChecked()) {
                     setNotifications(true);
@@ -119,7 +118,7 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
                     setNotifications(false);
                 }
             }
-        });
+        });*/
 
     }
 
@@ -352,13 +351,6 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
         return userDescription;
     }
 
-    public void setNotifications(boolean notifications) {
-        this.userNotification = notifications;
-    }
-
-    public boolean isUserNotification() {
-        return userNotification;
-    }
 
 
     // För att kunna använda bakåtknappen. Inte det mest effektiva sättet att göra det förmodligen men enda som jag fick att fungera.

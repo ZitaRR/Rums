@@ -45,8 +45,8 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
     ChatRoom currentRoom = chatRooms.get(position);
 
     holder.myText1.setText(currentRoom.getName());
-    holder.myText2.setText(currentRoom.getId());
-    holder.myCircleView.setImageResource(R.drawable.rums_ikon);
+    //holder.myText2.setText(currentRoom.getId());
+    holder.myCircleView.setImageResource(R.drawable.ic_icon_purple_transparent);
 
     // När man klickar på en rad..
     holder.homeChatRows.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             myText1 = itemView.findViewById(R.id.textview_chatlist_room);
-            myText2 = itemView.findViewById(R.id.textview_chatlist_username);
+            //myText2 = itemView.findViewById(R.id.textview_chatlist_username);
             homeChatRows = itemView.findViewById(R.id.home_chat_rows);
             myCircleView = itemView.findViewById(R.id.circle_imageview_chatlist_profilepic);
         }

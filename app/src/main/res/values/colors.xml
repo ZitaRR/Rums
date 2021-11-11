@@ -24,11 +24,14 @@
     <color name="transparent">#00C6ADFF</color>
 
     <color name="yellow_brown">#48FFA85C</color>
+    <color name ="input_text_color">#E6FFFFFF</color>
 
     <color name ="icon_one">#6F021FB3</color>
     <color name ="cardview_color">#E3E3E3</color>
 
-<!--    #65021FB3-->
+
+
+<!--    #65021FB3 #E6FFFFFF-->
 
     <!--    ................... -->
 

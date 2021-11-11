@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>implements Filterable {
 
     private ArrayList<RumUser> mUserList;
@@ -57,6 +59,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
         holder.userName.setText(currentUser.getUsername());
         holder.userEmail.setText(currentUser.getEmail());
         holder.inviteBox.setChecked(currentUser.getChecked());
+        holder.userPic.setImageResource(R.drawable.ic_icon_purple_transparent);
 
             holder.inviteBox.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,7 +85,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>impleme
 
         public TextView userName, userEmail;
         public CheckBox inviteBox;
-        public ImageView userPic;
+        public CircleImageView userPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
