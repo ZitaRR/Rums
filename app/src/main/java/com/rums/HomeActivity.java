@@ -130,6 +130,8 @@ public class HomeActivity extends BaseClassActivity {
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
                 startSomeActivity(LoginActivity.class);
+                finish();
+
                 return true;
             case R.id.menu_profile:
                 startSomeActivity(UserProfile.class);
