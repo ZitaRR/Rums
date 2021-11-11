@@ -6,6 +6,8 @@
         <entry key="../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-mdpi/gradient_home_button.xml" value="0.15694444444444444" />
         <entry key="app/src/main/res/drawable-v24/chat_bubble_background.xml" value="0.27447916666666666" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_account_circle_24.xml" value="0.1125" />
+        <entry key="app/src/main/res/drawable-v24/ic_baseline_image_24.xml" value="0.1125" />
         <entry key="app/src/main/res/drawable-xhdpi/gradient_actionbar.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-xhdpi/gradient_button_login.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-xhdpi/gradient_default_activity.xml" value="0.1" />
@@ -13,7 +15,11 @@
         <entry key="app/src/main/res/drawable/background_dialog.xml" value="0.1486111111111111" />
         <entry key="app/src/main/res/drawable/gradient_home_button.xml" value="0.15694444444444444" />
         <entry key="app/src/main/res/drawable/home_custom_button.xml" value="0.17569444444444443" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.1125" />
+        <entry key="app/src/main/res/drawable/ic_baseline_emoji_people_24.xml" value="0.1125" />
+        <entry key="app/src/main/res/drawable/ic_baseline_group_add_24.xml" value="0.1125" />
         <entry key="app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.23846153846153847" />
+        <entry key="app/src/main/res/drawable/ic_endless_constellation.xml" value="0.14305555555555555" />
         <entry key="app/src/main/res/drawable/ic_rums_ikon.xml" value="0.2824074074074074" />
         <entry key="app/src/main/res/drawable/login_custom_button.xml" value="0.1486111111111111" />
         <entry key="app/src/main/res/layout/activity_chat_room.xml" value="0.25833333333333336" />

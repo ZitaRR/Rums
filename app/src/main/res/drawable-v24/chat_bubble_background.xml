@@ -13,7 +13,7 @@
         android:top="2dp">
         <shape>
             <corners android:radius="16dp" />
-            <solid android:color="@color/yellow_brown" />
+            <solid android:color="#9A121111" />
         </shape>
     </item>
 </layer-list>
