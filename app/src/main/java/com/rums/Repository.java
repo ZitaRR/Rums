@@ -38,6 +38,9 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
 
                 for(DataSnapshot data : snapshot.getChildren()){
                     T entity = data.getValue(type);
+                    if(exists(entity)){
+                        continue;
+                    }
                     entities.add(entity);
                 }
 
