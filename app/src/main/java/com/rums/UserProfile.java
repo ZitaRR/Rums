@@ -136,6 +136,7 @@ public class UserProfile extends BaseClassActivity implements View.OnClickListen
     private void openDialog(){
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_profile_picture);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_dialog));
 
         Button cameraThroughDialog  = dialog.findViewById(R.id.button_dialog_camera);
         Button galleryThroughDialog = dialog.findViewById(R.id.button_dialog_gallery);
