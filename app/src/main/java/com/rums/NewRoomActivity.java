@@ -158,18 +158,29 @@ public class NewRoomActivity extends BaseClassActivity {
                             ChatRoom rm;
 
 
-                            if(getCurrentRumUser() != null) {
+                            if (getCurrentRumUser() != null) {
                                 final EditText userInput = frameView.findViewById(R.id.name_Room);
                                 String nameRoomTxt = userInput.getText().toString();
-                                myAdapter.selectedUsers.add(getCurrentRumUser().getId());
+                                if (nameRoomTxt.length() < 1) {
+                                    Toast.makeText(NewRoomActivity.this, "Room name cant be empty", Toast.LENGTH_SHORT).show();
 
-                                   rm = makeChatRoom(nameRoomTxt, myAdapter.selectedUsers, false, getCurrentRumUser().getId(), null);
+                                } else {
+
+                                    myAdapter.selectedUsers.add(getCurrentRumUser().getId());
+
+                                    rm = makeChatRoom(nameRoomTxt, myAdapter.selectedUsers, false, getCurrentRumUser().getId(), null);
                                     BaseClassActivity.getCurrentInstance().moveUserToChatRoom(rm);
-                                Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(NewRoomActivity.this, nameRoomTxt, Toast.LENGTH_SHORT).show();
+                                    finish();
 
-                               // }
+                                }
+
+
+                                // }
+
                             }
-                            finish();
+
+
                         }
                     })
 

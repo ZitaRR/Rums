@@ -23,6 +23,7 @@
             android:layout_height="50dp"
             android:textColorHint="#80E3E3E3"
             android:textAlignment="center"
+            android:textColor="@color/cardview_color"
             android:ems="10"
             android:hint="room name"
             android:inputType="textPersonName"
