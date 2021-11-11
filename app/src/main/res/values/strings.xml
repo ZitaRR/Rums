@@ -8,8 +8,8 @@
     <string name="settings_hint_description">description</string>
     <string name="settings_notifications">Notifications</string>
     <string name="settings_button_apply">Save</string>
-    <string name="u_name">Username:</string>
-    <string name="u_email">Email:</string>
+    <string name="u_name">username:</string>
+    <string name="u_email">email:</string>
     <string name="search_menu">Search</string>
 
 
