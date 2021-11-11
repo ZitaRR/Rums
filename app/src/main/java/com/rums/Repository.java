@@ -36,12 +36,10 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
                     return;
                 }
 
-                ArrayList<T> temp = new ArrayList<>();
                 for(DataSnapshot data : snapshot.getChildren()){
                     T entity = data.getValue(type);
-                    temp.add(entity);
+                    entities.add(entity);
                 }
-                entities = temp;
 
                 if(!initialized){
                     initialized = true;
@@ -126,6 +124,7 @@ public class Repository<T extends Identity> implements Crud<T>, EventHandler<Lis
         }
 
         reference.setValue(entities);
+        entities.clear();
     }
 
     @Override
