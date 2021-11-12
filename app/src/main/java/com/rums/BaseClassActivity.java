@@ -49,7 +49,7 @@ public class BaseClassActivity extends AppCompatActivity {
         setActionBar();
         getPreviousActivity();
         currentInstance = this;
-        storage = PersistantStorage.getInstance();
+        getStorage();
     }
 
     protected void setActionBar() {
