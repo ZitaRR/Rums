@@ -320,23 +320,18 @@ public class BaseClassActivity extends AppCompatActivity {
     public void setCurrentRumUser(RumUser currentRumUser) {
         this.currentRumUser = currentRumUser;
     }
-
     public Boolean getShouldHaveBackArrowInActionBar() {
         return shouldHaveBackArrowInActionBar;
     }
-
     public void setShouldHaveBackArrowInActionBar(Boolean shouldHaveBackArrowInActionBar) {
         this.shouldHaveBackArrowInActionBar = shouldHaveBackArrowInActionBar;
     }
-
     public static BaseClassActivity getCurrentInstance() {
         return currentInstance;
     }
-
     public static void setIsRepositoryReady(Boolean isRepositoryReady) {
         BaseClassActivity.isRepositoryReady = isRepositoryReady;
     }
-
     public static Boolean getIsRepositoryReady() {
         return isRepositoryReady;
     }
